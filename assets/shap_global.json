@@ -1,0 +1,83 @@
+{
+ "meta": {
+  "method": "shap.TreeExplainer, mean(|SHAP|) over 1836 training rows",
+  "unit": "eV"
+ },
+ "top15": [
+  {
+   "feature": "group_wmean",
+   "mean_abs_shap": 0.3604514002799988,
+   "rank": 1
+  },
+  {
+   "feature": "d_el_wmean",
+   "mean_abs_shap": 0.05990225076675415,
+   "rank": 2
+  },
+  {
+   "feature": "group_min",
+   "mean_abs_shap": 0.03617414832115173,
+   "rank": 3
+  },
+  {
+   "feature": "en_min",
+   "mean_abs_shap": 0.027113644406199455,
+   "rank": 4
+  },
+  {
+   "feature": "radius_min",
+   "mean_abs_shap": 0.026574786752462387,
+   "rank": 5
+  },
+  {
+   "feature": "en_wmean",
+   "mean_abs_shap": 0.024029629305005074,
+   "rank": 6
+  },
+  {
+   "feature": "group_max",
+   "mean_abs_shap": 0.021441979333758354,
+   "rank": 7
+  },
+  {
+   "feature": "en_wstd",
+   "mean_abs_shap": 0.018948251381516457,
+   "rank": 8
+  },
+  {
+   "feature": "period_min",
+   "mean_abs_shap": 0.015421626158058643,
+   "rank": 9
+  },
+  {
+   "feature": "ie1_wmean",
+   "mean_abs_shap": 0.014751073904335499,
+   "rank": 10
+  },
+  {
+   "feature": "radius_wmean",
+   "mean_abs_shap": 0.012495885603129864,
+   "rank": 11
+  },
+  {
+   "feature": "en_max",
+   "mean_abs_shap": 0.011703873053193092,
+   "rank": 12
+  },
+  {
+   "feature": "ie1_min",
+   "mean_abs_shap": 0.01079738698899746,
+   "rank": 13
+  },
+  {
+   "feature": "radius_wstd",
+   "mean_abs_shap": 0.010456930845975876,
+   "rank": 14
+  },
+  {
+   "feature": "d_el_min",
+   "mean_abs_shap": 0.009319334290921688,
+   "rank": 15
+  }
+ ]
+}

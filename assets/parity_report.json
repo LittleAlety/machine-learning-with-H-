@@ -1,0 +1,35 @@
+{
+ "meta": {
+  "threshold": 1e-9,
+  "engine": "predict.js (纯 JS, float32 累加 + float32 分裂比较)",
+  "reference": "Python xgboost booster.predict (float32)",
+  "node": "v20.20.2",
+  "generated_at": "2026-09-09T06:56:35.238Z"
+ },
+ "dataset": {
+  "n_rows": 1836,
+  "max_diff": 0,
+  "mean_diff": 0,
+  "worst": null,
+  "pass": true
+ },
+ "features": {
+  "n_checks": 66096,
+  "max_diff": 3.552713678800501e-15,
+  "worst": {
+   "row": 988,
+   "comp": "Cr3Tl",
+   "feature": "radius_wstd",
+   "js": 21.650635094610966,
+   "csv": 21.65063509461097
+  }
+ },
+ "random": {
+  "n": 50,
+  "max_diff": 0,
+  "mean_diff": 0,
+  "worst": null,
+  "pass": true
+ },
+ "pass": true
+}
