@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>JS ↔ Python 奇偶校验（v3 · 84 特征）</title>
+<script src="assets/predict.js"></script>
+<style>
+  body{background:#faf7f2;color:#3b2f26;font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+    max-width:860px;margin:40px auto;padding:0 24px;line-height:1.75}
+  h1{font-size:20px}
+  .card{background:#fffdf8;border:1px solid #e7dccb;border-radius:12px;padding:18px 22px;margin:14px 0}
+  .pass{color:#5a7150;font-weight:700}
+  .fail{color:#9c4a2e;font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+  th,td{padding:6px 10px;border-bottom:1px solid #f0e8db;text-align:left;font-variant-numeric:tabular-nums}
+  th{color:#7a6a58;font-size:12.5px}
+  code{background:#f4ece1;border-radius:4px;padding:1px 6px;font-size:12.5px}
+  pre{background:#f4ece1;border-radius:8px;padding:12px;font-size:12px;overflow:auto}
+</style>
+</head>
+<body>
+<h1>JS 引擎 ↔ Python XGBoost 奇偶校验 <small style="font-size:13px;color:#7a6a58">v3 · 84 特征 · parity_cases.json</small></h1>
+<div class="card" id="summary">加载中…</div>
+<div class="card">
+  <b>逐用例明细</b>
+  <table id="detail"><thead><tr>
+    <th>组成</th><th>规范化</th><th>域内</th><th>预测 max|diff|</th><th>特征 max|diff|</th><th>最差特征</th>
+  </tr></thead><tbody></tbody></table>
+</div>
+<div class="card"><b>报告 JSON（写入 assets/parity_report.json 的内容）</b><pre id="reportJson"></pre></div>
+
+<script>
+(function(){
+  "use strict";
+  var PRED_THRESHOLD = 1e-9;   /* 位级一致：目标 max diff = 0，阈值与旧版一致 */
+  var FEAT_THRESHOLD = 1e-6;
+
+  function fetchJSON(p){ return fetch(p).then(function(r){
+    if(!r.ok) throw new Error(p + ' HTTP ' + r.status);
+    return r.json();
+  });}
+
+  Promise.all([
+    fetchJSON('assets/model.json'),
+    fetchJSON('assets/elements.json'),
+    fetchJSON('assets/parity_cases.json')
+  ]).then(function(rs){
+    var engine = HStarPredict.createEngine(rs[0], rs[1]);
+    var pc = rs[2];
+    var fnames = pc.feature_names;
+
+    var pMax = 0, pWorst = null, fMax = 0, fWorst = null;
+    var metaMismatch = [];
+    var rows = [];
+
+    pc.cases.forEach(function(c){
+      var r = engine.predictFromComp(c.comp);
+      var pd = Math.abs(r.E_ads - c.py_pred);
+      if(pd > pMax){ pMax = pd; pWorst = { comp: c.comp, js: r.E_ads, py: c.py_pred }; }
+      var cfMax = 0, cfName = null;
+      fnames.forEach(function(f){
+        var fd = Math.abs(r.features[f] - c.features[f]);
+        if(fd > cfMax){ cfMax = fd; cfName = f; }
+        if(fd > fMax){ fMax = fd; fWorst = { comp: c.comp, feature: f, js: r.features[f], py: c.features[f] }; }
+      });
+      if(r.comp !== c.canon) metaMismatch.push(c.comp + ': 规范化 ' + r.comp + ' ≠ ' + c.canon);
+      if(r.in_domain !== c.in_domain) metaMismatch.push(c.comp + ': in_domain ' + r.in_domain + ' ≠ ' + c.in_domain);
+      rows.push({ comp: c.comp, canon: r.comp, in_domain: r.in_domain, pd: pd, fd: cfMax, fName: cfName });
+    });
+
+    var pass = (pMax < PRED_THRESHOLD) && (fMax <= FEAT_THRESHOLD) && (metaMismatch.length === 0);
+    var report = {
+      meta: {
+        model_version: (pc.meta && pc.meta.model_version) || 'v3-84feat',
+        source: 'web/parity_check.html（浏览器内运行，Chromium）',
+        engine: 'predict.js（纯 JS，float32 累加 + float32 分裂比较）',
+        reference: 'Python XGBoost booster.predict（float32），parity_cases.json ' + pc.cases.length + ' 用例',
+        pred_threshold: PRED_THRESHOLD,
+        feat_threshold: FEAT_THRESHOLD,
+        generated_at: new Date().toISOString()
+      },
+      predictions: { n: pc.cases.length, max_diff: pMax, worst: pWorst, pass: pMax < PRED_THRESHOLD },
+      features: { n_checks: pc.cases.length * fnames.length, n_features: fnames.length,
+                  max_diff: fMax, worst: fWorst, pass: fMax <= FEAT_THRESHOLD },
+      meta_checks: { n_mismatch: metaMismatch.length, mismatches: metaMismatch },
+      pass: pass
+    };
+    window.__PARITY_REPORT = report;
+
+    document.getElementById('summary').innerHTML =
+      '<span class="' + (pass ? 'pass' : 'fail') + '">' + (pass ? '✓ 校验通过' : '✗ 校验未通过') + '</span><br>' +
+      '用例数：<code>' + pc.cases.length + '</code>（域内 ' + (pc.meta && pc.meta.n_in_domain) +
+      ' / 域外 ' + (pc.meta && pc.meta.n_out_domain) + '）· 特征数：<code>' + fnames.length + '</code><br>' +
+      '预测 max|diff| = <code>' + pMax + '</code>（阈值 ' + PRED_THRESHOLD + '）<br>' +
+      '特征 max|diff| = <code>' + fMax + '</code>（阈值 ' + FEAT_THRESHOLD + '，共 ' +
+      (pc.cases.length * fnames.length) + ' 项比对）<br>' +
+      (fWorst ? '最差特征：<code>' + fWorst.comp + ' / ' + fWorst.feature + '</code> js=' + fWorst.js + ' py=' + fWorst.py + '<br>' : '') +
+      (metaMismatch.length ? '<span class="fail">元信息不一致：' + metaMismatch.join('；') + '</span>' : '规范化组成与 in_domain 判定全部一致。');
+
+    var tb = document.querySelector('#detail tbody');
+    rows.forEach(function(r){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + r.comp + '</td><td>' + r.canon + '</td><td>' + (r.in_domain ? '是' : '否') +
+        '</td><td>' + r.pd + '</td><td>' + r.fd + '</td><td>' + (r.fName || '—') + '</td>';
+      tb.appendChild(tr);
+    });
+    document.getElementById('reportJson').textContent = JSON.stringify(report, null, 2);
+  }).catch(function(e){
+    document.getElementById('summary').innerHTML = '<span class="fail">加载失败：' + e.message + '</span>';
+    window.__PARITY_REPORT = { pass: false, error: String(e) };
+  });
+})();
+</script>
+</body>
+</html>

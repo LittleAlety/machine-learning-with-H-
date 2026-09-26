@@ -1,0 +1,15 @@
+{
+  "checkpoint": "H0_env_probe",
+  "timestamp_utc": "2026-09-18T00:00:00Z",
+  "python": "/usr/local/bin/python3",
+  "torch_version": "2.8.0+cu128",
+  "cuda_available": false,
+  "chgnet_version": "0.4.2",
+  "pymatgen_version": "2026.5.4",
+  "pretrained_weights": "CHGNet v0.3.0 downloaded OK (412,525 params)",
+  "device": "cpu",
+  "timing_probe": {"slab_atoms": 16, "predict_seconds": 0.45},
+  "conclusion": "PASS: chgnet installed, pretrained weights available, CPU inference feasible (~1-2 s/slab at ~32 atoms). Proceed to H1.",
+  "fallback_triggered": false,
+  "note": "chgnet v0.3.0 predicts per-atom magmoms but NOT per-atom charges; charge-transfer statistics are therefore N/A by model capability (honest record, not fabricated)."
+}

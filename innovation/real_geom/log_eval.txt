@@ -1,0 +1,15 @@
+surface coverage: 1832/1836 comps
+== surface contracts ==
+mean18 Δ=0.0229 wins=10
+min18  Δ=0.0263 wins=10
+mm36   Δ=0.0249 wins=10
+3d sublayer n=398 Δ=0.0428 wins=10
+nested: gold=0.0903 base=0.1140 folds_win=5/5
+G1: LEAK dA=0.0249 dB=-0.0040 r=-0.16
+G2: LEAK dA=0.0295 dB=0.0174 r=0.59
+== site-level ==
+site arm base84: OOF=0.2839
+site arm onehot28_F3replica: OOF=0.1206
+site arm geom18: OOF=0.1042
+site arm geom18_plus_onehot: OOF=0.1010
+{"label": "contract_passed_gate_failed", "condition": "契约与嵌套过阈但 G1 闸门未过——信号不可移植，不可采纳", "mins18_usable": false, "site_target_met": false}

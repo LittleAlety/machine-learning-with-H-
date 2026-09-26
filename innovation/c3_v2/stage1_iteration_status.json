@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-09-26T08:40:20+00:00",
+  "workstream": "C-3 v2 Stage-1 gate iteration driver",
+  "host_note": "Iteration driver executed on a Windows workstation; no HPC allocation or compiled QE stack is present here, so DFT gates are PENDING, not fabricated.",
+  "gates": [
+    {
+      "step": "1.1 compile",
+      "status": "BLOCKED",
+      "archives_sha256_verified": true,
+      "executables_on_path": {
+        "pw.x": null,
+        "cp2k.psmp": null,
+        "gpaw": null
+      },
+      "n_archives_verified": 7,
+      "note": "Source archives verify (SHA256) but no compiled pw.x/cp2k/gpaw on PATH. Build per 1.1."
+    },
+    {
+      "step": "1.2 anchor gate",
+      "status": "PENDING",
+      "tolerance_eV": 0.1,
+      "n_anchor_surfaces": 9,
+      "n_recomputed": 0,
+      "worst_abs_delta_eV": null,
+      "note": "No BEEF-vdW recomputation yet. Run 1.2 on the cluster and write recomputed_dG_eV into anchor_gate_sheet.csv; this script then auto-decides PASS/FAIL. Gate requires |dE_ads| <= 0.1 eV on EVERY surface.",
+      "sheet": "ai_surface_cat\\innovation\\c3_v2\\anchor_gate_sheet.csv"
+    },
+    {
+      "step": "1.3 probe core-hours",
+      "status": "PENDING",
+      "planned_tasks": [
+        "1 bulk relax",
+        "1 clean slab relax",
+        "1 H* adsorption relax"
+      ],
+      "measured_core_hours": null,
+      "budget_midpoint_before_revision": 199875,
+      "note": "Three probe tasks have not been measured. The plan forbids carrying over the 199,875 estimate as an approved allocation: measure, then revise the budget table in one shot and apply for the formal quota."
+    },
+    {
+      "step": "1.4 MLIP-assisted path (optional)",
+      "status": "PENDING",
+      "note": "MACE-MPA-0 pre-relax -> DFT refine may only accelerate production after it reproduces |dE| <= 0.1 eV on the SAME anchor surfaces. Do not use for batch acceleration until then."
+    }
+  ],
+  "stage1_exit": {
+    "hard_condition": "anchor gate PASS AND probe core-hours logged",
+    "stage1_decision": "CONDITIONAL GO (env pending)",
+    "batch_production_go": false,
+    "stage2_3_go": false
+  },
+  "red_lines_enforced": [
+    "gates are never retroactively relaxed",
+    "any on-the-fly parameter change requires an amendment first",
+    "negative and failed results are retained as assets"
+  ]
+}

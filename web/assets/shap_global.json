@@ -1,0 +1,84 @@
+{
+ "meta": {
+  "method": "shap.TreeExplainer, mean(|SHAP|) over 1836 training rows",
+  "unit": "eV",
+  "model_version": "v3-84feat"
+ },
+ "top15": [
+  {
+   "feature": "group_wmean",
+   "mean_abs_shap": 0.2850631773471832,
+   "rank": 1
+  },
+  {
+   "feature": "melting_point_max",
+   "mean_abs_shap": 0.10558014363050461,
+   "rank": 2
+  },
+  {
+   "feature": "group_mode",
+   "mean_abs_shap": 0.04802021384239197,
+   "rank": 3
+  },
+  {
+   "feature": "nd_unfilled_wmean",
+   "mean_abs_shap": 0.037215009331703186,
+   "rank": 4
+  },
+  {
+   "feature": "melting_point_wmean",
+   "mean_abs_shap": 0.0367790050804615,
+   "rank": 5
+  },
+  {
+   "feature": "en_wmean",
+   "mean_abs_shap": 0.0220255758613348,
+   "rank": 6
+  },
+  {
+   "feature": "d_el_wmean",
+   "mean_abs_shap": 0.02159707434475422,
+   "rank": 7
+  },
+  {
+   "feature": "melting_point_wstd",
+   "mean_abs_shap": 0.013338922522962093,
+   "rank": 8
+  },
+  {
+   "feature": "mendeleev_number_wmean",
+   "mean_abs_shap": 0.012581809423863888,
+   "rank": 9
+  },
+  {
+   "feature": "en_min",
+   "mean_abs_shap": 0.011785848066210747,
+   "rank": 10
+  },
+  {
+   "feature": "en_wstd",
+   "mean_abs_shap": 0.011294862255454063,
+   "rank": 11
+  },
+  {
+   "feature": "covalent_radius_wmean",
+   "mean_abs_shap": 0.010240214876830578,
+   "rank": 12
+  },
+  {
+   "feature": "radius_min",
+   "mean_abs_shap": 0.00974250864237547,
+   "rank": 13
+  },
+  {
+   "feature": "melting_point_range",
+   "mean_abs_shap": 0.00824499037116766,
+   "rank": 14
+  },
+  {
+   "feature": "n_valence_wmean",
+   "mean_abs_shap": 0.0075585488229990005,
+   "rank": 15
+  }
+ ]
+}

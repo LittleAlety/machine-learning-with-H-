@@ -1,0 +1,53 @@
+[1] 复现 q50 OOF MAE 0.1063（期望≈0.1063）
+  v3 seed 0: 0.1135
+  v3 seed 1: 0.1133
+  v3 seed 2: 0.1144
+  v3 seed 7: 0.1137
+  v3 seed 13: 0.1141
+  v3 seed 42: 0.1134
+  v3 seed 99: 0.1144
+  v3 seed 123: 0.1134
+  v3 seed 2024: 0.1134
+  v3 seed 31337: 0.1138
+[2] 基线 0.1137±0.0004；增益 0.0075，方向一致 10/10
+[3] 嵌套 CV MAE=0.1065（内层选择 ['quantile', 'quantile', 'quantile', 'quantile', 'quantile']）
+  LOEO Ag: 0.1339
+  LOEO Al: 0.1651
+  LOEO Au: 0.1723
+  LOEO Bi: 0.2412
+  LOEO Cd: 0.0900
+  LOEO Co: 0.1062
+  LOEO Cr: 0.1502
+  LOEO Cu: 0.1447
+  LOEO Fe: 0.2436
+  LOEO Ga: 0.1213
+  LOEO Hf: 0.0639
+  LOEO Hg: 0.1417
+  LOEO In: 0.0970
+  LOEO Ir: 0.0938
+  LOEO La: 0.2316
+  LOEO Mn: 0.4079
+  LOEO Mo: 0.1515
+  LOEO Nb: 0.1044
+  LOEO Ni: 0.0956
+  LOEO Os: 0.1181
+  LOEO Pb: 0.1491
+  LOEO Pd: 0.0963
+  LOEO Pt: 0.0991
+  LOEO Re: 0.1275
+  LOEO Rh: 0.1117
+  LOEO Ru: 0.0978
+  LOEO Sc: 0.0553
+  LOEO Sn: 0.1617
+  LOEO Ta: 0.0813
+  LOEO Tc: 0.0879
+  LOEO Ti: 0.0569
+  LOEO Tl: 0.2216
+  LOEO V: 0.1187
+  LOEO W: 0.1000
+  LOEO Y: 0.1424
+  LOEO Zn: 0.0741
+  LOEO Zr: 0.0529
+[4] LOEO q50 汇集 0.1275（v3 0.155）；Mn/Fe/Bi Δ={'Mn': -0.07454889262629821, 'Fe': -0.03918336530218916, 'Bi': -0.037643161428795424}
+[5] 判定：不采纳 q50：OOF 增益 0.0075 eV（>0.005=True），方向 10/10，嵌套 CV 0.1065，LOEO Mn/Fe/Bi 变化 {'Mn': -0.07454889262629821, 'Fe': -0.03918336530218916, 'Bi': -0.037643161428795424}
+[写出] outputs/r14_a1_q50.json, data_processed/hstar_loeo_q50.csv

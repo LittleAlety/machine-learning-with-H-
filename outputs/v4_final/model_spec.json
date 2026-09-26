@@ -1,0 +1,8 @@
+{
+  "name": "v3 保留（无胜者，三层体系演示）",
+  "detail": "XGBoost squarederror, v3 84feat, tuned 参数",
+  "winner": null,
+  "candidates": [],
+  "features": "v3 84feat",
+  "fold_protocol": "GroupKFold(5, groups=comp)，训练于 lockbox 外 85%"
+}

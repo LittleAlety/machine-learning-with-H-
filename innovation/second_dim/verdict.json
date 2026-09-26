@@ -1,0 +1,20 @@
+{
+  "stage": "S3_second_dim",
+  "rule": "机制命名需交互+蒸馏两臂互证；残差 R2<=0.05 且符号增益<=0.03 -> 交互纹理",
+  "residual_predictable": true,
+  "residual_R2_max": 0.0974116818714309,
+  "sign_acc_gain_vs_majority": -0.0326797385620915,
+  "arm_a_top_family_pair": [
+    "group",
+    "melting_point"
+  ],
+  "arm_a_top_family_pair_count_in_top20": 4,
+  "arm_b_distill_top5_families": [
+    "melting_point",
+    "mendeleev_number",
+    "n_valence"
+  ],
+  "second_dim_name": "unidentified (interaction texture)",
+  "second_dim_name_zh": "未识别（交互纹理）",
+  "interpretation": "residual magnitude weakly linear-predictable (Ridge R2~0.10) but tree R2<=0 and sign unpredictable (<= majority baseline) -> no single missing feature dominates; gap attributed to interaction texture. Dominant pair group_wmean x melting_point_max (0.0438 eV) is 2x any other pair, but family-pair concentration (4/20 < 5/20 threshold) below naming rule -> name withheld as unidentified."
+}

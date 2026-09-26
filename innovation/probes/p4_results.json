@@ -1,0 +1,47 @@
+{
+  "reports": [
+    {
+      "feature": "site_onehot",
+      "k_dims": 9,
+      "mae_base_10seeds": 0.11959830244769601,
+      "mae_gold_10seeds": 0.11873626818998599,
+      "delta_A": 0.0008620342577100162,
+      "delta_A_std": 0.000385245176007886,
+      "seeds_win": "10/10",
+      "delta_B_inferred": -0.004652156159514628,
+      "retention": -5.396718422621655,
+      "verdict": "NO_GAIN"
+    },
+    {
+      "feature": "config_mean",
+      "k_dims": 1,
+      "mae_base_10seeds": 0.11959830244769601,
+      "mae_gold_10seeds": 0.08053447489267142,
+      "delta_A": 0.03906382755502459,
+      "delta_A_std": 0.0006659220932928756,
+      "seeds_win": "10/10",
+      "delta_B_inferred": -0.0026673359517948025,
+      "retention": -0.06828147979195438,
+      "verdict": "LEAK"
+    },
+    {
+      "feature": "config_count",
+      "k_dims": 1,
+      "mae_base_10seeds": 0.11959830244769601,
+      "mae_gold_10seeds": 0.10995136743789172,
+      "delta_A": 0.009646935009804302,
+      "delta_A_std": 0.0007281563058831015,
+      "seeds_win": "10/10",
+      "delta_B_inferred": -0.001459105027009855,
+      "retention": -0.15125063302768682,
+      "verdict": "LEAK"
+    }
+  ],
+  "capacity_side_gain": 0.002659674254138697,
+  "info_side_max_deltaA": 0.03906382755502459,
+  "verdicts": {
+    "site_onehot": "NO_GAIN",
+    "config_mean": "LEAK",
+    "config_count": "LEAK"
+  }
+}

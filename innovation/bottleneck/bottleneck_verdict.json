@@ -1,0 +1,9 @@
+{
+  "linear_arm_k2_gap_eV": 0.1045309205068865,
+  "mlp_arm_k2_gap_eV": 0.030945582421232964,
+  "linear_arm_verdict": "gap",
+  "mlp_arm_verdict": "gap",
+  "arms_conflict": false,
+  "final_verdict": "gap",
+  "rule": "gap < 0.005 eV -> sufficiency; else gap; conflict -> MLP arm governs"
+}

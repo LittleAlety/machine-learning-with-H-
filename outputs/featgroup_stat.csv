@@ -1,0 +1,6 @@
+stat,stat_cn,n_features,mean_abs_shap_sum,share_pct
+wmean,加权平均 wmean,6,0.4801456,62.920254
+min,最小值 min,6,0.12540093,16.433054
+max,最大值 max,6,0.059346043,7.7769494
+wstd,加权标准差 wstd,6,0.05336374,6.9930043
+range,极差 range,6,0.032911792,4.3128967

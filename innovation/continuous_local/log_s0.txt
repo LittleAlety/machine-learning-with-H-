@@ -1,0 +1,32 @@
+[shard 0] total=663 todo=661
+/usr/local/lib/python3.12/site-packages/chgnet/model/model.py:898: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  volumes = torch.tensor(volumes, dtype=TORCH_DTYPE, device=atomic_numbers.device)
+CHGNet v0.3.0 initialized with 412,525 parameters
+CHGNet will run on cpu
+CHGNet will run on cpu
+[shard 0] 10/661 done=10 fail=0 elapsed=6.3min eta=407.9min
+[shard 0] 20/661 done=20 fail=0 elapsed=17.0min eta=544.4min
+[shard 0] 30/661 done=30 fail=0 elapsed=22.5min eta=472.8min
+[shard 0] 40/661 done=40 fail=0 elapsed=29.5min eta=457.4min
+[shard 0] 50/661 done=50 fail=0 elapsed=35.0min eta=428.0min
+[shard 0] 60/661 done=60 fail=0 elapsed=40.2min eta=403.0min
+[shard 0] 70/661 done=70 fail=0 elapsed=44.6min eta=376.7min
+[shard 0] 80/661 done=80 fail=0 elapsed=49.1min eta=356.8min
+[shard 0] 90/661 done=90 fail=0 elapsed=56.0min eta=355.4min
+[shard 0] 100/661 done=100 fail=0 elapsed=62.6min eta=351.3min
+[shard 0] 110/661 done=110 fail=0 elapsed=70.7min eta=354.0min
+[shard 0] 120/661 done=120 fail=0 elapsed=75.7min eta=341.4min
+[shard 0] 130/661 done=130 fail=0 elapsed=81.3min eta=332.0min
+[shard 0] 140/661 done=140 fail=0 elapsed=88.7min eta=330.2min
+[shard 0] 150/661 done=150 fail=0 elapsed=96.3min eta=328.0min
+[shard 0] 160/661 done=160 fail=0 elapsed=101.8min eta=318.8min
+[shard 0] 170/661 done=170 fail=0 elapsed=108.6min eta=313.6min
+[shard 0] 180/661 done=180 fail=0 elapsed=114.4min eta=305.6min
+[shard 0] 190/661 done=190 fail=0 elapsed=120.6min eta=299.0min
+[shard 0] 200/661 done=200 fail=0 elapsed=126.0min eta=290.4min
+[shard 0] 210/661 done=210 fail=0 elapsed=133.6min eta=286.9min
+[shard 0] 220/661 done=220 fail=0 elapsed=138.5min eta=277.6min
+[shard 0] 230/661 done=230 fail=0 elapsed=146.1min eta=273.8min
+[shard 0] 240/661 done=240 fail=0 elapsed=153.1min eta=268.5min
+[shard 0] 250/661 done=250 fail=0 elapsed=158.9min eta=261.3min

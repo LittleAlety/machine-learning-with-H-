@@ -1,0 +1,37 @@
+{
+  "n_hstar_records": 7048,
+  "n_parsed": 6898,
+  "n_failed": 150,
+  "parse_success_rate": 0.9787173666288309,
+  "n_comps_parsed": 1832,
+  "feature_cols": [
+    "site_cn",
+    "site_gcn",
+    "h_height_A",
+    "nn_cn_mean",
+    "nn_cn_min",
+    "nn_cn_std",
+    "nn_gcn_mean",
+    "nn_gcn_min",
+    "nn_gcn_std",
+    "nn_en_mean",
+    "nn_en_std",
+    "nn_d_mean",
+    "nn_d_std",
+    "d12_relaxed_A",
+    "d12_relax_pct",
+    "surf_disp_mean_A",
+    "surf_disp_max_A",
+    "surf_rumpling_A"
+  ],
+  "n_features": 18,
+  "site_cn_dist": {
+    "1.0": 2086,
+    "2.0": 1770,
+    "3.0": 3004,
+    "4.0": 23,
+    "5.0": 15
+  },
+  "runtime_min": 0.12233992020289103,
+  "sha256_features_csv": "8f7aba937adee3ae4b7d6a9bcdff88e370c628f79e08bb0ba44ebde7b22c5e46"
+}

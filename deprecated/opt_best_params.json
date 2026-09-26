@@ -1,0 +1,22 @@
+{
+  "best_params": {
+    "max_depth": 11,
+    "min_child_weight": 10.812729,
+    "gamma": 0.0476,
+    "subsample": 0.863922,
+    "colsample_bytree": 0.988332,
+    "colsample_bylevel": 0.659163,
+    "reg_alpha": 0.069958,
+    "reg_lambda": 0.050016,
+    "learning_rate": 0.01977
+  },
+  "best_weight_scheme": "n_raw",
+  "n_estimators_full_fit": 306,
+  "search_best_inner_MAE": 0.12883487509758004,
+  "nested_cv_MAE": 0.1274463313967982,
+  "nested_cv_baseline_MAE": 0.12026041484336293,
+  "group_cv_MAE": 0.12647224286319633,
+  "loeo_MAE": 0.15318064241729096,
+  "extval_MAE": 0.32974769071152393,
+  "extval_bias": 0.1396738286595913
+}

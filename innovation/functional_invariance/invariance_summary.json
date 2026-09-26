@@ -1,0 +1,89 @@
+{
+  "workstream": "I_functional_invariance",
+  "domains": {
+    "Mamun_BEEFvdW": {
+      "n": 1836,
+      "n_unique_comps": 1836
+    },
+    "EqV2_RPBE": {
+      "n": 491,
+      "n_unique_comps": 115
+    },
+    "CatHub_PBE": {
+      "n": 203,
+      "n_unique_comps": 46
+    }
+  },
+  "i1_overlap": {
+    "triple_overlap_comps": 3,
+    "pair_counts": [
+      {
+        "pair": "Mamun_BEEFvdW ∩ EqV2_RPBE",
+        "n_overlap_comps": 68
+      },
+      {
+        "pair": "Mamun_BEEFvdW ∩ CatHub_PBE",
+        "n_overlap_comps": 34
+      },
+      {
+        "pair": "EqV2_RPBE ∩ CatHub_PBE",
+        "n_overlap_comps": 3
+      }
+    ]
+  },
+  "i2_stability": {
+    "top5_stable": [
+      "melting_point_range",
+      "melting_point_mode",
+      "melting_point_min",
+      "melting_point_wstd",
+      "melting_point_max"
+    ],
+    "bottom5_unstable": [
+      "en_range",
+      "en_mode",
+      "en_min",
+      "en_wstd",
+      "en_wmean"
+    ],
+    "n_sign_flip_features": 74
+  },
+  "i3": {
+    "verdict": "A",
+    "best_arm": "domain_indicator",
+    "arms_summary": [
+      {
+        "arm": "naive_pooled",
+        "EqV2_MAE_mean": 0.13088614806801208,
+        "EqV2_MAE_sd": 0.003739728153804949,
+        "gain_mean": 0.2161138519319879,
+        "gain_min_10seeds": 0.21004066936907914,
+        "contract_10of10_gain_ge_0.005": true,
+        "rho_mean": 0.4557799594741345
+      },
+      {
+        "arm": "domain_indicator",
+        "EqV2_MAE_mean": 0.12257226708793992,
+        "EqV2_MAE_sd": 0.005036640252167198,
+        "gain_mean": 0.22442773291206003,
+        "gain_min_10seeds": 0.21746696702835303,
+        "contract_10of10_gain_ge_0.005": true,
+        "rho_mean": 0.4845064363945732
+      },
+      {
+        "arm": "IRM_lite",
+        "EqV2_MAE_mean": 0.22986832599774618,
+        "EqV2_MAE_sd": 0.004518894958445752,
+        "gain_mean": 0.11713167400225377,
+        "gain_min_10seeds": 0.10947276676534834,
+        "contract_10of10_gain_ge_0.005": true,
+        "rho_mean": 0.09748783008403482
+      }
+    ],
+    "criteria_check": {
+      "MAE_le_0.25": true,
+      "gain_gt_0.05": true,
+      "rho_ge_0.35": true
+    }
+  }
+}

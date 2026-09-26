@@ -1,0 +1,6 @@
+covered rows: 1836/1836 (100.0%), comps: 1836/1836
+gate: NO_GAIN dA=0.0003 dB=-0.0005 r=-1.94
+contract: Δ=0.0003 wins=7/10
+3d sublayer: n=398 Δ=0.0033
+nested: gold=0.1139 base=0.1135 folds_win=2/5
+{"label": "negative", "gate_pass": false, "contract_passed": false, "nested_ok": false, "rule": "stage_S2_static.adopt: 静态组 PASS 且 Δ>0.005 + 10/10 (+嵌套CV复核) -> v5.1 定向采纳", "phase5_relax_group_contrast": "对照: Phase 5 弛豫依赖组 (层距/位移/弛豫能降, 14% 覆盖子集) 闸门 LEAK (Δ_A=0.0129, Δ_B=-0.0145, 保留率 -1.12, innovation/continuous_local/gate_contract_report.json); 静态组为构造性可移植, 两者口径分离记录。"}

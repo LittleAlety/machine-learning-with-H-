@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "model_version": "v3-84feat",
+    "source": "web/parity_check.html（浏览器内运行，Chromium）",
+    "engine": "predict.js（纯 JS，float32 累加 + float32 分裂比较）",
+    "reference": "Python XGBoost booster.predict（float32），parity_cases.json 20 用例",
+    "pred_threshold": 1e-09,
+    "feat_threshold": 1e-06,
+    "generated_at": "2026-09-11T08:08:35.624Z"
+  },
+  "predictions": {
+    "n": 20,
+    "max_diff": 0,
+    "worst": null,
+    "pass": true
+  },
+  "features": {
+    "n_checks": 1680,
+    "n_features": 84,
+    "max_diff": 0,
+    "worst": null,
+    "pass": true
+  },
+  "meta_checks": {
+    "n_mismatch": 0,
+    "mismatches": []
+  },
+  "pass": true
+}

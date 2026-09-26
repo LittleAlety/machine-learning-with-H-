@@ -1,0 +1,66 @@
+{
+  "stage": "Phase6-S1 structure source audit",
+  "date": "2026-09-20",
+  "probe1_mirror": {
+    "file": "data_raw/MamunHighT2019_adsorption.json.gz",
+    "n_reaction_records": 45130,
+    "has__structures_block": true,
+    "n_structures_stored": 42667,
+    "distinct_refs_referenced": 42667,
+    "refs_matched": 42667,
+    "hstar_configs_total": 7048,
+    "hstar_configs_structure_covered": 7048,
+    "hstar_comps_total": 1836,
+    "hstar_comps_structure_covered": 1836,
+    "sample_row_keys": [
+      "cell",
+      "constraints",
+      "ctime",
+      "mtime",
+      "numbers",
+      "pbc",
+      "positions",
+      "unique_id",
+      "user"
+    ],
+    "sample_has_positions_cell_constraints": true,
+    "constraint_note": "FixAtoms 底层两层固定、顶层弛豫（与 Mamun 2019 'deposited' 约束来源一致），positions 为弛豫后终态几何",
+    "geometry_sanity": {
+      "parsed": "30/30",
+      "H_height_above_top_layer_A": {
+        "mean": 1.188,
+        "min": 0.485,
+        "max": 1.881
+      },
+      "verdict": "全部可解析为 (cell, numbers, positions, constraints)；H 高度 0.5-1.9 A 且逐构型不同 → 真实弛豫终态几何，非理想原型"
+    },
+    "other_raw_sources_check": {
+      "cathub_cache pages (133x3 pass)": "NODE_FIELDS 仅 id/Equation/composition/energy/facet/sites/pubId/dftCode/dftFunctional，无几何（geometry 不在 reactions 查询字段内）",
+      "catappdata.csv": "仅能量/组成/参考列，无结构",
+      "eqv2_361.csv / eqv2_500.csv": "外部验证集描述符列，无结构"
+    }
+  },
+  "probe2_cathub_api": {
+    "schema_system_geometry_fields": [
+      "Cifdata",
+      "InputFile",
+      "Trajdata",
+      "cell",
+      "constraints",
+      "fmax",
+      "forces",
+      "numbers",
+      "positions",
+      "uniqueId"
+    ],
+    "schema_supports_geometry": true,
+    "sample_probe": "跳过：CATHUB_API_KEY 不在环境变量中；schema 已证实 API 支持 Cifdata/Trajdata/positions/fmax，历史会话（notes/09）已用 Key 成功拉取 Mamun 元数据 8,663 条"
+  },
+  "probe3_materials_cloud": {
+    "paper": "Mamun, Winther, Boes, Bligaard, Sci. Data 6:76 (2019), doi:10.1038/s41597-019-0080-z",
+    "data_records_statement": "论文 Data Records 声明：(i) Catalysis-Hub 永久链接 https://www.catalysis-hub.org/publications/MamunHighT2019，网页/API 可下载 CIF/JSON/POSCAR/QE 输入；(ii) 全部 QE 原始输出已上传 Materials Cloud archive，可用 ASE 直接读出 Atoms（含弛豫结构）。来源：PMC6538633 正文",
+    "conclusion": "两路公开来源均发布结构文件（CIF/traj/QE output），与探测1/2互证"
+  },
+  "branch": "α",
+  "branch_rule": "α: 真实弛豫结构组成覆盖率 ≥50% → 连续局域特征直接在 DFT 几何上算；否则 β 双腿"
+}

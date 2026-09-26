@@ -1,0 +1,32 @@
+# Phase 3 预注册判读规则（红线15） — 冻结时间戳: 2026-09-18
+# 全程沿用红线 1-10（v2.0/v3.0）；新增红线 11-15：
+# 11 CHGNet 仅作特征生成器，不替代交付引擎
+# 12 锚点库数值禁止 LLM 直出，审计链缺一字段不入库
+# 13 Agent 禁止无工具调用的数值回答
+# 14 新数据口径开工前先冻结对应 lockbox
+# 15 本文件先写判读规则再跑实验
+
+seeds: [0, 1, 2, 7, 13, 42, 99, 123, 2024, 31337]
+fair_contract: {min_gain_eV: 0.005, direction: "10/10", nested_cv: required}
+gate: {leak_line: A, portability_line: B, retention_min: 0.8}
+
+workstream_G_modnet:
+  config_locked: {feature_select: "greedy_physics <=20 of 84", net: "64-32", early_stop: "inner_val_fold"}
+  adopt: "fair_contract 双过 + LOEO 复测 + 跨域复测"
+  reject: "入表14；3.7 扩展节升级为'含领域最强小数据 NN 模板在内函数类无红利'"
+
+workstream_H_chgnet:
+  checkpoints:
+    H1_slab_build: "1836 组成全部可建"
+    H2_gate: "新特征族过可移植性闸门"
+    H3_contract: "OOF MAE 改善 >0.005 且 10/10"
+    H4_targeted: "3d 磁性子层 MAE 改善 >=0.02 eV 即单独成论"
+    H5_loeo: "Mn/Fe/Co/Ni 折退化 <0.02 eV；CatHub 跨域不劣于 0.177"
+    H6_lockbox: "含 CHGNet 特征的 lockbox 开工前先冻结，单次裁决"
+  fallback: "成本超预算 → 3d 磁性相关子集（约800）先行定向验证"
+
+workstream_I_invariance:
+  dual_outcome:
+    A: "存在不变核 → 协议感知模型；EqV2 MAE ≤0.25 且改善 >0.05 eV 且排序 ρ≥0.35"
+    B: "无不变核 → 机制解释'跨库误差=描述符-泛函耦合伪相关'，入表14+讨论章"
+  arms: ["naive_pooled", "domain_indicator", "IRM_lite"]

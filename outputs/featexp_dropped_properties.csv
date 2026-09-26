@@ -1,0 +1,6 @@
+property,n_missing,miss_rate,missing_elements
+electron_affinity,4,0.1081,"Cd,Hg,Mn,Zn"
+thermal_conductivity,4,0.1081,"Mn,Mo,Os,Y"
+covalent_radius_bragg,23,0.6216,"Au,Ga,Hf,Hg,In,Ir,La,Mo,Nb,Os,Pb,Pd,Pt,Re,Rh,Ru,Sc,Ta,Tc,V,W,Y,Zr"
+gas_basicity,22,0.5946,"Ag,Al,Au,Bi,Cd,Ga,Hf,Hg,In,Ir,Mo,Nb,Os,Pb,Pt,Re,Sn,Ta,Tc,Tl,W,Zr"
+proton_affinity,22,0.5946,"Ag,Al,Au,Bi,Cd,Ga,Hf,Hg,In,Ir,Mo,Nb,Os,Pb,Pt,Re,Sn,Ta,Tc,Tl,W,Zr"

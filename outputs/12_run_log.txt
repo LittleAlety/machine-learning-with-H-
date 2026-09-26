@@ -1,0 +1,70 @@
+[读入] hstar_dataset_v2.csv  1836 行 × 36 特征；1836 个 comp 组；site_spread 已排除
+[基线] 07 XGBoost_tuned GroupKFold MAE=0.1198±0.0087，参数={'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 400, 'subsample': 0.8}
+[权重] n_raw 范围 1-10；inv_comp_freq 范围 0.927-1.944
+
+[1] 随机搜索 150 组（GroupKFold(5) + 组内验证折 early stopping）
+  [全数据搜索 25/150] 当前最优 MAE=0.1354 （15s）
+  [全数据搜索 50/150] 当前最优 MAE=0.1354 （28s）
+  [全数据搜索 75/150] 当前最优 MAE=0.1350 （47s）
+  [全数据搜索 100/150] 当前最优 MAE=0.1350 （57s）
+  [全数据搜索 125/150] 当前最优 MAE=0.1312 （68s）
+  [全数据搜索 150/150] 当前最优 MAE=0.1309 （83s）
+[搜索最优] GroupKFold MAE=0.1309±0.0089 参数={'max_depth': 9, 'min_child_weight': 10.812729, 'gamma': 0.0476, 'subsample': 0.863922, 'colsample_bytree': 0.988332, 'colsample_bylevel': 0.659163, 'reg_alpha': 0.069958, 'reg_lambda': 0.050016, 'learning_rate': 0.011911} 平均最优迭代数=406
+[写出] outputs/opt_search_results.csv, figures/opt_search_trajectory.png
+
+[2] 样本权重实验（最优超参 + GroupKFold(5)，评估不加权）
+  uniform        MAE=0.1309±0.0089
+  n_raw          MAE=0.1250±0.0081
+  inv_comp_freq  MAE=0.1313±0.0095
+[权重结论] 最优方案 = n_raw
+
+[3] Stacking（XGB* + RF + Ridge，同 GroupKFold 折 OOF 对比）
+  [全量收尾] 最优迭代数 n_estimators=449
+  XGB_opt        OOF MAE=0.1260
+  RandomForest   OOF MAE=0.1222
+  Stacking       OOF MAE=0.1233
+[最终模型] 单模型 XGB（最优配置）（stacking 相对单 XGB Δ=-0.0027）
+
+[4a] 嵌套 CV（外层 GroupKFold(5) × 内层搜索 50 组）
+  [外层折1搜索 25/50] 当前最优 MAE=0.1376 （9s）
+  [外层折1搜索 50/50] 当前最优 MAE=0.1319 （20s）
+  [外层折1] 优化 MAE=0.1330  基线 MAE=0.1297
+  [外层折2搜索 25/50] 当前最优 MAE=0.1367 （9s）
+  [外层折2搜索 50/50] 当前最优 MAE=0.1367 （17s）
+  [外层折2] 优化 MAE=0.1211  基线 MAE=0.1152
+  [外层折3搜索 25/50] 当前最优 MAE=0.1452 （7s）
+  [外层折3搜索 50/50] 当前最优 MAE=0.1409 （15s）
+  [外层折3] 优化 MAE=0.1235  基线 MAE=0.1127
+  [外层折4搜索 25/50] 当前最优 MAE=0.1290 （8s）
+  [外层折4搜索 50/50] 当前最优 MAE=0.1290 （16s）
+  [外层折4] 优化 MAE=0.1422  基线 MAE=0.1309
+  [外层折5搜索 25/50] 当前最优 MAE=0.1388 （7s）
+  [外层折5搜索 50/50] 当前最优 MAE=0.1388 （16s）
+  [外层折5] 优化 MAE=0.1208  基线 MAE=0.1105
+[嵌套CV] 优化模型无偏 MAE=0.1281±0.0093；基线同折对照 MAE=0.1198±0.0097
+
+[4b] LOEO（最优配置）
+  LOEO 汇集 MAE=0.1539（37 折；基线 0.1547）
+
+[5] EqV2 外部验证（零重训，模型=最终模型全量训练）
+[读入] EqV2 原始 861 行，剔除 formula/E_true 缺失后 857 行
+  外部验证 ALL: MAE=0.3318  bias=+0.1423  去偏差MAE=0.2909
+[写出] outputs/opt_extval_results.csv / opt_extval_metrics.csv / figures/opt_extval_parity.png
+
+===== 汇总对比（outputs/opt_comparison.csv）=====
+     stage               setting                        protocol    MAE  MAE_std                   note
+        基线 XGBoost_tuned（07 小网格）             GroupKFold(规范化comp) 0.1198   0.0087          当前基线 0.120 eV
+      超参搜索      XGB 最优配置（150组搜索）             GroupKFold(规范化comp) 0.1309   0.0089           搜索阶段内层评估，非无偏
+      样本权重               uniform             GroupKFold(规范化comp) 0.1309   0.0089           同一最优超参；评估不加权
+      样本权重                 n_raw             GroupKFold(规范化comp) 0.1250   0.0081           同一最优超参；评估不加权
+      样本权重         inv_comp_freq             GroupKFold(规范化comp) 0.1313   0.0095           同一最优超参；评估不加权
+Stacking对比               XGB_opt         GroupKFold(规范化comp) OOF 0.1260      NaN  uniform 权重；元学习器=Ridge
+Stacking对比          RandomForest         GroupKFold(规范化comp) OOF 0.1222      NaN  uniform 权重；元学习器=Ridge
+Stacking对比              Stacking         GroupKFold(规范化comp) OOF 0.1233      NaN  uniform 权重；元学习器=Ridge
+  嵌套CV无偏估计         优化流程（内层搜索50组） 外层GroupKFold(5)+内层GroupKFold(4) 0.1281   0.0093         无偏估计；与基线同外层折对照
+  嵌套CV无偏估计         基线（07固定参数，同折）                 外层GroupKFold(5) 0.1198   0.0097             同外层折固定参数对照
+      LOEO              XGB 最优配置               留一元素外测（按n_test加权） 0.1539      NaN         基线 LOEO=0.1547
+      外部验证             最终模型（零重训）                        EqV2 ALL 0.3318      NaN 基线=0.3470；bias=+0.1423
+
+[7] 候选刷新判定：基线GroupKFold 0.1198 − 嵌套CV 0.1281 = -0.0083 eV → 未达阈值，保留原候选
+[写出] notes/12_optimization.md

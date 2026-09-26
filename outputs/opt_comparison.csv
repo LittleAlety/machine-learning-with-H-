@@ -1,0 +1,13 @@
+stage,setting,protocol,MAE,MAE_std,note
+基线,XGBoost_tuned（07 小网格）,GroupKFold(规范化comp),0.1198,0.0087,当前基线 0.120 eV
+超参搜索,XGB 最优配置（150组搜索）,GroupKFold(规范化comp),0.1309,0.0089,搜索阶段内层评估，非无偏
+样本权重,uniform,GroupKFold(规范化comp),0.1309,0.0089,同一最优超参；评估不加权
+样本权重,n_raw,GroupKFold(规范化comp),0.125,0.0081,同一最优超参；评估不加权
+样本权重,inv_comp_freq,GroupKFold(规范化comp),0.1313,0.0095,同一最优超参；评估不加权
+Stacking对比,XGB_opt,GroupKFold(规范化comp) OOF,0.126,,uniform 权重；元学习器=Ridge
+Stacking对比,RandomForest,GroupKFold(规范化comp) OOF,0.1222,,uniform 权重；元学习器=Ridge
+Stacking对比,Stacking,GroupKFold(规范化comp) OOF,0.1233,,uniform 权重；元学习器=Ridge
+嵌套CV无偏估计,优化流程（内层搜索50组）,外层GroupKFold(5)+内层GroupKFold(4),0.1281,0.0093,无偏估计；与基线同外层折对照
+嵌套CV无偏估计,基线（07固定参数，同折）,外层GroupKFold(5),0.1198,0.0097,同外层折固定参数对照
+LOEO,XGB 最优配置,留一元素外测（按n_test加权）,0.1539,,基线 LOEO=0.1547
+外部验证,最终模型（零重训）,EqV2 ALL,0.3318,,基线=0.3470；bias=+0.1423

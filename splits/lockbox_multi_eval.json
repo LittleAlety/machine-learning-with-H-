@@ -1,0 +1,34 @@
+{
+  "created_utc": "2026-09-16T04:48:26.502922+00:00",
+  "protocol": "v3 84feat XGB(seed42) 训练于 85%，评于 15% lockbox；仅评估，不调参选型",
+  "per_split": [
+    {
+      "split_seed": 42,
+      "n_lockbox": 276,
+      "MAE": 0.11029714201094626
+    },
+    {
+      "split_seed": 1,
+      "n_lockbox": 276,
+      "MAE": 0.12208087108342953
+    },
+    {
+      "split_seed": 2,
+      "n_lockbox": 276,
+      "MAE": 0.10708691869018759
+    },
+    {
+      "split_seed": 3,
+      "n_lockbox": 276,
+      "MAE": 0.10935490337351768
+    }
+  ],
+  "mae_mean": 0.11220495878952026,
+  "mae_std": 0.006720380912573821,
+  "bootstrap_ci95_mean": [
+    0.10788947452037725,
+    0.11889937915595157
+  ],
+  "group_cv_10seed_oof_mae": 0.11374,
+  "oof_optimism_flag": false
+}

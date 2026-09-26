@@ -1,0 +1,1051 @@
+{
+  "generated_at": "2026-09-20",
+  "workstream": "C-3 v2 DFT production preflight",
+  "inputs": {
+    "preregistration": "ai_surface_cat\\innovation\\c3_v2\\batches_preregistered.json",
+    "active_learning_candidates": "ai_surface_cat\\outputs\\active_learning_candidates_all.csv",
+    "dual_adsorbate_ranking": "ai_surface_cat\\innovation\\c3_v2\\dual_all_ranked.csv",
+    "chgnet_relaxation_features": "ai_surface_cat\\innovation\\continuous_local\\continuous_local_features.csv"
+  },
+  "hash_audit": {
+    "declared_sha256": "d331e15c6c47bd31e39e95f0d1a5793733c696600b8a72532796c6452c38b121",
+    "file_sha256": "8c033501c42975490d437c9b20e27aa0c3a21571429ba2c884e5ba634eceecb7",
+    "source_file_sha256": {
+      "ai_surface_cat\\outputs\\active_learning_candidates_all.csv": "8ede51597cf54207effdd4000c5a516c446d99ceb715c95bca9eadd650eb2a11",
+      "ai_surface_cat\\innovation\\c3_v2\\dual_all_ranked.csv": "e6e87b8939def8abe2c8afba7667c0713afe9d4a877d57fa331c4efd78338b38",
+      "ai_surface_cat\\innovation\\continuous_local\\continuous_local_features.csv": "73b1c5bb947b4f5b0a3568c63b183a568a85bedb29dce8d05c594773e27ef3f0"
+    },
+    "canonical_payload_sha256": "bbe92129c03a73c587b0c7b5e7c77cf4cc353ea574b8ecc0d3c2b1975a29ea8a",
+    "declared_matches_file": false,
+    "declared_matches_canonical_variant": null,
+    "status": "UNVERIFIED",
+    "tested_variants": {
+      "canonical_sort_keys": "bbe92129c03a73c587b0c7b5e7c77cf4cc353ea574b8ecc0d3c2b1975a29ea8a",
+      "canonical_sort_keys_newline": "37fdc0df40b36854e8f490020db633a19902990272545adf9fb0226b5534beaa",
+      "canonical_ascii": "5e930aa88a897ee92e44a16b919fd869987ce334509e9954d767f29157780470",
+      "canonical_ascii_newline": "c335b678e6bb1001fad502c84f5639ccc7d3b1ef97bda8b00968a5d1499015bc",
+      "indent_1": "b9367f3cfc56e8e2d1ce2b43fa6136630ecd81bd0bc09f603156caf21df520a4",
+      "indent_1_newline": "a16fab64093bcb8224450d42a48f99f3557b7f4de9c025b472389a22c3cba113",
+      "indent_2": "423621ce49cf46b96bf2efa5bd21c663cdd5003bbf319ed1fb13df4aef60e6ab",
+      "indent_2_newline": "8321f3260f2299fbabf4b54b3ad4b8435bc28dc8fce49713cecf27f29feb9dbe",
+      "batch_A_AL_top10_sha256": "834099936f7685cbf662d81473738f8574283c29414fa01391ca7d458bbe12f2",
+      "batch_B_scaling_tier2_10_sha256": "f60007071cd02015891ff37e375687217b9acbcb4eba7e8f26cb61b01877c882",
+      "batch_C_relax_audit_30_sha256": "c9a5760cabc882ef22d93b3da5aee02b88dbd475d47be9fd4bf73cd386027426",
+      "batches_only": "285f10b60653c148d7c7d3e062a5dc6a7c393972163a1beb3d2f4cf58d568311",
+      "batches_only_newline": "104066b48dafb55f3a712c598795f1ab5026ef3a6693e1a99f14a97fe64910fd",
+      "batches_only_list": "af70bc065c1e3bf06fd12f7b560b476abd2acde33ae067f70bb69b30b07cee9c",
+      "batches_only_list_newline": "1c553bec0e54218542ca1d5e97ca328fd9d87b9e500aff946398b785d13b8e11",
+      "source_file_hashes_concat": "8ef732bf56b838d18d9d49c4f4cbfc4cfd187131edf5f0b7229bad9a7995e0dc",
+      "source_file_hashes_lines": "8ee4609c52a15e3377bd428c6323eeb824d0e2fdc1e0db7f43d8a88012e91712",
+      "raw_object_empty_placeholder": "c11c904b89adc64b650ea3339edd337b580c557d42b74e0b815ed7a41d5c853e"
+    }
+  },
+  "batch_A": {
+    "comparison": {
+      "order_match": true,
+      "set_match": true,
+      "expected_count": 10,
+      "target_count": 10,
+      "missing_from_recomputed": [],
+      "extra_in_recomputed": [],
+      "max_abs_field_difference": {
+        "acquisition_score": 3.999999999998449e-05,
+        "pred_dG": 5.000000000002225e-05
+      },
+      "expected_signature": [
+        [
+          "HgRu",
+          "L10",
+          101
+        ],
+        [
+          "Co3Ga",
+          "L12",
+          111
+        ],
+        [
+          "CoPt3",
+          "L12",
+          111
+        ],
+        [
+          "AuRu",
+          "L10",
+          101
+        ],
+        [
+          "HgTc",
+          "L10",
+          101
+        ],
+        [
+          "AuOs",
+          "L10",
+          101
+        ],
+        [
+          "CrHg",
+          "L10",
+          101
+        ],
+        [
+          "CrIn",
+          "L10",
+          101
+        ],
+        [
+          "HgNi3",
+          "L12",
+          111
+        ],
+        [
+          "CdCr",
+          "L10",
+          101
+        ]
+      ]
+    },
+    "eligible_pool_size": 58,
+    "source_pool_size": 426,
+    "first_eligible_global_rank": 16,
+    "selected_global_rank_range": [
+      16,
+      58
+    ],
+    "mean_abs_pred_dG_eV": 0.066944,
+    "n_abs_pred_dG_le_0.05": 4,
+    "n_abs_pred_dG_le_0.10": 7,
+    "max_loeo_element_mae_eV": 0.2283075929916394,
+    "high_toxicity_or_radioactivity_count": 4,
+    "warning_element_counts": {
+      "Cr": 3,
+      "Hg": 4,
+      "Tc": 1
+    },
+    "selected": [
+      {
+        "comp": "HgRu",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.57208,
+        "pred_dG": 5e-05,
+        "in_domain": true,
+        "_all_rank": 16,
+        "_eligible_rank": 1,
+        "max_loeo_mae_eV": 0.1348772180375198
+      },
+      {
+        "comp": "Co3Ga",
+        "structure": "L12",
+        "facet": 111,
+        "acquisition_score": 0.54783,
+        "pred_dG": 0.01813,
+        "in_domain": true,
+        "_all_rank": 20,
+        "_eligible_rank": 2,
+        "max_loeo_mae_eV": 0.1512852948194817
+      },
+      {
+        "comp": "CoPt3",
+        "structure": "L12",
+        "facet": 111,
+        "acquisition_score": 0.48902,
+        "pred_dG": -0.00643,
+        "in_domain": true,
+        "_all_rank": 23,
+        "_eligible_rank": 3,
+        "max_loeo_mae_eV": 0.1285399448482072
+      },
+      {
+        "comp": "AuRu",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.4316,
+        "pred_dG": 0.03328,
+        "in_domain": true,
+        "_all_rank": 33,
+        "_eligible_rank": 4,
+        "max_loeo_mae_eV": 0.2283075929916394
+      },
+      {
+        "comp": "HgTc",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.41629,
+        "pred_dG": 0.07645,
+        "in_domain": true,
+        "_all_rank": 36,
+        "_eligible_rank": 5,
+        "max_loeo_mae_eV": 0.1348772180375198
+      },
+      {
+        "comp": "AuOs",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.37589,
+        "pred_dG": -0.05823,
+        "in_domain": true,
+        "_all_rank": 38,
+        "_eligible_rank": 6,
+        "max_loeo_mae_eV": 0.2283075929916394
+      },
+      {
+        "comp": "CrHg",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.34354,
+        "pred_dG": 0.14038,
+        "in_domain": true,
+        "_all_rank": 44,
+        "_eligible_rank": 7,
+        "max_loeo_mae_eV": 0.18478715867499
+      },
+      {
+        "comp": "CrIn",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.33324,
+        "pred_dG": -0.11461,
+        "in_domain": true,
+        "_all_rank": 45,
+        "_eligible_rank": 8,
+        "max_loeo_mae_eV": 0.18478715867499
+      },
+      {
+        "comp": "HgNi3",
+        "structure": "L12",
+        "facet": 111,
+        "acquisition_score": 0.32417,
+        "pred_dG": -0.07713,
+        "in_domain": true,
+        "_all_rank": 48,
+        "_eligible_rank": 9,
+        "max_loeo_mae_eV": 0.1348772180375198
+      },
+      {
+        "comp": "CdCr",
+        "structure": "L10",
+        "facet": 101,
+        "acquisition_score": 0.2729,
+        "pred_dG": -0.14475,
+        "in_domain": true,
+        "_all_rank": 58,
+        "_eligible_rank": 10,
+        "max_loeo_mae_eV": 0.18478715867499
+      }
+    ]
+  },
+  "batch_B": {
+    "comparison": {
+      "order_match": true,
+      "set_match": true,
+      "expected_count": 10,
+      "target_count": 10,
+      "missing_from_recomputed": [],
+      "extra_in_recomputed": [],
+      "max_abs_field_difference": {
+        "dG_H_eV": 4.1653000000002605e-05,
+        "dG_OH_eV": 4.409999999999137e-05,
+        "score": 4.999999999988347e-05
+      },
+      "expected_signature": [
+        [
+          "Cr3Hf",
+          "L12",
+          111
+        ],
+        [
+          "CrNb3",
+          "L12",
+          111
+        ],
+        [
+          "Al3Ta",
+          "L12",
+          111
+        ],
+        [
+          "InZr",
+          "L10",
+          101
+        ],
+        [
+          "AlTa",
+          "L10",
+          101
+        ],
+        [
+          "Al3Zr",
+          "L12",
+          111
+        ],
+        [
+          "Al3Hf",
+          "L12",
+          111
+        ],
+        [
+          "AlNb",
+          "L10",
+          101
+        ],
+        [
+          "Al3Nb",
+          "L12",
+          111
+        ],
+        [
+          "HfPb",
+          "L10",
+          101
+        ]
+      ]
+    },
+    "eligible_pool_size": 1080,
+    "source_pool_size": 1836,
+    "oh_in_training_count": 0,
+    "selected_global_rank_range": [
+      2,
+      36
+    ],
+    "score_range_eV": [
+      3.2462237,
+      4.3396425
+    ],
+    "dG_H_range_eV": [
+      -0.40393817,
+      0.32053563
+    ],
+    "dG_OH_range_eV": [
+      0.9738672,
+      1.3018928
+    ],
+    "Cr_warning_count": 2,
+    "selected": [
+      {
+        "comp": "Cr3Hf",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.32053563,
+        "dG_OH_eV": 0.9738672,
+        "score": 3.2462237,
+        "_all_rank": 2,
+        "_eligible_rank": 1
+      },
+      {
+        "comp": "CrNb3",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.29274097,
+        "dG_OH_eV": 1.1549752,
+        "score": 3.8499172,
+        "_all_rank": 7,
+        "_eligible_rank": 2
+      },
+      {
+        "comp": "Al3Ta",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.1885857,
+        "dG_OH_eV": 1.2015303,
+        "score": 4.0051007,
+        "_all_rank": 13,
+        "_eligible_rank": 3
+      },
+      {
+        "comp": "InZr",
+        "structure": "L10",
+        "facet": 101,
+        "oh_in_training": false,
+        "dG_H_eV": -0.34622133,
+        "dG_OH_eV": 1.2200303,
+        "score": 4.0667677,
+        "_all_rank": 15,
+        "_eligible_rank": 4
+      },
+      {
+        "comp": "AlTa",
+        "structure": "L10",
+        "facet": 101,
+        "oh_in_training": false,
+        "dG_H_eV": -0.40393817,
+        "dG_OH_eV": 1.235205,
+        "score": 4.11735,
+        "_all_rank": 23,
+        "_eligible_rank": 5
+      },
+      {
+        "comp": "Al3Zr",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.059558347,
+        "dG_OH_eV": 1.2506099,
+        "score": 4.1686993,
+        "_all_rank": 25,
+        "_eligible_rank": 6
+      },
+      {
+        "comp": "Al3Hf",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.059109315,
+        "dG_OH_eV": 1.2506441,
+        "score": 4.168813,
+        "_all_rank": 26,
+        "_eligible_rank": 7
+      },
+      {
+        "comp": "AlNb",
+        "structure": "L10",
+        "facet": 101,
+        "oh_in_training": false,
+        "dG_H_eV": -0.35043573,
+        "dG_OH_eV": 1.2816385,
+        "score": 4.272128,
+        "_all_rank": 31,
+        "_eligible_rank": 8
+      },
+      {
+        "comp": "Al3Nb",
+        "structure": "L12",
+        "facet": 111,
+        "oh_in_training": false,
+        "dG_H_eV": 0.25463563,
+        "dG_OH_eV": 1.2949237,
+        "score": 4.316412,
+        "_all_rank": 34,
+        "_eligible_rank": 9
+      },
+      {
+        "comp": "HfPb",
+        "structure": "L10",
+        "facet": 101,
+        "oh_in_training": false,
+        "dG_H_eV": -0.256064,
+        "dG_OH_eV": 1.3018928,
+        "score": 4.3396425,
+        "_all_rank": 36,
+        "_eligible_rank": 10
+      }
+    ]
+  },
+  "batch_C": {
+    "comparison": {
+      "order_match": true,
+      "set_match": true,
+      "expected_count": 25,
+      "target_count": 25,
+      "missing_from_recomputed": [],
+      "extra_in_recomputed": [],
+      "max_abs_field_difference": {
+        "surf_disp_mean_A": 0.0004893237761707248,
+        "relax_energy_drop_per_atom": 0.0004977195858959504
+      },
+      "expected_signature": [
+        [
+          "LaPb",
+          "L10",
+          101
+        ],
+        [
+          "LaSc",
+          "L10",
+          101
+        ],
+        [
+          "PbSc",
+          "L10",
+          101
+        ],
+        [
+          "FeSc",
+          "L10",
+          101
+        ],
+        [
+          "LaY",
+          "L10",
+          101
+        ],
+        [
+          "NiY",
+          "L10",
+          101
+        ],
+        [
+          "LaNi",
+          "L10",
+          101
+        ],
+        [
+          "CuLa",
+          "L10",
+          101
+        ],
+        [
+          "FeZr",
+          "L10",
+          101
+        ],
+        [
+          "FeTi",
+          "L10",
+          101
+        ],
+        [
+          "CrTl",
+          "L10",
+          101
+        ],
+        [
+          "CuY",
+          "L10",
+          101
+        ],
+        [
+          "Co",
+          "A1",
+          111
+        ],
+        [
+          "FeLa3",
+          "L12",
+          111
+        ],
+        [
+          "NiSn3",
+          "L12",
+          111
+        ],
+        [
+          "Al3La",
+          "L12",
+          111
+        ],
+        [
+          "Ag3Sc",
+          "L12",
+          111
+        ],
+        [
+          "La3Mo",
+          "L12",
+          111
+        ],
+        [
+          "Fe3Mo",
+          "L12",
+          111
+        ],
+        [
+          "Cr3Pb",
+          "L12",
+          111
+        ],
+        [
+          "Ag3Co",
+          "L12",
+          111
+        ],
+        [
+          "FeSn3",
+          "L12",
+          111
+        ],
+        [
+          "Fe3V",
+          "L12",
+          111
+        ],
+        [
+          "Fe3Ta",
+          "L12",
+          111
+        ],
+        [
+          "CuFe3",
+          "L12",
+          111
+        ]
+      ]
+    },
+    "quota_rule": "all A1 + top 12 L10 + top 12 L12 (inferred from frozen listing)",
+    "quota_is_explicit_in_preregistration": false,
+    "source_pool_size": 256,
+    "source_structure_counts": {
+      "L12": 167,
+      "L10": 88,
+      "A1": 1
+    },
+    "selected_structure_counts": {
+      "L10": 12,
+      "L12": 12,
+      "A1": 1
+    },
+    "literal_global_top25_structure_counts": {
+      "L10": 25
+    },
+    "overlap_with_literal_global_top25": 12,
+    "surface_displacement_A": {
+      "min": 3.0110861609674897,
+      "median": 3.502669428978633,
+      "mean": 4.287182716329588,
+      "max": 6.710253738810327,
+      "lowest_selected_percentile_in_source": 82.421875,
+      "source_p90": 3.528913343122216
+    },
+    "relax_energy_drop_per_atom_eV": {
+      "min": -9.189869433641434,
+      "median": -5.527612276375294,
+      "mean": -6.070283590108156,
+      "max": -3.438747612759471,
+      "source_p10": -9.276849493384361,
+      "lowest_selected_percentile_in_source": 11.328125
+    },
+    "spearman_disp_vs_energy_drop_full": 0.07869220645456625,
+    "spearman_disp_vs_energy_drop_selected": 0.13,
+    "n_converged": 21,
+    "converged_rate": 0.84,
+    "source_converged_rate": 0.8125,
+    "unconverged": [
+      {
+        "comp": "LaNi",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.236344854459649,
+        "relax_fmax_final": 0.0704196989536285
+      },
+      {
+        "comp": "NiSn3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.42096333322828,
+        "relax_fmax_final": 0.7723997235298157
+      },
+      {
+        "comp": "Cr3Pb",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.125179805251072,
+        "relax_fmax_final": 0.0884513556957244
+      },
+      {
+        "comp": "FeSn3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.0781830302755115,
+        "relax_fmax_final": 0.8281344771385193
+      }
+    ],
+    "n_with_red_flag_elements": 21,
+    "red_flag_element_counts": {
+      "Fe": 9,
+      "La": 8,
+      "Sc": 4,
+      "Tl": 1,
+      "Y": 3
+    },
+    "selected": [
+      {
+        "comp": "LaPb",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 6.710253738810327,
+        "relax_energy_drop_per_atom": -4.85435751453042,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0114814648404717
+      },
+      {
+        "comp": "LaSc",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 6.0682679526869805,
+        "relax_energy_drop_per_atom": -5.432593941688538,
+        "relax_converged": true,
+        "relax_fmax_final": 0.014489384368062
+      },
+      {
+        "comp": "PbSc",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.871995147547614,
+        "relax_energy_drop_per_atom": -5.35381668433547,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0101121440529823
+      },
+      {
+        "comp": "FeSc",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.809073962113711,
+        "relax_energy_drop_per_atom": -7.337738987058401,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0364370197057724
+      },
+      {
+        "comp": "LaY",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.455042172748957,
+        "relax_energy_drop_per_atom": -5.527612276375294,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0104113267734646
+      },
+      {
+        "comp": "NiY",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.252221072930698,
+        "relax_energy_drop_per_atom": -6.374409317970276,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0373537242412567
+      },
+      {
+        "comp": "LaNi",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.236344854459649,
+        "relax_energy_drop_per_atom": -5.535178009420633,
+        "relax_converged": false,
+        "relax_fmax_final": 0.0704196989536285
+      },
+      {
+        "comp": "CuLa",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.171627683363813,
+        "relax_energy_drop_per_atom": -4.576424196362495,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0140286600217223
+      },
+      {
+        "comp": "FeZr",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.107985317678519,
+        "relax_energy_drop_per_atom": -8.477770373225212,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0284265279769897
+      },
+      {
+        "comp": "FeTi",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 5.082041134438714,
+        "relax_energy_drop_per_atom": -8.338502280414104,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0461498536169528
+      },
+      {
+        "comp": "CrTl",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 4.887038618459688,
+        "relax_energy_drop_per_atom": -5.199699185788631,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0339925773441791
+      },
+      {
+        "comp": "CuY",
+        "structure": "L10",
+        "facet": 101,
+        "surf_disp_mean_A": 4.799674790843093,
+        "relax_energy_drop_per_atom": -5.392880335450172,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0068010766990482
+      },
+      {
+        "comp": "Co",
+        "structure": "A1",
+        "facet": 111,
+        "surf_disp_mean_A": 3.502669428978633,
+        "relax_energy_drop_per_atom": -6.7111546993255615,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0238302666693925
+      },
+      {
+        "comp": "FeLa3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.4614442061791486,
+        "relax_energy_drop_per_atom": -5.412568729370832,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0419024638831615
+      },
+      {
+        "comp": "NiSn3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.42096333322828,
+        "relax_energy_drop_per_atom": -4.31710615567863,
+        "relax_converged": false,
+        "relax_fmax_final": 0.7723997235298157
+      },
+      {
+        "comp": "Al3La",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.403389943930268,
+        "relax_energy_drop_per_atom": -4.293407119810581,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0265835896134376
+      },
+      {
+        "comp": "Ag3Sc",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.2095504769242167,
+        "relax_energy_drop_per_atom": -3.875338342040777,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0249309986829757
+      },
+      {
+        "comp": "La3Mo",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.1652768961657767,
+        "relax_energy_drop_per_atom": -5.780275896191597,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0344531945884227
+      },
+      {
+        "comp": "Fe3Mo",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.155956115458069,
+        "relax_energy_drop_per_atom": -8.787252448499203,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0412690602242946
+      },
+      {
+        "comp": "Cr3Pb",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.125179805251072,
+        "relax_energy_drop_per_atom": -7.332398116588592,
+        "relax_converged": false,
+        "relax_fmax_final": 0.0884513556957244
+      },
+      {
+        "comp": "Ag3Co",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.084850898725935,
+        "relax_energy_drop_per_atom": -3.438747612759471,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0280138421803712
+      },
+      {
+        "comp": "FeSn3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.0781830302755115,
+        "relax_energy_drop_per_atom": -4.707886125892401,
+        "relax_converged": false,
+        "relax_fmax_final": 0.8281344771385193
+      },
+      {
+        "comp": "Fe3V",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.075940489849709,
+        "relax_energy_drop_per_atom": -8.46850873529911,
+        "relax_converged": true,
+        "relax_fmax_final": 0.030997360125184
+      },
+      {
+        "comp": "Fe3Ta",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.033510676223829,
+        "relax_energy_drop_per_atom": -9.189869433641434,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0347221903502941
+      },
+      {
+        "comp": "CuFe3",
+        "structure": "L12",
+        "facet": 111,
+        "surf_disp_mean_A": 3.0110861609674897,
+        "relax_energy_drop_per_atom": -7.041593234986067,
+        "relax_converged": true,
+        "relax_fmax_final": 0.0268191155046224
+      }
+    ]
+  },
+  "software_readiness": {
+    "manifest_present": true,
+    "archives_ready": true,
+    "checks": [
+      {
+        "path": "downloads/q-e-7.6.tar.gz",
+        "exists": true,
+        "expected_sha256": "945c8f16ab330c8f0b30f4de1a9a088b85038476fcd819394e641f4d2d8b7d51",
+        "actual_sha256": "945c8f16ab330c8f0b30f4de1a9a088b85038476fcd819394e641f4d2d8b7d51",
+        "match": true
+      },
+      {
+        "path": "downloads/gpaw-26.7.0.tar.gz",
+        "exists": true,
+        "expected_sha256": "1509af00cfcd032bbbce197a5b3e37edb82bf458db5e200f6a105ec74efbca15",
+        "actual_sha256": "1509af00cfcd032bbbce197a5b3e37edb82bf458db5e200f6a105ec74efbca15",
+        "match": true
+      },
+      {
+        "path": "downloads/cp2k-2026.2.tar.gz",
+        "exists": true,
+        "expected_sha256": "d27e9b4cf13c4fe2ed0b8c731dde07d17ff137d0ade46ba09058e8b93d6fe4ea",
+        "actual_sha256": "d27e9b4cf13c4fe2ed0b8c731dde07d17ff137d0ade46ba09058e8b93d6fe4ea",
+        "match": true
+      },
+      {
+        "path": "downloads/fftw-3.3.10.tar.gz",
+        "exists": true,
+        "expected_sha256": "56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467",
+        "actual_sha256": "56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467",
+        "match": true
+      },
+      {
+        "path": "downloads/dependencies/libxc-7.1.2.tar.gz",
+        "exists": true,
+        "expected_sha256": "c517ce61820ea8114664a4280b6a6bc74a4f22f1fd1ea4ddecd6df0caeeae4f4",
+        "actual_sha256": "c517ce61820ea8114664a4280b6a6bc74a4f22f1fd1ea4ddecd6df0caeeae4f4",
+        "match": true
+      },
+      {
+        "path": "downloads/dependencies/libvdwxc-0.5.0.tar.gz",
+        "exists": true,
+        "expected_sha256": "29fb70efd58aff51524d2172a87e8f88e760b696b0ddb9aa5878432bdffa3c2f",
+        "actual_sha256": "29fb70efd58aff51524d2172a87e8f88e760b696b0ddb9aa5878432bdffa3c2f",
+        "match": true
+      },
+      {
+        "path": "downloads/dependencies/gpaw_data-1.1.0-py3-none-any.whl",
+        "exists": true,
+        "expected_sha256": "d6d2f2450cd6b22aa421738fce21c9c83b7f534cbc3bb4081ce5593fd9487173",
+        "actual_sha256": "d6d2f2450cd6b22aa421738fce21c9c83b7f534cbc3bb4081ce5593fd9487173",
+        "match": true
+      }
+    ],
+    "executables_on_path": {
+      "pw.x": null,
+      "cp2k.psmp": null,
+      "gpaw": null,
+      "cmake": null,
+      "gfortran": null,
+      "mpirun": null
+    }
+  },
+  "anchor_gate_candidates": {
+    "literature_anchor_rows": 25,
+    "literature_unique_surfaces": 24,
+    "recommended_training_protocol_anchors": [
+      {
+        "surface": "Pt(111)",
+        "true_dG_eV": -0.0723,
+        "pred_dG_eV": -0.1064,
+        "literature_anchor_matches": 2
+      },
+      {
+        "surface": "Cu(111)",
+        "true_dG_eV": 0.1864,
+        "pred_dG_eV": 0.1661,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Ir(111)",
+        "true_dG_eV": -0.0841,
+        "pred_dG_eV": -0.0553,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Pd(111)",
+        "true_dG_eV": -0.0497,
+        "pred_dG_eV": 0.0202,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Rh(111)",
+        "true_dG_eV": -0.0443,
+        "pred_dG_eV": -0.0981,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Ag(111)",
+        "true_dG_eV": 0.5782,
+        "pred_dG_eV": 0.3431,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Au(111)",
+        "true_dG_eV": 0.5624,
+        "pred_dG_eV": 0.2339,
+        "literature_anchor_matches": 1
+      },
+      {
+        "surface": "Co(111)",
+        "true_dG_eV": -0.2087,
+        "pred_dG_eV": 0.1317,
+        "literature_anchor_matches": 0
+      },
+      {
+        "surface": "Ru(111)",
+        "true_dG_eV": -0.1712,
+        "pred_dG_eV": -0.2373,
+        "literature_anchor_matches": 1
+      }
+    ],
+    "recommended_anchor_count": 9,
+    "note": "Use Mamun BEEF-vdW training values for the calculation gate; literature values with another functional are context, not the gate target."
+  },
+  "budget_audit": {
+    "assumptions": {
+      "H_sites_per_surface": 5,
+      "OH_sites_per_surface": 5,
+      "failure_retry_overhead": 0.3
+    },
+    "midpoint_core_hours_before_overhead": 153750,
+    "midpoint_core_hours": 199875,
+    "low_core_hours": 101400,
+    "high_core_hours": 298350,
+    "wall_days_at_32_cores": 260.25390625,
+    "wall_days_at_512_cores": 16.265869140625,
+    "document_rounded_core_hours": 200000,
+    "rounded_vs_recomputed_relative_error": 0.000625
+  },
+  "overall": {
+    "candidate_membership_reproduced": true,
+    "batch_checks": {
+      "A": true,
+      "B": true,
+      "C": true
+    },
+    "prereg_hash_chain": "UNVERIFIED",
+    "software_archives_ready": true,
+    "compiled_dft_engines_ready": false,
+    "anchor_gate_executed": false,
+    "resource_probe_executed": false,
+    "stage1_go_conditionally": true,
+    "stage2_stage3_go": false,
+    "decision": "GO to Stage 1 environment/anchor preparation; NO-GO to batch production until the three preflight gates pass."
+  },
+  "blocking_findings": [
+    "The declared preregistration SHA256 is not reproduced by the file or the tested canonical payload variants.",
+    "Batch C's 12/1/12 structure quotas are inferred from the frozen listing and are not explicit in config/preregistered_phase6.yaml.",
+    "The DFT engines are downloaded as source but are not compiled or probed.",
+    "The BEEF-vdW anchor gate has not been executed.",
+    "The three-task core-hour calibration has not been executed."
+  ],
+  "risk_notes": [
+    "Batch A contains 4 Hg/Tc-containing systems; laboratory safety review is required before experimental follow-up.",
+    "Batch C contains 21/25 systems with registered oxophilicity/LOEO/toxicity flags; this is deliberate for the relaxation audit but prevents direct catalytic recommendation.",
+    "Batch C contains 21/25 CHGNet structures that reached the relaxation criterion; 2 did not.",
+    "The source archives are verified, but no binary has been built in this Windows workspace; cluster toolchain validation remains pending."
+  ],
+  "conclusion": "The frozen A/B/C membership is reproducible from the local upstream files, so the scientific selection logic is internally consistent. The package is ready for Stage 1 environment setup, but not ready for production DFT: the declared hash needs an auditable detached checksum, Batch C stratification needs an explicit amendment/restatement, and the anchor, software, and core-hour gates remain unexecuted."
+}

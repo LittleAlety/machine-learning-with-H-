@@ -1,0 +1,133 @@
+{
+  "created_utc": "2026-09-16T06:39:40.932133+00:00",
+  "B1_lockbox": {
+    "verdict": "完成",
+    "key_numbers": {
+      "n_lockbox": 276,
+      "sha256": "322017b409dea326b822ea7db6a0a4e8fe8fd7baa60b98413a2aa0a692c5bb65",
+      "leakcheck": {
+        "lockbox_nn_mean": 2.7347622694423115,
+        "train_nn_mean": 2.8388047391655054,
+        "ks_stat": 0.10869565217391304,
+        "ks_pvalue": 0.007178459080093571
+      }
+    },
+    "files": [
+      "splits/lockbox_v1.json",
+      "splits/lockbox_leakcheck.png",
+      "config/fair_contract.yaml"
+    ]
+  },
+  "B2_multisplit": {
+    "verdict": "无显著 OOF 乐观偏差",
+    "key_numbers": {
+      "mae_mean": 0.11220495878952026,
+      "mae_std": 0.006720380912573821,
+      "ci95": [
+        0.10788947452037725,
+        0.11889937915595157
+      ]
+    },
+    "files": [
+      "splits/lockbox_multi_eval.json",
+      "splits/lockbox_multi_eval.csv",
+      "splits/lockbox_seed1.json",
+      "splits/lockbox_seed2.json",
+      "splits/lockbox_seed3.json"
+    ]
+  },
+  "B3_external_protocol": {
+    "verdict": "冻结",
+    "key_numbers": {
+      "cathub": 355,
+      "eqv2": 491,
+      "bootstrap": 10000,
+      "seed": 42
+    },
+    "files": [
+      "config/external_test_protocol.yaml"
+    ]
+  },
+  "A1_q50": {
+    "verdict": "不采纳",
+    "key_numbers": {
+      "oof_mean": 0.10628447428213686,
+      "gain": 0.007451682868291407,
+      "direction": 10,
+      "nested_mae": 0.10653039513910793,
+      "loeo_focus_delta": {
+        "Mn": -0.07454889262629821,
+        "Fe": -0.03918336530218916,
+        "Bi": -0.037643161428795424
+      },
+      "cathub_gap": "+0.029 eV (0.206 vs 0.177)"
+    },
+    "files": [
+      "outputs/r14_a1_q50.json",
+      "data_processed/hstar_loeo_q50.csv"
+    ]
+  },
+  "A2_monotonic": {
+    "verdict": "不采纳",
+    "key_numbers": {
+      "top3": 0.11497099331659973,
+      "top6": 0.11597187138639098,
+      "nested_mae": 0.11470113847493088
+    },
+    "files": [
+      "outputs/r14_a2_monotonic.json",
+      "outputs/r14_a2_monotonic_shap.csv"
+    ]
+  },
+  "A3_ensemble": {
+    "verdict": "不采纳",
+    "key_numbers": {
+      "ensemble_mean": 0.11413399293520385,
+      "gain": -0.0003978357847755964,
+      "direction": 1,
+      "nested_mae": 0.11380168171040322
+    },
+    "files": [
+      "outputs/r14_a3_ensemble.json"
+    ]
+  },
+  "A4_mlp": {
+    "verdict": "记录（不参与交付）",
+    "key_numbers": {
+      "M1_64_32_relu": {
+        "mean": 0.1468563714356301,
+        "beats_v3": false
+      },
+      "M2_64_32_relu_bn": {
+        "mean": 0.15619509435543147,
+        "beats_v3": false
+      },
+      "M3_32_16_tanh": {
+        "mean": 0.16100083109466923,
+        "beats_v3": false
+      }
+    },
+    "files": [
+      "outputs/r14_a4_mlp.json"
+    ]
+  },
+  "A5_v4": {
+    "verdict": "v3 保留（无胜者，三层体系演示）",
+    "key_numbers": {
+      "winner": null,
+      "lockbox_MAE": 0.11029714201094626,
+      "lockbox_ci95": [
+        0.08788728311382663,
+        0.13546170051918727
+      ],
+      "RMSE": 0.23246007155794557,
+      "R2": 0.816283198760554
+    },
+    "files": [
+      "outputs/v4_final/model_spec.json",
+      "outputs/v4_final/lockbox_report.json",
+      "outputs/v4_final/comparison_table.csv",
+      "outputs/negative_register_r14.csv"
+    ]
+  }
+}

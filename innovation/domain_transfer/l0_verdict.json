@@ -1,0 +1,105 @@
+{
+  "preregistered_rule": "B4−B2 改善 >0.02 eV 且 bootstrap 95% CI 不含 0 → 结局A（红利在联合映射）；否则结局B（锚点本体论）",
+  "outcome": "B",
+  "outcome_interpretation": "锚点本体论：跨库上限由锚点数量决定，GBDT 相对线性偏移无显著红利",
+  "B4_minus_B2": {
+    "improvement_eV": 0.016521290948595974,
+    "CI95": [
+      0.0030729115155736435,
+      0.026725633308702854
+    ],
+    "passes_gt_0.02": false,
+    "ci_excludes_0": true
+  },
+  "arms_summary": [
+    {
+      "arm": "B1_mean_shift",
+      "EqV2_MAE": 0.34918921487233107,
+      "MAE_CI95": [
+        0.30894010028317104,
+        0.39962829663650207
+      ],
+      "spearman_rho": 0.2172798780234363,
+      "seed_MAE_mean": 0.35318671628764803,
+      "seed_MAE_sd": 0.003163459783199479
+    },
+    {
+      "arm": "B2_linear_shift",
+      "EqV2_MAE": 0.13597802453397853,
+      "MAE_CI95": [
+        0.10555419848009315,
+        0.17768434624182508
+      ],
+      "spearman_rho": -0.24175801560999943,
+      "seed_MAE_mean": 0.13726422576425343,
+      "seed_MAE_sd": 0.0007569348302660406
+    },
+    {
+      "arm": "B3_domain_linear",
+      "EqV2_MAE": 0.2293244734280711,
+      "MAE_CI95": [
+        0.1947553647750697,
+        0.27534862628947765
+      ],
+      "spearman_rho": 0.23581865312813316,
+      "seed_MAE_mean": 0.2303566429997667,
+      "seed_MAE_sd": 0.0019270828525108819
+    },
+    {
+      "arm": "B4_domain_gbdt",
+      "EqV2_MAE": 0.11945673358538256,
+      "MAE_CI95": [
+        0.08781900951964171,
+        0.16153227179241386
+      ],
+      "spearman_rho": 0.5119548589392541,
+      "seed_MAE_mean": 0.12257226708793992,
+      "seed_MAE_sd": 0.005036640252167198
+    }
+  ],
+  "baselines": {
+    "v3_zero_anchor_EqV2_MAE_eV": 0.347,
+    "B4_reference_phase3I_MAE_eV": 0.1226
+  },
+  "protocol_L0b": {
+    "anchors_train_fold_only": true,
+    "anchor_budget": "pooled KFold(5) 训练折内全部 EqV2 行（≈393/折），四方案同预算",
+    "eqv2_face_matches_0347_baseline": true,
+    "n_eqv2_face": 491,
+    "comp_overlap": {
+      "triple": 3,
+      "Mamun_BEEFvdW∩EqV2_RPBE": 68,
+      "Mamun_BEEFvdW∩CatHub_PBE": 34,
+      "EqV2_RPBE∩CatHub_PBE": 3
+    },
+    "lockbox": {
+      "path": "splits/lockbox_l0_anchors.json",
+      "frozen_before_any_analysis": true,
+      "eqv2_test_face_sha256": "627a3e604cd5279be1a8bb75a09fc6d4a4d3aef8a3a0e9906b46f9c3d782f2fe",
+      "inherits_lockbox_v1_sha256": "84cac08a52da09d612fcc65059fb26d42aafe792e8a42bf876c3664b7aa7e2e2"
+    }
+  },
+  "config_locked": {
+    "seeds": [
+      0,
+      1,
+      2,
+      7,
+      13,
+      42,
+      99,
+      123,
+      2024,
+      31337
+    ],
+    "n_bootstrap": 10000,
+    "bootstrap_seed": 20260918,
+    "xgb_params": {
+      "learning_rate": 0.03,
+      "max_depth": 7,
+      "n_estimators": 400,
+      "subsample": 0.8
+    },
+    "cv": "KFold(5, shuffle, seed) 同折同种子"
+  }
+}

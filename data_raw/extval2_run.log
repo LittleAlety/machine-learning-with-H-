@@ -1,0 +1,41 @@
+[出厂模型] XGBoost_tuned {'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 400, 'subsample': 0.8}，全量 1836 行 × 36 特征（种子 42）
+[内部对照] Mamun OOF MAE=0.120 eV
+[清洗] 原始非 Mamun 行 15327
+[清洗] 步骤1 反应身份（纯 H 吸附 k·(0.5H2+*)->k·H*）：剔除 1515（共吸附/不配平方程），余 13812
+[清洗] 步骤2a 组成可解析：剔除 0，余 13812
+[清洗] 步骤2b 同质金属纯度（排除含非金属组成：硼/氮/氧化物、M-N-C、分子催化剂、H 预覆盖表面）：剔除 12969，余 843
+[清洗] 步骤3a 物理范围 |E_perH|≤5 eV：剔除 0（[]），余 843
+[清洗] 步骤3b 稳健离群（median±8·MAD，median=-0.277, MAD=0.540 eV）：剔除 0，余 843
+[清洗] 保留来源分布: {'AlonsoStrain2023': 347, 'BoesAdsorption2018': 97, 'ClarkInfluence2018': 11, 'DStructure2024': 2, 'FantaQMCcopperCO2024': 28, 'Gauthierrole2021': 12, 'HansenFirst2018': 17, 'JiangModelling2021': 2, 'KaiData-driven2022': 45, 'LandersUnderstanding2020': 3, 'LiuCatalytic2022': 4, 'MontoyaThe2015': 47, 'PasumarthiFacetDependence2023': 132, 'PengRole2020': 15, 'PengTrends2022': 1, 'SchumannSelectivity2018': 6, 'SharadaAdsorption2019': 1, 'SongStrongly2026': 1, 'TangFrom2020': 22, 'TangModeling2020': 7, 'TettehCompressively2022': 10, 'WangAchieving2021': 31, 'YangIntrinsic2016': 2}
+[聚合] 唯一 (pub,comp,facet) 表面 355 个（k>1 覆盖倍数涉及 60 个表面）
+[兜底] ['Nd.group', 'Sm.group']；外部集元素 ['Ag', 'Al', 'Au', 'Cd', 'Co', 'Cu', 'Fe', 'In', 'Ir', 'Mg', 'Mn', 'Mo', 'Nb', 'Nd', 'Ni', 'Os', 'Pb', 'Pd', 'Pt', 'Re', 'Rh', 'Ru', 'Sc', 'Si', 'Sm', 'Sn', 'Ta', 'Ti', 'V', 'W', 'Y', 'Zn', 'Zr']
+[写出] /mnt/agents/output/ai_surface_cat/data_processed/extval2_homogeneous.csv（355 行）
+[写出] /mnt/agents/output/ai_surface_cat/outputs/extval2_metrics.csv
+
+===== 第二外部验证（同质金属 Cathub）指标 =====
+                          stratum   n   MAE  RMSE      R2  bias_pred_minus_true  MAE_after_bias_shift
+                              ALL 355 0.177 0.245   0.742                 0.088                 0.160
+                       仅k=1（严格稀释） 295 0.172 0.235   0.772                 0.091                 0.151
+                域内（单元素+facet=111）  75 0.141 0.211   0.629                 0.022                 0.147
+                  元素全在 Mamun 37 内 326 0.181 0.247   0.742                 0.088                 0.162
+             pub=AlonsoStrain2023 202 0.185 0.219   0.701                 0.147                 0.119
+           pub=BoesAdsorption2018   7 0.060 0.095   0.907                 0.030                 0.071
+           pub=ClarkInfluence2018   5 0.093 0.103  -4.459                -0.093                 0.039
+             pub=Gauthierrole2021  12 0.365 0.596   0.117                -0.150                 0.397
+              pub=HansenFirst2018  17 0.221 0.350   0.700                 0.064                 0.233
+           pub=KaiData-driven2022   5 0.353 0.363 -14.573                 0.353                 0.082
+               pub=MontoyaThe2015  12 0.090 0.170   0.691                -0.069                 0.089
+pub=PasumarthiFacetDependence2023   5 0.121 0.140  -3.034                -0.121                 0.059
+                 pub=PengRole2020  15 0.077 0.099   0.908                -0.047                 0.071
+      pub=SchumannSelectivity2018   6 0.081 0.090   0.909                -0.018                 0.075
+                 pub=TangFrom2020  22 0.153 0.231   0.749                 0.045                 0.164
+             pub=TangModeling2020   7 0.059 0.075   0.899                -0.058                 0.040
+            pub=WangAchieving2021  26 0.201 0.277   0.031                 0.023                 0.199
+                    func=BEEF-vdW 114 0.142 0.228   0.741                 0.001                 0.143
+                         func=MS2   5 0.353 0.363 -14.573                 0.353                 0.082
+                         func=PBE 203 0.184 0.218   0.702                 0.146                 0.119
+                        func=RPBE   8 0.056 0.090   0.955                 0.030                 0.062
+             func=RPBE_-0.413VSHE  12 0.365 0.596   0.117                -0.150                 0.397
+
+[对照] EqV2 跨库验证：MAE=0.347, bias=+0.158（n=491）
+[写出] /mnt/agents/output/ai_surface_cat/figures/extval2_parity.png

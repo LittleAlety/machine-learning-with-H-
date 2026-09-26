@@ -1,0 +1,86 @@
+{
+  "created_utc": "2026-09-17T18:20:10.387383+00:00",
+  "workstream": "phase3_G_modnet_registered",
+  "preregistration": "config/preregistered_phase3.yaml::workstream_G_modnet",
+  "locked_config": {
+    "feature_select": "greedy forward, |Pearson| on OLS residual, <=20 of 84, outer-train-fold only",
+    "net": "torch 64-32-1 ReLU MLP, Adam(lr=1e-3), MSE, max 500 epoch",
+    "early_stop": "patience=30 on inner group-aware 15% val fold only",
+    "scaler": "StandardScaler fit inside inner-train split only",
+    "nested_cv": "inner fold used ONLY for early stopping, no hyperparameter tuning",
+    "data": "data_processed/hstar_features_v3_84feat.csv (84 维组成描述符, 主线 energy_eV)",
+    "folds": "GroupKFold(5, groups=comp) 与 v3 完全同折（确定性）",
+    "seeds": [
+      0,
+      1,
+      2,
+      7,
+      13,
+      42,
+      99,
+      123,
+      2024,
+      31337
+    ]
+  },
+  "baseline_v3_oof_mae": 0.11374,
+  "per_seed_mae": [
+    0.14458434052100716,
+    0.14881334921287076,
+    0.15333454758289852,
+    0.15046467223170268,
+    0.15589225732736492,
+    0.1514763572411792,
+    0.15454738292626055,
+    0.15253858802045664,
+    0.1611611955279167,
+    0.15046741060921073
+  ],
+  "mean": 0.1523280101200868,
+  "std": 0.004203433482016511,
+  "per_seed_gain_vs_v3": [
+    -0.030844340521007166,
+    -0.035073349212870766,
+    -0.03959454758289853,
+    -0.036724672231702685,
+    -0.042152257327364925,
+    -0.0377363572411792,
+    -0.04080738292626056,
+    -0.038798588020456645,
+    -0.047421195527916696,
+    -0.03672741060921074
+  ],
+  "selected_features_fold0_seed0": [
+    "group_wmean",
+    "melting_point_range",
+    "radius_wmean",
+    "group_range",
+    "en_min",
+    "en_mode",
+    "period_wstd",
+    "melting_point_mode",
+    "period_mode",
+    "ie1_min",
+    "mendeleev_number_mode",
+    "n_unfilled_range",
+    "structure_L10",
+    "radius_min",
+    "mendeleev_number_min",
+    "n_valence_range",
+    "d_el_min",
+    "melting_point_wmean",
+    "nd_unfilled_max",
+    "n_elements"
+  ],
+  "fair_contract_check": {
+    "gain_eV": -0.038588010120086794,
+    "gain_gt_0.005": false,
+    "direction_10of10": "0/10",
+    "direction_ok": false,
+    "nested_cv_by_design": true
+  },
+  "verdict": {
+    "adopt": false,
+    "action": "如实阴性：入表14；3.7 扩展节升级为'含领域最强小数据 NN 模板在内函数类无红利'"
+  }
+}

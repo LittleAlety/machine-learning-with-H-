@@ -1,0 +1,27 @@
+{
+  "checkpoint": "H6_lockbox_freeze",
+  "source_lockbox": "splits/lockbox_v1.json",
+  "source_sha256": "84cac08a52da09d612fcc65059fb26d42aafe792e8a42bf876c3664b7aa7e2e2",
+  "freeze_csv": "lockbox_chgnet_frozen.csv",
+  "freeze_sha256": "689a4ea9c707b557e710f857d00b0e4aa9c30cca5ce112951861c252b9731cbb",
+  "n_lockbox_rows": 276,
+  "n_lockbox_comps": 276,
+  "n_total_rows": 1836,
+  "structure_counts": {
+    "L12": 179,
+    "L10": 92,
+    "A1": 5
+  },
+  "rule": "含 CHGNet 特征的模型开工前冻结; lockbox 对开发不可见, 单次裁决 (红线14)",
+  "feature_block_planned": [
+    "chg_surf_mag_mean",
+    "chg_surf_mag_absmean",
+    "chg_surf_mag_max",
+    "chg_surf_mag_min",
+    "chg_surf_mag_std",
+    "chg_surf_mag_range",
+    "chg_bulk_mag_absmean",
+    "chg_surf_bulk_absmag_diff",
+    "chg_energy_per_atom"
+  ]
+}

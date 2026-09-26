@@ -1,0 +1,513 @@
+{
+ "meta": {
+  "n_rows": 1836,
+  "usage": "\u8f93\u5165\u7279\u5f81\u5728\u8bad\u7ec3\u5206\u5e03\u4e2d\u7684\u4f4d\u7f6e",
+  "model_version": "v3-84feat"
+ },
+ "stats": {
+  "n_elements": {
+   "min": 1.0,
+   "max": 2.0,
+   "median": 2.0,
+   "mean": 1.9814814814814814
+  },
+  "en_wmean": {
+   "min": 1.1,
+   "max": 2.4,
+   "median": 1.8075,
+   "mean": 1.8036791938997823
+  },
+  "en_max": {
+   "min": 1.1,
+   "max": 2.4,
+   "median": 1.93,
+   "mean": 1.983954248366013
+  },
+  "en_min": {
+   "min": 1.1,
+   "max": 2.4,
+   "median": 1.63,
+   "mean": 1.620479302832244
+  },
+  "en_range": {
+   "min": 0.0,
+   "max": 1.2999999999999998,
+   "median": 0.3000000000000002,
+   "mean": 0.363474945533769
+  },
+  "en_wstd": {
+   "min": 0.0,
+   "max": 0.6499999999999999,
+   "median": 0.1428941916244323,
+   "mean": 0.16560506332715882
+  },
+  "radius_wmean": {
+   "min": 125.0,
+   "max": 195.0,
+   "median": 142.5,
+   "mean": 146.13902505446623
+  },
+  "radius_max": {
+   "min": 125.0,
+   "max": 195.0,
+   "median": 155.0,
+   "mean": 154.7685185185185
+  },
+  "radius_min": {
+   "min": 125.0,
+   "max": 195.0,
+   "median": 135.0,
+   "mean": 137.48910675381265
+  },
+  "radius_range": {
+   "min": 0.0,
+   "max": 70.0,
+   "median": 10.0,
+   "mean": 17.279411764705884
+  },
+  "radius_wstd": {
+   "min": 0.0,
+   "max": 35.0,
+   "median": 5.0,
+   "mean": 7.872964014305549
+  },
+  "group_wmean": {
+   "min": 3.0,
+   "max": 15.0,
+   "median": 8.5,
+   "mean": 8.592864923747277
+  },
+  "group_max": {
+   "min": 3.0,
+   "max": 15.0,
+   "median": 11.0,
+   "mean": 10.601851851851851
+  },
+  "group_min": {
+   "min": 3.0,
+   "max": 15.0,
+   "median": 6.0,
+   "mean": 6.538126361655773
+  },
+  "group_range": {
+   "min": 0.0,
+   "max": 12.0,
+   "median": 4.0,
+   "mean": 4.063725490196078
+  },
+  "group_wstd": {
+   "min": 0.0,
+   "max": 6.0,
+   "median": 1.7320508075688772,
+   "mean": 1.852500241014243
+  },
+  "period_wmean": {
+   "min": 3.0,
+   "max": 6.0,
+   "median": 5.0,
+   "mean": 5.007352941176471
+  },
+  "period_max": {
+   "min": 3.0,
+   "max": 6.0,
+   "median": 6.0,
+   "mean": 5.481481481481482
+  },
+  "period_min": {
+   "min": 3.0,
+   "max": 6.0,
+   "median": 4.0,
+   "mean": 4.528322440087146
+  },
+  "period_range": {
+   "min": 0.0,
+   "max": 3.0,
+   "median": 1.0,
+   "mean": 0.9531590413943355
+  },
+  "period_wstd": {
+   "min": 0.0,
+   "max": 1.5,
+   "median": 0.4330127018922193,
+   "mean": 0.4342563911737333
+  },
+  "ie1_wmean": {
+   "min": 5.5769,
+   "max": 10.17667725,
+   "median": 7.3777862,
+   "mean": 7.452525357175926
+  },
+  "ie1_max": {
+   "min": 5.5769,
+   "max": 10.437504,
+   "median": 7.86403,
+   "mean": 8.065336849618737
+  },
+  "ie1_min": {
+   "min": 5.5769,
+   "max": 9.394197,
+   "median": 6.76651,
+   "mean": 6.834073068300654
+  },
+  "ie1_range": {
+   "min": 0.0,
+   "max": 4.860604,
+   "median": 1.057358000000001,
+   "mean": 1.231263781318083
+  },
+  "ie1_wstd": {
+   "min": 0.0,
+   "max": 2.430302,
+   "median": 0.4746512033061753,
+   "mean": 0.5604907689301561
+  },
+  "d_el_wmean": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 6.5,
+   "mean": 6.341367102396514
+  },
+  "d_el_max": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 10.0,
+   "mean": 8.22930283224401
+  },
+  "d_el_min": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 4.0,
+   "mean": 4.417211328976035
+  },
+  "d_el_range": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 3.0,
+   "mean": 3.8120915032679736
+  },
+  "d_el_wstd": {
+   "min": 0.0,
+   "max": 5.0,
+   "median": 1.5,
+   "mean": 1.7368626899097066
+  },
+  "structure_A1": {
+   "min": 0.0,
+   "max": 1.0,
+   "median": 0.0,
+   "mean": 0.018518518518518517
+  },
+  "structure_L10": {
+   "min": 0.0,
+   "max": 1.0,
+   "median": 0.0,
+   "mean": 0.332244008714597
+  },
+  "structure_L12": {
+   "min": 0.0,
+   "max": 1.0,
+   "median": 1.0,
+   "mean": 0.6492374727668845
+  },
+  "facet_101": {
+   "min": 0.0,
+   "max": 1.0,
+   "median": 0.0,
+   "mean": 0.332244008714597
+  },
+  "facet_111": {
+   "min": 0.0,
+   "max": 1.0,
+   "median": 1.0,
+   "mean": 0.6677559912854031
+  },
+  "melting_point_wmean": {
+   "min": 251.4694,
+   "max": 3687.15,
+   "median": 1792.8042500000001,
+   "mean": 1780.1821758169935
+  },
+  "melting_point_max": {
+   "min": 302.91459999999995,
+   "max": 3687.15,
+   "median": 2236.15,
+   "mean": 2330.3171818627457
+  },
+  "melting_point_min": {
+   "min": 234.321,
+   "max": 3687.15,
+   "median": 1193.15,
+   "mean": 1238.0386361111111
+  },
+  "melting_point_range": {
+   "min": 0.0,
+   "max": 3452.829,
+   "median": 958.8290000000002,
+   "mean": 1092.278545751634
+  },
+  "melting_point_wstd": {
+   "min": 0.0,
+   "max": 1692.1177000000002,
+   "median": 445.85500000000013,
+   "mean": 497.11857632580563
+  },
+  "mendeleev_number_wmean": {
+   "min": 11.0,
+   "max": 97.0,
+   "median": 62.5,
+   "mean": 61.10239651416122
+  },
+  "mendeleev_number_max": {
+   "min": 11.0,
+   "max": 97.0,
+   "median": 72.5,
+   "mean": 72.17592592592592
+  },
+  "mendeleev_number_min": {
+   "min": 11.0,
+   "max": 97.0,
+   "median": 52.0,
+   "mean": 49.80664488017429
+  },
+  "mendeleev_number_range": {
+   "min": 0.0,
+   "max": 86.0,
+   "median": 18.0,
+   "mean": 22.369281045751634
+  },
+  "mendeleev_number_wstd": {
+   "min": 0.0,
+   "max": 43.0,
+   "median": 8.227241335952167,
+   "mean": 10.200919645107852
+  },
+  "covalent_radius_wmean": {
+   "min": 110.25,
+   "max": 180.0,
+   "median": 132.5,
+   "mean": 133.65659041394335
+  },
+  "covalent_radius_max": {
+   "min": 111.0,
+   "max": 180.0,
+   "median": 142.0,
+   "mean": 141.98093681917211
+  },
+  "covalent_radius_min": {
+   "min": 110.0,
+   "max": 180.0,
+   "median": 124.0,
+   "mean": 125.3371459694989
+  },
+  "covalent_radius_range": {
+   "min": 0.0,
+   "max": 69.99999999999999,
+   "median": 14.0,
+   "mean": 16.643790849673202
+  },
+  "covalent_radius_wstd": {
+   "min": 0.0,
+   "max": 34.99999999999999,
+   "median": 6.278684177437177,
+   "mean": 7.591383615079529
+  },
+  "n_valence_wmean": {
+   "min": 3.0,
+   "max": 12.0,
+   "median": 6.5,
+   "mean": 6.750544662309368
+  },
+  "n_valence_max": {
+   "min": 3.0,
+   "max": 12.0,
+   "median": 9.0,
+   "mean": 8.50599128540305
+  },
+  "n_valence_min": {
+   "min": 3.0,
+   "max": 12.0,
+   "median": 4.0,
+   "mean": 4.9793028322440085
+  },
+  "n_valence_range": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 3.5266884531590414
+  },
+  "n_valence_wstd": {
+   "min": 0.0,
+   "max": 4.5,
+   "median": 1.299038105676658,
+   "mean": 1.6058000254741844
+  },
+  "nd_valence_wmean": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 6.5,
+   "mean": 6.341367102396514
+  },
+  "nd_valence_max": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 10.0,
+   "mean": 8.22930283224401
+  },
+  "nd_valence_min": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 4.0,
+   "mean": 4.417211328976035
+  },
+  "nd_valence_range": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 3.0,
+   "mean": 3.8120915032679736
+  },
+  "nd_valence_wstd": {
+   "min": 0.0,
+   "max": 5.0,
+   "median": 1.5,
+   "mean": 1.7368626899097066
+  },
+  "n_unfilled_wmean": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 4.5,
+   "mean": 4.453703703703703
+  },
+  "n_unfilled_max": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 6.0,
+   "mean": 6.030501089324619
+  },
+  "n_unfilled_min": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 2.905773420479303
+  },
+  "n_unfilled_range": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 3.124727668845316
+  },
+  "n_unfilled_wstd": {
+   "min": 0.0,
+   "max": 4.5,
+   "median": 1.299038105676658,
+   "mean": 1.4233542452120673
+  },
+  "nd_unfilled_wmean": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 3.3645152505446623
+  },
+  "nd_unfilled_max": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 5.0,
+   "mean": 5.205337690631808
+  },
+  "nd_unfilled_min": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 0.0,
+   "mean": 1.565359477124183
+  },
+  "nd_unfilled_range": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 3.639978213507625
+  },
+  "nd_unfilled_wstd": {
+   "min": 0.0,
+   "max": 4.5,
+   "median": 1.5,
+   "mean": 1.6586139327174763
+  },
+  "en_mode": {
+   "min": 1.1,
+   "max": 2.4,
+   "median": 1.83,
+   "mean": 1.818425925925926
+  },
+  "radius_mode": {
+   "min": 125.0,
+   "max": 195.0,
+   "median": 140.0,
+   "mean": 145.76797385620915
+  },
+  "group_mode": {
+   "min": 3.0,
+   "max": 15.0,
+   "median": 9.0,
+   "mean": 8.887254901960784
+  },
+  "period_mode": {
+   "min": 3.0,
+   "max": 6.0,
+   "median": 5.0,
+   "mean": 4.989106753812636
+  },
+  "ie1_mode": {
+   "min": 5.5769,
+   "max": 10.437504,
+   "median": 7.4166799,
+   "mean": 7.473881128758171
+  },
+  "d_el_mode": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 7.0,
+   "mean": 6.543028322440088
+  },
+  "melting_point_mode": {
+   "min": 234.321,
+   "max": 3687.15,
+   "median": 1795.15,
+   "mean": 1720.1067800108933
+  },
+  "mendeleev_number_mode": {
+   "min": 11.0,
+   "max": 97.0,
+   "median": 65.0,
+   "mean": 62.619825708061
+  },
+  "covalent_radius_mode": {
+   "min": 110.0,
+   "max": 180.0,
+   "median": 129.0,
+   "mean": 132.80773420479304
+  },
+  "n_valence_mode": {
+   "min": 3.0,
+   "max": 12.0,
+   "median": 7.0,
+   "mean": 6.91557734204793
+  },
+  "nd_valence_mode": {
+   "min": 0.0,
+   "max": 10.0,
+   "median": 7.0,
+   "mean": 6.543028322440088
+  },
+  "n_unfilled_mode": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 4.0,
+   "mean": 4.239106753812636
+  },
+  "nd_unfilled_mode": {
+   "min": 0.0,
+   "max": 9.0,
+   "median": 3.0,
+   "mean": 3.070261437908497
+  }
+ }
+}

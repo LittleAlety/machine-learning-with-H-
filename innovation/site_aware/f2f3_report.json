@@ -1,0 +1,59 @@
+{
+  "protocol": {
+    "features": "84 v3 + 27 site one-hot",
+    "xgb": {
+      "learning_rate": 0.03,
+      "max_depth": 7,
+      "n_estimators": 400,
+      "subsample": 0.8
+    },
+    "folds": "GroupKFold(5,shuffle,rs=42)",
+    "seeds": [
+      0,
+      1,
+      2,
+      7,
+      13,
+      42,
+      99,
+      123,
+      2024,
+      31337
+    ],
+    "n_dev_records": 5859,
+    "n_dev_surfaces": 1549
+  },
+  "F2a_mean_minus_min_median": 0.19321939722613024,
+  "F2a_accept_range": [
+    0.15,
+    0.3
+  ],
+  "F2a_verdict": "PASS",
+  "F2b_minagg_pred_vs_v3label_median_abs": 0.07235332207253009,
+  "F2b_minagg_pred_vs_v3label_mae": 0.10884439929036789,
+  "F2b_note": "模型级口径差：位点模型逐位点预测后 min 聚合，与 v3 min 标签的差反映模型误差而非聚合口径差；数据级口径差见 F2a",
+  "F3_site_oof_mae_per_seed": {
+    "0": 0.11539048960947841,
+    "1": 0.11610196146362307,
+    "2": 0.11496595696698203,
+    "7": 0.11517136417671679,
+    "13": 0.11608303403006484,
+    "42": 0.11527025322688955,
+    "99": 0.11647598183444197,
+    "123": 0.11605446747841461,
+    "2024": 0.1146946010822989,
+    "31337": 0.11573831654992282
+  },
+  "F3_site_oof_mae_10seed_mean": 0.11559464264188331,
+  "F3_site_oof_mae_std": 0.000551010932605033,
+  "F3_target": 0.09,
+  "F3_verdict": "FAIL",
+  "bounty_interval": [
+    0.077,
+    0.09
+  ],
+  "beyond_bounty_leak_suspect": false,
+  "site_oof_mae_base_no_onehot_10seed_mean": 0.2823550651453729,
+  "site_level_gain_from_onehot": 0.1667604225034896,
+  "site_level_gain_seeds_win": "10/10"
+}

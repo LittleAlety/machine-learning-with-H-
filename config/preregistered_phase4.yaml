@@ -1,0 +1,29 @@
+# Phase 4 预注册判读规则 — 冻结时间戳: 2026-09-18（红线：先写规则再跑实验）
+seeds: [0, 1, 2, 7, 13, 42, 99, 123, 2024, 31337]
+redlines_16_20:
+  16: "锚点禁止进入任何测试评估面；含锚点口径的 lockbox 先于分析冻结"
+  17: "B4 vs B2 增量主张必须带 bootstrap CI；CI 含 0 即按降级口径（结局B）成文"
+  18: "磁性收口候选 ≤5 且先注册后运行，一次性强制关闭"
+  19: "paper1 边界地图 v2 禁用'跨库问题已解决'类表述"
+  20: "paper3 全部数字与 L0-L3 实验输出逐值一致后方可入 tex"
+
+workstream_L:
+  L0a_baselines:  # 同等锚点预算同台
+    B1: "每域均值偏移校正（朴素下限）"
+    B2: "线性偏移校正 slope+intercept（朴素上限）"
+    B3: "域指示 + 线性模型（机制对照，无交互）"
+    B4: "域指示 GBDT（主方案，现有 0.1226）"
+    verdict_rule: "B4-B2 改善 >0.02 eV 且 bootstrap 95% CI 不含 0 → 结局A；否则结局B（锚点本体论）"
+  L0b_protocol: "锚点只进训练折；EqV2 测试面集合与 0.347 基线同一；组成重叠核查；bootstrap 10,000 次"
+  L1_anchor_curve: "锚点数 5/10/20/50；MAE 与 Spearman ρ 双曲线"
+  L2_matrix: "Mamun/EqV2/CatHub 六向 训练→锚点→测试 全矩阵；失败格如实呈现"
+  L3_mechanism: "SHAP 交互值（域指示×描述符）；关键对照 B3 若也到 ~0.13 则机制解释坍塌，如实改写"
+
+workstream_M_magnetic:
+  candidates_max: 5
+  candidates_locked: ["m_max", "m_mean_wstd_ratio", "m_surface_mean", "m_max_over_mean", "m_gini"]  # 先注册后运行
+  rule: "公平契约 + 嵌套 CV；过线 → v5 磁性定向版；不过 → 关闭，仅真实新数据可重启"
+
+workstream_Q_optional:
+  prereq: "EqV2 491 表面自带结构文件可用"
+  design: "A/B 配位 + GCN 类连续局域描述符（纯几何）→ 位点级模型 → 对照离散 one-hot 兑现率 14.7%"

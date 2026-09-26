@@ -1,0 +1,31 @@
+{
+ "scope_qualifier": "ordered fcc intermetallic surfaces, composition-level granularity, demo-level free-energy corrections (+0.24 eV for H*, +3.2 eV for OH*/O*)",
+ "data_convention": "label-based (measured shared compositions, no model predictions)",
+ "resolution_eV": 0.11,
+ "HER_x_ORR": {
+  "scaling_line": "dG_OH = 1.3842*dG_H + 3.3322",
+  "slope": 1.3842,
+  "intercept": 3.3322,
+  "r2": 0.0684,
+  "n": 229,
+  "d_min_eV": 1.9514,
+  "d_min_over_resolution": 17.7,
+  "nearest_measured_point_dist_eV": 0.8941,
+  "verdict": "PHYSICAL GAP (Pareto basis): 0.730 eV = 6.6x resolution; empty intersection is a physical fact within dataset coverage (ordered fcc, composition-level, demo-level corrections).",
+  "pareto_dmin_eV": 0.7301,
+  "pareto_dmin_over_resolution": 6.6,
+  "pareto_verdict": "PRIMARY (Phase3 Week-0 revision, empirical Pareto front): min over 229 shared compositions of max(|dG_H|,|dG_OH|) = 0.730 eV = 6.6x resolution -> physical gap (assumption-free). Regression-line d_min 1.951 eV downgraded to secondary (H->OH R2=0.068 too weak)."
+ },
+ "HER_x_OER": {
+  "scaling_line": "dG_O = 2.6701*dG_H + 2.5313",
+  "slope": 2.6701,
+  "intercept": 2.5313,
+  "r2": 0.5411,
+  "n": 1765,
+  "d_min_eV": 0.8878,
+  "d_min_over_resolution": 8.1,
+  "verdict": "RESOLUTION-MARGINAL (Pareto basis, Phase3 Week-0 revision): min max-norm distance = 0.175 eV = 1.6x resolution -> NOT decidable as physical; statement downgraded to 'no dual-optimal composition detected within model resolution'. Regression-line 0.888 eV retained as secondary.",
+  "pareto_dmin_eV": 0.1751,
+  "pareto_dmin_over_resolution": 1.6
+ }
+}

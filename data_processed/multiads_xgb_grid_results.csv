@@ -1,0 +1,25 @@
+params,std_test_score,rank_test_score,mean_MAE
+"{'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 400, 'subsample': 1.0}",0.010114172328523817,1,0.3156235909330166
+"{'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 200, 'subsample': 1.0}",0.008396232237571008,2,0.32547946633807434
+"{'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 400, 'subsample': 0.8}",0.011599182969160356,3,0.3289388979020792
+"{'learning_rate': 0.1, 'max_depth': 7, 'n_estimators': 200, 'subsample': 0.8}",0.010590389185084552,4,0.331587975836276
+"{'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 400, 'subsample': 0.8}",0.008358478633246201,5,0.33289179494036814
+"{'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 400, 'subsample': 1.0}",0.010049106680009601,6,0.336619596589305
+"{'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 400, 'subsample': 1.0}",0.00996370283922914,7,0.33898287889772794
+"{'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 400, 'subsample': 0.8}",0.007219399362190238,8,0.34176502768864375
+"{'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 200, 'subsample': 0.8}",0.008106938054271571,9,0.35695664460308896
+"{'learning_rate': 0.03, 'max_depth': 7, 'n_estimators': 200, 'subsample': 1.0}",0.008664912860427535,10,0.35934039337846746
+"{'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.8}",0.007312645318428215,11,0.35935627508079226
+"{'learning_rate': 0.1, 'max_depth': 5, 'n_estimators': 200, 'subsample': 1.0}",0.008658174498864078,12,0.36233879871082053
+"{'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 400, 'subsample': 0.8}",0.007605939328116708,13,0.3740837804159377
+"{'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 400, 'subsample': 1.0}",0.008632385505399506,14,0.380815268229474
+"{'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 200, 'subsample': 0.8}",0.00911928524677417,15,0.41046759083777307
+"{'learning_rate': 0.03, 'max_depth': 5, 'n_estimators': 200, 'subsample': 1.0}",0.007673530975084823,16,0.41454797771538476
+"{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 400, 'subsample': 0.8}",0.008766534542849142,17,0.4240254183852601
+"{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 400, 'subsample': 1.0}",0.010713707989780703,18,0.4281258943521512
+"{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 200, 'subsample': 0.8}",0.008781541360184879,19,0.4571059913891455
+"{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 200, 'subsample': 1.0}",0.014348842416176687,20,0.4608104661390139
+"{'learning_rate': 0.03, 'max_depth': 3, 'n_estimators': 400, 'subsample': 0.8}",0.011714612946438626,21,0.4823445674983328
+"{'learning_rate': 0.03, 'max_depth': 3, 'n_estimators': 400, 'subsample': 1.0}",0.011652692162689923,22,0.4884197223174579
+"{'learning_rate': 0.03, 'max_depth': 3, 'n_estimators': 200, 'subsample': 0.8}",0.014223844054955847,23,0.5360051150914255
+"{'learning_rate': 0.03, 'max_depth': 3, 'n_estimators': 200, 'subsample': 1.0}",0.013503027504670802,24,0.5405603111556524

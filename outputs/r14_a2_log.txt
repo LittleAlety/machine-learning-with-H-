@@ -1,0 +1,13 @@
+/mnt/agents/output/ai_surface_cat/scripts/33_monotonic.py:42: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  rho = spearmanr(X[:, j], sv[:, j]).statistic
+[SHAP 复核] {'group_wmean': {'prereg': '+1(↑E_ads)', 'shap_dir': 1}, 'en_wmean': {'prereg': '+1(↑E_ads)', 'shap_dir': 1}, 'd_el_wmean': {'prereg': '+1(↑E_ads)', 'shap_dir': 1}}
+[档位] top3=[('group_wmean', 1), ('en_wmean', 1), ('d_el_wmean', 1)] top6_extra=[('melting_point_max', -1), ('group_mode', 1), ('nd_unfilled_wmean', -1)]
+[top3] 0.1150  增益 -0.0012  方向 1/10
+[top6] 0.1160  增益 -0.0022  方向 0/10
+  外层折内层选择 none {'none': 0.11663684292305096, 'top3': 0.1166622477357026, 'top6': 0.11824901560889461}
+  外层折内层选择 top3 {'none': 0.12333528105110309, 'top3': 0.12312581391642045, 'top6': 0.1254729887879829}
+  外层折内层选择 none {'none': 0.12173046004753196, 'top3': 0.12339915572603247, 'top6': 0.12352839298251388}
+  外层折内层选择 none {'none': 0.1139951313709584, 'top3': 0.11431830754986265, 'top6': 0.11431497737055407}
+  外层折内层选择 top3 {'none': 0.12270045866862622, 'top3': 0.1225336936838935, 'top6': 0.12399377283208331}
+[判定] 不采纳：best=top3 增益 -0.0012，方向 1/10，嵌套 CV 0.1147 vs 基线 0.1137
+[写出] outputs/r14_a2_monotonic.json, r14_a2_monotonic_shap.csv

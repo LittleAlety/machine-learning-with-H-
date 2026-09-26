@@ -1,0 +1,40 @@
+{
+  "oof_mae_q50_10seeds": "0.1063±0.0004",
+  "cross_calibrated_coverage": {
+    "global": 0.899,
+    "conditional": 0.899
+  },
+  "near_peak_band_coverage_|dGpred|<=0.1": 0.913,
+  "reliability_max_bin_deviation": 0.14525252891526863,
+  "reliability_acceptance_<=0.10": "FAIL（如实报告；分位点CDF已优于高斯 0.216→0.145）",
+  "P_near_max": 0.3914630488515122,
+  "P_near_ge_0.5_count": 0,
+  "old_band_n": 114,
+  "new_band_n": 114,
+  "band_overlap": 54,
+  "cathub355": {
+    "interval_coverage_90": 0.5295774647887324,
+    "reliability_bins": [
+      {
+        "bin": 0,
+        "n": 161,
+        "P_mean": 0.031032901263996163,
+        "empirical": 0.006211180124223602
+      },
+      {
+        "bin": 1,
+        "n": 94,
+        "P_mean": 0.15853990660590084,
+        "empirical": 0.0
+      },
+      {
+        "bin": 2,
+        "n": 100,
+        "P_mean": 0.22810186942898814,
+        "empirical": 0.13
+      }
+    ],
+    "max_bin_dev": 0.15853990660590084,
+    "note": "跨域（多泛函+晶面超训练域），预期不完美，如实报告"
+  }
+}

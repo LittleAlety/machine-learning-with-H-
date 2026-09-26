@@ -1,0 +1,24 @@
+# external_test_protocol.yaml — B-3：冻结外部测试集正式标注（plan-hb v2.0 r14）
+# 生成：r14 任务 B-3；一经冻结，外部测试集只用于最终报告，不用于任何选型/调参。
+created_utc: "2026-09-16T04:46:45Z"
+external_test_sets:
+  cathub_355:
+    file: data_processed/extval2_homogeneous.csv   # CatHub 355 均质体系外部集
+    n: 355
+    source: CatHub (catalysis-hub.org)，H* 吸附能，实验/DFT 文献值
+    reference_v3_mae_eV: 0.177
+  eqv2_491:
+    file: data_processed/cathub_hstar_extra.csv    # EqV2 口径 491 体系
+    n: 491
+    source: EqV2/OC20 外部基准映射
+    reference: 见 data_processed/extval_metrics.csv
+evaluation:
+  metrics: [MAE, RMSE, R2, median_AE, P90_AE]
+  stratification: "按结构类型 (A1/L10/L12) 与 |ΔG| 带 (<0.1 / 0.1-0.3 / >0.3 eV) 分层报告"
+  bootstrap:
+    n_resamples: 10000
+    seed: 42
+    ci: 95%
+    unit: 逐样本绝对误差重抽样（分层保持比例）
+  comparison: "与 v3 参考值同口径对比；报告差值 + bootstrap CI，不做事后剔除"
+discipline: "冻结外部测试集仅用于 A-5 定版后的最终一次性报告与论文表；开发阶段禁止触碰"

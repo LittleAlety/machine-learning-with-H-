@@ -1,0 +1,4 @@
+test,n,statistic,p_value,effect_median,effect_mean,note
+nested_cv_fold_wilcoxon,5,0,0.0625,0.00628969,0.0079076,逐外折 MAE 差 (baseline_36−full_merged)；n=5 功效极有限，Wilcoxon 双侧最小可达 p=0.0625；精确法
+nested_cv_fold_paired_t,5,3.41619,0.0268742,0.00628969,0.0079076,同上的配对 t；n=5 小样本正态性不可验，仅供参考
+oof_absresidual_wilcoxon_seed42,1836,732722,1.16204e-06,0.00440589,0.00636586,组成级 OOF|残差|差 (v2−v3)，同一组成在两模型各一 OOF 残差故配对成立；但同 fold 样本共享训练集（伪重复），p 值偏乐观，应结合 n=5 折级检验解读

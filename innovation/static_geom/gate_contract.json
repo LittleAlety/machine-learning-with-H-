@@ -1,0 +1,156 @@
+{
+  "timestamp_utc": "2026-09-20T12:35:01.382366+00:00",
+  "stage": "phase6_S2_static_geom",
+  "coverage": {
+    "n_covered": 1836,
+    "n_total": 1836,
+    "frac": 1.0,
+    "note": "静态组由未弛豫原型几何确定性生成, 天然全覆盖"
+  },
+  "features": [
+    "surf_cn_mean",
+    "surf_cn_min",
+    "surf_cn_std",
+    "surf_gcn_mean",
+    "surf_gcn_std",
+    "surf_gcn_min",
+    "surf_nn_en_mean",
+    "surf_nn_en_std",
+    "surf_nn_d_mean",
+    "surf_nn_d_std"
+  ],
+  "baseline": "v3 84 features, XGB lr0.03/depth7/n400/sub0.8, GroupKFold(5,comp), 10 seeds",
+  "prereg": [
+    "config/preregistered_phase6.yaml stage_S2_static",
+    "config/preregistered_phase5.yaml fair_contract"
+  ],
+  "portability_gate": {
+    "delta_A": 0.0002702967568474421,
+    "delta_B": -0.0005233903862815372,
+    "retention": -1.9363546658347197,
+    "retain_thresh": 0.8,
+    "verdict": "NO_GAIN",
+    "note": "静态组仅需未弛豫原型几何+周期表量 -> 构造性可移植, 线B Ridge 推断仅为形式检验; 实测如上"
+  },
+  "contract_full": {
+    "tag": "full1836",
+    "n": 1836,
+    "base_mae_mean": 0.11373615715042826,
+    "gold_mae_mean": 0.11346586039358084,
+    "delta_mean": 0.0002702967568474421,
+    "delta_std": 0.0006318163759230131,
+    "seeds_win": 7,
+    "thresh": 0.005,
+    "passed": false,
+    "per_seed_delta": {
+      "0": -0.0002893634879122392,
+      "1": -0.00033379234345670694,
+      "2": 0.0011082625214389463,
+      "7": 0.000633490322209565,
+      "13": 0.0006455947008041085,
+      "42": -0.0010952208371416972,
+      "99": 0.0008513311147899799,
+      "123": 0.00039226055664939863,
+      "2024": 0.00018246549542200174,
+      "31337": 0.000607939525671064
+    }
+  },
+  "mag3d_sublayer": {
+    "tag": "mag3d_full",
+    "n": 398,
+    "base_mae_mean": 0.19910398956712985,
+    "gold_mae_mean": 0.195763671124488,
+    "delta_mean": 0.0033403184426418348,
+    "delta_std": 0.0016026985687283655,
+    "seeds_win": 10,
+    "thresh": 0.005,
+    "passed": false,
+    "per_seed_delta": {
+      "0": 0.002438447783290998,
+      "1": 0.0009303741959483802,
+      "2": 0.0035888658663203177,
+      "7": 0.002931286590772658,
+      "13": 0.002159901108829132,
+      "42": 0.0049396340207046585,
+      "99": 0.005617478166411005,
+      "123": 0.005317394539932269,
+      "2024": 0.004332015780588283,
+      "31337": 0.0011477863736206462
+    },
+    "phase3_ref": 0.0173,
+    "phase4_ref": 0.0109,
+    "phase5_relax_group_ref": -0.0082
+  },
+  "nested_cv": {
+    "per_fold": [
+      {
+        "outer_fold": 1,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.11995643388933237,
+        "outer_mae_base": 0.11849509000272462
+      },
+      {
+        "outer_fold": 2,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.10379531344395766,
+        "outer_mae_base": 0.10359282430673793
+      },
+      {
+        "outer_fold": 3,
+        "best_params": {
+          "learning_rate": 0.05,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.11399446620903633,
+        "outer_mae_base": 0.11208641085362975
+      },
+      {
+        "outer_fold": 4,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.1300975078363172,
+        "outer_mae_base": 0.13094589279312333
+      },
+      {
+        "outer_fold": 5,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.10187057209920754,
+        "outer_mae_base": 0.10232313427844192
+      }
+    ],
+    "gold_mae_mean": 0.11394285869557023,
+    "base_mae_mean": 0.11348867044693152,
+    "delta_mean": -0.000454188248638715,
+    "folds_win": 2
+  },
+  "verdict": {
+    "label": "negative",
+    "gate_pass": false,
+    "contract_passed": false,
+    "nested_ok": false,
+    "rule": "stage_S2_static.adopt: 静态组 PASS 且 Δ>0.005 + 10/10 (+嵌套CV复核) -> v5.1 定向采纳",
+    "phase5_relax_group_contrast": "对照: Phase 5 弛豫依赖组 (层距/位移/弛豫能降, 14% 覆盖子集) 闸门 LEAK (Δ_A=0.0129, Δ_B=-0.0145, 保留率 -1.12, innovation/continuous_local/gate_contract_report.json); 静态组为构造性可移植, 两者口径分离记录。"
+  },
+  "runtime_min": 5.868835445245107
+}

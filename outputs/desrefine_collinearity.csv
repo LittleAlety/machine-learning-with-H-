@@ -1,0 +1,16 @@
+new_feature,base_feature,pearson_r
+nd_valence_wmean,d_el_wmean,1.0
+nd_valence_min,d_el_min,1.0
+nd_valence_max,d_el_max,1.0
+nd_valence_range,d_el_range,1.0
+nd_valence_wstd,d_el_wstd,1.0
+nd_valence_wstd,d_el_range,0.9935
+nd_valence_range,d_el_wstd,0.9935
+mendeleev_number_max,group_max,0.9828
+nd_unfilled_max,group_min,-0.9827
+nd_unfilled_wmean,group_wmean,-0.9669
+mendeleev_number_wmean,group_wmean,0.9464
+nd_unfilled_min,group_max,-0.9245
+nd_unfilled_wstd,group_wstd,0.9061
+nd_unfilled_range,group_range,0.9055
+nd_unfilled_wstd,group_range,0.9011

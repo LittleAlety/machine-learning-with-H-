@@ -1,0 +1,42 @@
+{
+  "workstream": "phase5_route2_foundation_relax",
+  "timestamp_utc": "2026-09-19T13:20:00Z",
+  "preregistration": "config/preregistered_phase5.yaml route2_foundation_relax",
+  "relaxation": {
+    "engine": "CHGNet v0.3.0 (chgnet 0.4.2), FIRE, fmax=0.05 eV/A, max 100 steps, CPU 3 cores",
+    "scope": "degraded per preregistration: 3d-magnetic + escape-angle subset (Fe/Co/Ni/Mn/Cr/La/Y/Sc)",
+    "subset_size": 663,
+    "n_relaxed": 256,
+    "n_failed": 0,
+    "coverage_subset": 0.386,
+    "coverage_full_1836": 0.139,
+    "wall_time_min": 159,
+    "mean_s_per_slab": 38,
+    "conv_rate_fmax0.05": 0.79,
+    "ordering": "md5 pseudo-random (unbiased coverage under time cap)",
+    "reconstruction_disclosure": "mean relax energy drop -6.5 eV/atom; 71% slabs surface mean displacement >1 A; d12 change up to -53% -> prototype slabs reconstruct heavily under CHGNet; features describe CHGNet-relaxed (possibly artifact-bearing) surfaces"
+  },
+  "features": {
+    "n_new": 18,
+    "list": ["surf_cn_mean", "surf_cn_min", "surf_cn_std", "surf_gcn_mean", "surf_gcn_std", "surf_gcn_min", "surf_nn_en_mean", "surf_nn_en_std", "surf_nn_d_mean", "surf_nn_d_std", "d12_relaxed_A", "d12_relax_pct", "surf_disp_mean_A", "surf_disp_max_A", "surf_rumpling_A", "relax_energy_drop_per_atom", "relax_n_steps", "relax_fmax_final"],
+    "file": "continuous_local_features.csv (256 rows, 0 failures)"
+  },
+  "results": {
+    "portability_gate": {"delta_A": 0.0129, "delta_B": -0.0145, "retention": -1.12, "verdict": "LEAK",
+      "interpretation": "ridge inference from 36 base descriptors cannot reproduce relax features on unseen comps (delta_B<0); features carry orthogonal structural info, but by the frozen gate criterion the statistical portability test FAILS"},
+    "contract_covered_subset": {"n": 256, "base_mae": 0.1985, "gold_mae": 0.1855, "delta": 0.0129, "delta_std": 0.0037, "seeds_win": "10/10", "passed": true},
+    "contract_full_1836_nanfill": {"base_mae": 0.1196, "gold_mae": 0.1211, "delta": -0.0015, "seeds_win": "0/10", "passed": false},
+    "nested_cv_covered": {"base_mae": 0.1990, "gold_mae": 0.1811, "delta": 0.0179, "folds_win": "4/5"},
+    "mag3d_sublayer": {"n": 155, "delta": -0.0082, "seeds_win": 0, "phase3_ref": 0.0173, "phase4_ref": 0.0109,
+      "note": "relax-geometry features do NOT replicate phase3/4 magmom gains on 3d sublayer"},
+    "site_oof_target_0.090": false
+  },
+  "verdict": {
+    "label": "subset_signal_gate_failed",
+    "conditional": true,
+    "condition": "relaxation quality NOT anchored by DFT (no DFT capability this session; anchor gate = TODO)",
+    "summary_cn": "条件性、不可采纳: 覆盖子集(256 行)上契约过阈(+0.0129, 10/10, 嵌套CV +0.0179) 但可移植性闸门实测 LEAK(retention -1.12), 全表 1836 口径无增益(-0.0015), 3d 子层反向(-0.0082)。oracle 缺口 ~0.033 eV 未关闭。"
+  },
+  "todos": ["DFT re-relaxation anchor gate (pending DFT capability)",
+            "extend relaxation to remaining 407 subset slabs + full 1836 if revisited"]
+}

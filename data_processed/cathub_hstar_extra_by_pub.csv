@@ -1,0 +1,46 @@
+pubId,n,n_comp,E_min,E_max,E_mean,title,year
+ZhangOff-equilibrium2025,9205,3,-5.735537914999895,3.1258008900000505,-3.1534911378973023,Off-Equilibrium Reactivity of Boron-Enriched Metal Diboride Surfaces in Electroreduction Conditions,2025
+YohannesCombined2023,2590,48,-11.628307645000007,22.060583244999975,-0.41038524154054556,Combined High throughput DFT and ML Screening of Transition Metal Nitrides for Electrochemical CO2 Reduction,2023
+BoesAdsorption2018,1589,7,-2.23380131854,22.3385623792,3.079977767347691,Adsorption energies on fcc 111 transition metals,2018
+ZhangDopant-dependent2025,538,51,-0.7451561049999782,1.953439904999982,-0.008158277602238964,Dopant-dependent boron arrangement and chemistry of metal boride surface,2025
+AlonsoStrain2023,347,46,-1.2388288632864715,1.230459321894159,-0.39061952988053267,Application of machine learning to discover new intermetallic catalysts for the hydrogen evolution and the oxygen reduction reactions,2024
+DickensElectronic2018,213,111,-3.356589245078794,1.5544091457268223,-1.0027096803477233,An Electronic Structure Descriptor for Oxygen Reactivity at Metal and Metal-Oxide Surfaces,2018
+ZhangUnlocking2025,168,168,-1.9799308049999809,-0.27526686499999187,-0.7412210382142751,Unlocking Switchable Reactivity of MBene via Asymmetric Surface Adsorption,2025
+PasumarthiFacetDependence2023,132,1,-0.024201397682190873,0.7454756897132029,0.268968464342117,Facet-Dependent Catalytic Selectivity for Electrochemical Reduction of CO on Copper,2025
+TangModeling2020,94,73,-0.9265589536807965,1.6969510202325182,0.08555382417468169,Modeling Hydrogen Evolution Reaction Kinetics through Explicit Water–Metal Interfaces,2020
+MontoyaThe2015,47,12,-0.614156062531,0.600781870864,-0.16109061789231638,The Challenge of Electrochemical Ammonia Synthesis: A New Perspective on the Role of Nitrogen Scaling Relations,2015
+KaiData-driven2022,45,4,-1.6454085600000212,-0.7946080699999811,-1.1911622100000054,Data‐driven and constrained optimization of semi‐local exchange and nonlocal correlation functionals for materials and surface chemistry,2022
+LandersUnderstanding2020,40,15,-0.4211433273740113,0.5964595464356535,0.033446215999524576,"Dynamics and Hysteresis of Hydrogen Intercalation and Deintercalation in Palladium Electrodes: A Multimodal <i>In Situ</i> X-ray Diffraction, Coulometry, and Computational Study",2021
+WangAchieving2021,31,15,-1.6080223771277815,0.8280771415738855,-0.689502324941831,Achieving industrial ammonia synthesis rates at near-ambient conditions through modified scaling relations on a confined dual site,2021
+FantaQMCcopperCO2024,28,1,-1.0746999999973923,1.938800000003539,-0.0074680553563147055,Resolution of Selectivity Steps of CO Reduction Reaction on Copper by Quantum Monte Carlo,2025
+DheerRefinement2026,28,3,-1.5253519700000027,0.7188866500000017,-0.5655175567857904,"Refinement of the Electrochemical Description of the Nitrogenase Cofactor: Ground States, Activation and N2 Selectivity from Quantum Monte Carlo",2026
+JiangModelling2021,25,23,-0.6602813649999746,1.6529340350000155,-0.0936177189999853,Modeling Potential-Dependent Electrochemical Activation Barriers: Revisiting the Alkaline Hydrogen Evolution Reaction,2021
+HansenFirst2018,25,17,-2.2699420396238565,1.8379027974588098,-0.649921460764599,First Principles Micro-kinetic Model of Catalytic Non-oxidative Dehydrogenation of Ethane over Close-packed Metallic Facets,2018
+TangFrom2020,23,12,-1.0533610147613217,0.823242902981292,0.05359597287157237,From Electricity to Fuels: Descriptors for C1 Selectivity in Electrochemical CO2 Reduction,2020
+DheerNitrogenase2025,20,5,-1.0548441800000035,0.6602423799999997,-0.4560544585000642,Nitrogenase New Perspective on the Limitations of Nitrogen Reduction in the Nitrogenase System,2025
+LiuCatalytic2022,18,3,-13.811079829999983,6.635211335000008,-2.5010427949999516,Catalytic Performance and Near-Surface X-ray Characterization of Titanium Hydride Electrodes for the Electrochemical Nitrate Reduction Reaction,2022
+PengRole2020,16,8,-0.3937796265890938,0.5094893747373135,-0.057698076961514744,The Role of Atomic Carbon in Directing Electrochemical CO(2) Reduction to Multicarbon Products,2020
+Gauthierrole2021,12,6,-0.7031794450000035,1.7490136650000068,0.083869572499997,The role of roughening in enhancing selectivity to C2+ products during CO2 electroreduction on copper,2021
+ClarkInfluence2018,11,1,0.3814283108949894,0.8835865303117316,0.4918608809133399,Influence of Atomic Surface Structure on the Activity of Ag for the Electrochemical Reduction of CO2 to CO,2019
+TettehCompressively2022,10,1,-0.3140766850000034,-0.25754143499999316,-0.29363925299999494,Strained Pt(221) Facet in a PtCo@Pt-Rich Catalyst Boosts Oxygen Reduction and Hydrogen Evolution Activity,2022
+TangActive2025,10,10,-0.27980610087979585,0.9214382472273428,0.2698876666821889,Active Sites on Titanium and Hydrogen-Covered Transition Metal Surfaces for Nitrate Reduction,2025
+WangUniversal2011,8,5,-1.0,0.554,-0.21175,"Universal br{\o}nsted-evans-polanyi relations for c--c, c--o, c--n, n--o, n--n, and o--o dissociation reactions",2011
+E.Molecular2026,6,2,0.08957423999999037,0.6545308037499353,0.2543527062499417,Molecular Approaches to the Mechanism of CO2 Reduction to Methanol by Cobalt Phthalocyanine,2026
+SchumannSelectivity2018,6,6,-0.424950096465,0.44312846144,-0.14053364997138332,Selectivity of Synthesis Gas Conversion to C2+ Oxygenates on fcc (111) Transition-Metal Surfaces,2018
+JungSpin2025,6,3,-0.6708666700000094,1.0039003899999557,0.5588767966666429,Spin State Modulation in M–N–C Single-Atom Catalysts for Oxygen Electrocatalysis,2025
+KimStabilizing2026,5,3,-1.6980212999999935,-1.494565830000056,-1.5655390760000159,Stabilizing lattice oxygen in RuO2 with high-valent 5d Re dopants for durable acidic water electrolysis,2026
+JungRuO2-doping2026,5,3,-1.6980212999999935,-1.494565830000056,-1.5655390760000159,RuO2-doping stabilization OER dataset,2026
+SongStrongly2026,5,5,-0.9428303599999879,1.573492009999967,-0.22502159000001143,Strongly supported platinum cluster catalysts with atom counts,2026
+WeiInsights2022,4,2,-15.223170339999967,-5.1011770900000215,-8.8902325225,Insights into Active Sites and Mechanisms of Benzyl Alcohol Oxidation on Nickel–Iron Oxyhydroxide Electrodes,2023
+KoshyInvestigation2022,2,2,1.2929889399999865,1.4394948999834014,1.366241919991694,Investigation of the Structure of Atomically Dispersed NiN<sub><i>x</i></sub> Sites in Ni and N-Doped Carbon Electrocatalysts by <sup>61</sup>Ni Mössbauer Spectroscopy and Simulations,2022
+YangIntrinsic2016,2,1,-0.36076486946,-0.312787388,-0.33677612873,Intrinsic Selectivity and Structure Sensitivity of Rhodium Catalysts for C2+ Oxygenate Production,2016
+DStructure2024,2,1,-0.6370475800000577,-0.5858723100000134,-0.6114599450000355,"Structure sensitivity of the electrochemical hydrogenation of <i>cis</i>,<i>cis</i>-muconic acid to hexenedioic acid and adipic acid",2024
+ChenUnderstanding2018,2,1,-1.4082240449999972,-1.070919975000038,-1.2395720100000176,Understanding the apparent fractional charge of protons in the aqueous electrochemical double layer,2018
+LogadottirAmmonia2003,2,1,-1.1,-1.04,-1.07,Ammonia synthesis over a Ru (0001) surface studied by density functional calculations,2003
+CarlsonLiquidcrystal2024,1,1,-1.7331811800000025,-1.7331811800000025,-1.7331811800000025,Liquidcrystal interphase in electrolytes with soft templating effects for aqueous dual-electrode-free batteries,2024
+BukasORR2017,1,1,-1.35433832152,-1.35433832152,-1.35433832152,Combining Experiment and Theory to Unravel the Mechanism of Two-Electron Oxygen Reduction at a Selective and Active Co-Catalyst,2018
+HossainTitanium2025,1,1,-0.9070067700000095,-0.9070067700000095,-0.9070067700000095,Titanium Nitrogen-Doped Carbon Flowers Catalyze Electrochemical Nitrate Reduction Reaction to Ammonia,2025
+PengTrends2022,1,1,0.11168436794105219,0.11168436794105219,0.11168436794105219,Trends in oxygenate/hydrocarbon selectivity for electrochemical CO(2) reduction to C2 products,2022
+MedfordThermochemistry2014,1,1,-0.71,-0.71,-0.71,Thermochemistry and micro-kinetic analysis of methanol synthesis on ZnO (0001),2014
+Unpublished,1,0,-0.13,-0.13,-0.13,Rational design of MoS2 catalysts: tuning the structure and activity via transition metal doping,2015
+SharadaAdsorption2019,1,1,-1.2879526899999973,-1.2879526899999973,-1.2879526899999973,Adsorption on transition metal surfaces: Transferability and accuracy of DFT using the ADS41 dataset,2019

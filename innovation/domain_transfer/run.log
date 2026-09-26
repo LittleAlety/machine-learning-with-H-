@@ -1,0 +1,49 @@
+[口径自检] 主域 84 特征重算失配数 = 0（须为 0）
+[域] Mamun_BEEFvdW: n=1836, 唯一组成=1836, E_ads ∈ [-2.31, 2.74] eV
+[域] EqV2_RPBE: n=491, 唯一组成=115, E_ads ∈ [-3.05, 7.31] eV
+[域] CatHub_PBE: n=203, 唯一组成=46, E_ads ∈ [-1.24, 0.83] eV
+[lockbox] 已先于分析冻结 → /mnt/agents/output/ai_surface_cat/splits/lockbox_l0_anchors.json  eqv2_face_sha256=627a3e604cd5279b…
+[L0-b] EqV2 测试面与 0.347 基线同一集合: True (n=491, 键交集=491)
+[L0-b] 三域组成重叠: {'triple': 3, 'Mamun_BEEFvdW∩EqV2_RPBE': 68, 'Mamun_BEEFvdW∩CatHub_PBE': 34, 'EqV2_RPBE∩CatHub_PBE': 3}
+[L0-a] B1_mean_shift    seed=    0  MAE=0.3602  ρ=0.223
+[L0-a] B2_linear_shift  seed=    0  MAE=0.1384  ρ=-0.196
+[L0-a] B3_domain_linear seed=    0  MAE=0.2273  ρ=0.238
+[L0-a] B4_domain_gbdt   seed=    0  MAE=0.1234  ρ=0.485
+[L0-a] B1_mean_shift    seed=    1  MAE=0.3547  ρ=0.221
+[L0-a] B2_linear_shift  seed=    1  MAE=0.1376  ρ=-0.182
+[L0-a] B3_domain_linear seed=    1  MAE=0.2284  ρ=0.232
+[L0-a] B4_domain_gbdt   seed=    1  MAE=0.1278  ρ=0.485
+[L0-a] B1_mean_shift    seed=    2  MAE=0.3521  ρ=0.217
+[L0-a] B2_linear_shift  seed=    2  MAE=0.1381  ρ=-0.247
+[L0-a] B3_domain_linear seed=    2  MAE=0.2313  ρ=0.240
+[L0-a] B4_domain_gbdt   seed=    2  MAE=0.1295  ρ=0.481
+[L0-a] B1_mean_shift    seed=    7  MAE=0.3504  ρ=0.244
+[L0-a] B2_linear_shift  seed=    7  MAE=0.1377  ρ=-0.197
+[L0-a] B3_domain_linear seed=    7  MAE=0.2285  ρ=0.237
+[L0-a] B4_domain_gbdt   seed=    7  MAE=0.1211  ρ=0.520
+[L0-a] B1_mean_shift    seed=   13  MAE=0.3507  ρ=0.219
+[L0-a] B2_linear_shift  seed=   13  MAE=0.1367  ρ=-0.218
+[L0-a] B3_domain_linear seed=   13  MAE=0.2298  ρ=0.230
+[L0-a] B4_domain_gbdt   seed=   13  MAE=0.1185  ρ=0.515
+[L0-a] B1_mean_shift    seed=   42  MAE=0.3508  ρ=0.204
+[L0-a] B2_linear_shift  seed=   42  MAE=0.1368  ρ=-0.133
+[L0-a] B3_domain_linear seed=   42  MAE=0.2323  ρ=0.219
+[L0-a] B4_domain_gbdt   seed=   42  MAE=0.1265  ρ=0.459
+[L0-a] B1_mean_shift    seed=   99  MAE=0.3543  ρ=0.208
+[L0-a] B2_linear_shift  seed=   99  MAE=0.1369  ρ=-0.187
+[L0-a] B3_domain_linear seed=   99  MAE=0.2316  ρ=0.238
+[L0-a] B4_domain_gbdt   seed=   99  MAE=0.1152  ρ=0.536
+[L0-a] B1_mean_shift    seed=  123  MAE=0.3552  ρ=0.221
+[L0-a] B2_linear_shift  seed=  123  MAE=0.1377  ρ=-0.187
+[L0-a] B3_domain_linear seed=  123  MAE=0.2309  ρ=0.241
+[L0-a] B4_domain_gbdt   seed=  123  MAE=0.1155  ρ=0.503
+[L0-a] B1_mean_shift    seed= 2024  MAE=0.3497  ρ=0.215
+[L0-a] B2_linear_shift  seed= 2024  MAE=0.1360  ρ=-0.177
+[L0-a] B3_domain_linear seed= 2024  MAE=0.2300  ρ=0.235
+[L0-a] B4_domain_gbdt   seed= 2024  MAE=0.1220  ρ=0.407
+[L0-a] B1_mean_shift    seed=31337  MAE=0.3537  ρ=0.228
+[L0-a] B2_linear_shift  seed=31337  MAE=0.1367  ρ=-0.210
+[L0-a] B3_domain_linear seed=31337  MAE=0.2335  ρ=0.236
+[L0-a] B4_domain_gbdt   seed=31337  MAE=0.1262  ρ=0.453
+[裁决] B4−B2 = 0.0165 eV, CI95=[0.0031, 0.0267] → 结局 B
+[写出] innovation/domain_transfer/ 全部产物完成

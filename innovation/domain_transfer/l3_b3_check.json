@@ -1,0 +1,128 @@
+{
+  "protocol": "pooled KFold(5, shuffle, seed) x 10 seeds, same folds for B3/B4; features = 84 descriptors + 2 domain dummies; EqV2 OOF metrics",
+  "preregistered_rule": "if B3 also reaches ~0.13 eV -> mechanism explanation collapses, report honestly",
+  "collapse_threshold_eV": 0.13,
+  "B4_reference_MAE_phase3": 0.1226,
+  "B3_linear": {
+    "EqV2_MAE_mean": 0.23139190913924015,
+    "EqV2_MAE_sd": 0.001948580786592003,
+    "EqV2_rho_mean": 0.2342002391072588
+  },
+  "B4_gbdt_rerun": {
+    "EqV2_MAE_mean": 0.12257226708793992,
+    "EqV2_MAE_sd": 0.005036640252167198,
+    "EqV2_rho_mean": 0.4845064363945732
+  },
+  "delta_B3_minus_B4_MAE": 0.10881964205130024,
+  "mechanism_collapsed": false,
+  "conclusion": "MECHANISM SUPPORTED: B3 (no interactions) is clearly worse than B4; domain-indicator x descriptor interactions (quantified in l3_interactions.csv) carry a real, non-additive share of the B4 gain.",
+  "per_seed": [
+    {
+      "seed": 0,
+      "B3_linear_EqV2_MAE": 0.22802016816262516,
+      "B3_linear_EqV2_rho": 0.23958721684123682,
+      "B4_gbdt_EqV2_MAE": 0.12339112977600153,
+      "B4_gbdt_EqV2_rho": 0.4854903078866658
+    },
+    {
+      "seed": 1,
+      "B3_linear_EqV2_MAE": 0.2295129709567768,
+      "B3_linear_EqV2_rho": 0.23189901703935803,
+      "B4_gbdt_EqV2_MAE": 0.12784488027705093,
+      "B4_gbdt_EqV2_rho": 0.48491421282771485
+    },
+    {
+      "seed": 2,
+      "B3_linear_EqV2_MAE": 0.2323657301098962,
+      "B3_linear_EqV2_rho": 0.23721461628151766,
+      "B4_gbdt_EqV2_MAE": 0.12953303297164695,
+      "B4_gbdt_EqV2_rho": 0.48136938518350963
+    },
+    {
+      "seed": 7,
+      "B3_linear_EqV2_MAE": 0.22960598938888074,
+      "B3_linear_EqV2_rho": 0.23671049614598294,
+      "B4_gbdt_EqV2_MAE": 0.12112660235291316,
+      "B4_gbdt_EqV2_rho": 0.5204958608721147
+    },
+    {
+      "seed": 13,
+      "B3_linear_EqV2_MAE": 0.23085520844519158,
+      "B3_linear_EqV2_rho": 0.22981115912959502,
+      "B4_gbdt_EqV2_MAE": 0.11849985314260246,
+      "B4_gbdt_EqV2_rho": 0.5150605857194942
+    },
+    {
+      "seed": 42,
+      "B3_linear_EqV2_MAE": 0.233476684888036,
+      "B3_linear_EqV2_rho": 0.21854040601625258,
+      "B4_gbdt_EqV2_MAE": 0.12645009081978778,
+      "B4_gbdt_EqV2_rho": 0.45863797374019855
+    },
+    {
+      "seed": 99,
+      "B3_linear_EqV2_MAE": 0.23253360058396919,
+      "B3_linear_EqV2_rho": 0.23866282747392928,
+      "B4_gbdt_EqV2_MAE": 0.11515955983961847,
+      "B4_gbdt_EqV2_rho": 0.5358111636391291
+    },
+    {
+      "seed": 123,
+      "B3_linear_EqV2_MAE": 0.23183991897227793,
+      "B3_linear_EqV2_rho": 0.24109551795887516,
+      "B4_gbdt_EqV2_MAE": 0.11554721193283948,
+      "B4_gbdt_EqV2_rho": 0.5027825342268682
+    },
+    {
+      "seed": 2024,
+      "B3_linear_EqV2_MAE": 0.23131826309542122,
+      "B3_linear_EqV2_rho": 0.23276647264404485,
+      "B4_gbdt_EqV2_MAE": 0.12198787673938746,
+      "B4_gbdt_EqV2_rho": 0.40748399060272306
+    },
+    {
+      "seed": 31337,
+      "B3_linear_EqV2_MAE": 0.23439055678932633,
+      "B3_linear_EqV2_rho": 0.2357146615417955,
+      "B4_gbdt_EqV2_MAE": 0.12618243302755097,
+      "B4_gbdt_EqV2_rho": 0.45301834924731427
+    }
+  ],
+  "shap_interaction_top5": [
+    {
+      "domain_indicator": "domain::EqV2_RPBE",
+      "partner_feature": "group_wmean",
+      "pair_type": "domain_x_descriptor",
+      "mean_abs_interaction": 0.032323505729436874,
+      "rank_within_domain_indicator": 1.0
+    },
+    {
+      "domain_indicator": "domain::EqV2_RPBE",
+      "partner_feature": "en_wmean",
+      "pair_type": "domain_x_descriptor",
+      "mean_abs_interaction": 0.020433131605386734,
+      "rank_within_domain_indicator": 2.0
+    },
+    {
+      "domain_indicator": "domain::EqV2_RPBE",
+      "partner_feature": "melting_point_max",
+      "pair_type": "domain_x_descriptor",
+      "mean_abs_interaction": 0.008016437292098999,
+      "rank_within_domain_indicator": 3.0
+    },
+    {
+      "domain_indicator": "domain::Mamun_BEEFvdW",
+      "partner_feature": "group_wmean",
+      "pair_type": "domain_x_descriptor",
+      "mean_abs_interaction": 0.0074602458626031876,
+      "rank_within_domain_indicator": 1.0
+    },
+    {
+      "domain_indicator": "domain::EqV2_RPBE",
+      "partner_feature": "en_max",
+      "pair_type": "domain_x_descriptor",
+      "mean_abs_interaction": 0.006680330261588097,
+      "rank_within_domain_indicator": 4.0
+    }
+  ]
+}

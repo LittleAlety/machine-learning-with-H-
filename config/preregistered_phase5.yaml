@@ -1,0 +1,18 @@
+# Phase 5 预注册判读规则 — 冻结时间戳: 2026-09-18（先写规则再跑实验）
+seeds: [0, 1, 2, 7, 13, 42, 99, 123, 2024, 31337]
+fair_contract: {min_gain_eV: 0.005, direction: "10/10", nested_cv: required}
+
+route1_bottleneck:  # 物理瓶颈模型：组成 → 低维潜空间 → E_ads
+  dims_locked: [1, 2, 3]          # 候选集合锁死，禁扩
+  encoder: "linear (可解释优先) 与 64-32 MLP 两臂，锁死"
+  dual_outcome:
+    sufficiency: "2 维瓶颈复现 v3 OOF 0.1134（差距 <0.005）→ 'group_wmean 型低维管道是充分统计量'成立"
+    gap: "瓶颈显著掉精度 → 存在 SHAP 单特征排名未暴露的第二独立维度"
+  report: "逐维数 OOF、与 v3 差、潜变量与 group_wmean/d 带代理的相关"
+
+route2_foundation_relax:  # 基座势弛豫 + 连续局域特征
+  steps: "原型 slab（已建成 1836/1836）→ CHGNet 弛豫 → 连续局域描述符（配位数 CN、GCN、A/B 近邻加权性质）→ 闸门 → 公平契约"
+  anchor_gate: "DFT 复弛豫不可用于本会话 → 如实记为'锚定闸门待 DFT'，全部结论为条件性（伪影风险披露），禁止无条件精度宣称"
+  budget: "CPU 弛豫预算 4 小时；超时则按 3d 磁性 + 逃逸角相关子集降级"
+  target: "对准 oracle 缺口 ~0.033 eV；位点级 OOF ≤0.090 或表面级公平契约过阈"
+  contract_baseline: "v3 0.1134 / 位点离散基线兑现率 14.7%"

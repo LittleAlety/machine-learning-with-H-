@@ -1,0 +1,352 @@
+{
+ "phase": 6,
+ "frozen_at": "2026-09-20T20:27:13.585952",
+ "rule": "计算前公开（红线16）；红旗候选（La/Y/Sc强亲氧、Mn/Bi/Fe LOEO、Tl毒性）不进首轮；Cr 注记钝化警示（3.14节）",
+ "batch_A_AL_top10": [
+  {
+   "comp": "HgRu",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.5721,
+   "pred_dG": 0.0
+  },
+  {
+   "comp": "Co3Ga",
+   "structure": "L12",
+   "facet": 111,
+   "acquisition_score": 0.5478,
+   "pred_dG": 0.0181
+  },
+  {
+   "comp": "CoPt3",
+   "structure": "L12",
+   "facet": 111,
+   "acquisition_score": 0.489,
+   "pred_dG": -0.0064
+  },
+  {
+   "comp": "AuRu",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.4316,
+   "pred_dG": 0.0333
+  },
+  {
+   "comp": "HgTc",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.4163,
+   "pred_dG": 0.0764
+  },
+  {
+   "comp": "AuOs",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.3759,
+   "pred_dG": -0.0582
+  },
+  {
+   "comp": "CrHg",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.3435,
+   "pred_dG": 0.1404
+  },
+  {
+   "comp": "CrIn",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.3332,
+   "pred_dG": -0.1146
+  },
+  {
+   "comp": "HgNi3",
+   "structure": "L12",
+   "facet": 111,
+   "acquisition_score": 0.3242,
+   "pred_dG": -0.0771
+  },
+  {
+   "comp": "CdCr",
+   "structure": "L10",
+   "facet": 101,
+   "acquisition_score": 0.2729,
+   "pred_dG": -0.1448
+  }
+ ],
+ "batch_B_scaling_tier2_10": [
+  {
+   "comp": "Cr3Hf",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.3205,
+   "dG_OH_eV": 0.9739,
+   "score": 3.2462,
+   "oh_in_training": false
+  },
+  {
+   "comp": "CrNb3",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.2927,
+   "dG_OH_eV": 1.155,
+   "score": 3.8499,
+   "oh_in_training": false
+  },
+  {
+   "comp": "Al3Ta",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.1886,
+   "dG_OH_eV": 1.2015,
+   "score": 4.0051,
+   "oh_in_training": false
+  },
+  {
+   "comp": "InZr",
+   "structure": "L10",
+   "facet": 101,
+   "dG_H_eV": -0.3462,
+   "dG_OH_eV": 1.22,
+   "score": 4.0668,
+   "oh_in_training": false
+  },
+  {
+   "comp": "AlTa",
+   "structure": "L10",
+   "facet": 101,
+   "dG_H_eV": -0.4039,
+   "dG_OH_eV": 1.2352,
+   "score": 4.1174,
+   "oh_in_training": false
+  },
+  {
+   "comp": "Al3Zr",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.0596,
+   "dG_OH_eV": 1.2506,
+   "score": 4.1687,
+   "oh_in_training": false
+  },
+  {
+   "comp": "Al3Hf",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.0591,
+   "dG_OH_eV": 1.2506,
+   "score": 4.1688,
+   "oh_in_training": false
+  },
+  {
+   "comp": "AlNb",
+   "structure": "L10",
+   "facet": 101,
+   "dG_H_eV": -0.3504,
+   "dG_OH_eV": 1.2816,
+   "score": 4.2721,
+   "oh_in_training": false
+  },
+  {
+   "comp": "Al3Nb",
+   "structure": "L12",
+   "facet": 111,
+   "dG_H_eV": 0.2546,
+   "dG_OH_eV": 1.2949,
+   "score": 4.3164,
+   "oh_in_training": false
+  },
+  {
+   "comp": "HfPb",
+   "structure": "L10",
+   "facet": 101,
+   "dG_H_eV": -0.2561,
+   "dG_OH_eV": 1.3019,
+   "score": 4.3396,
+   "oh_in_training": false
+  }
+ ],
+ "batch_C_relax_audit_30": [
+  {
+   "comp": "LaPb",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 6.71,
+   "relax_energy_drop_per_atom": -4.854
+  },
+  {
+   "comp": "LaSc",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 6.068,
+   "relax_energy_drop_per_atom": -5.433
+  },
+  {
+   "comp": "PbSc",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.872,
+   "relax_energy_drop_per_atom": -5.354
+  },
+  {
+   "comp": "FeSc",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.809,
+   "relax_energy_drop_per_atom": -7.338
+  },
+  {
+   "comp": "LaY",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.455,
+   "relax_energy_drop_per_atom": -5.528
+  },
+  {
+   "comp": "NiY",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.252,
+   "relax_energy_drop_per_atom": -6.374
+  },
+  {
+   "comp": "LaNi",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.236,
+   "relax_energy_drop_per_atom": -5.535
+  },
+  {
+   "comp": "CuLa",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.172,
+   "relax_energy_drop_per_atom": -4.576
+  },
+  {
+   "comp": "FeZr",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.108,
+   "relax_energy_drop_per_atom": -8.478
+  },
+  {
+   "comp": "FeTi",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 5.082,
+   "relax_energy_drop_per_atom": -8.339
+  },
+  {
+   "comp": "CrTl",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 4.887,
+   "relax_energy_drop_per_atom": -5.2
+  },
+  {
+   "comp": "CuY",
+   "structure": "L10",
+   "facet": 101,
+   "surf_disp_mean_A": 4.8,
+   "relax_energy_drop_per_atom": -5.393
+  },
+  {
+   "comp": "Co",
+   "structure": "A1",
+   "facet": 111,
+   "surf_disp_mean_A": 3.503,
+   "relax_energy_drop_per_atom": -6.711
+  },
+  {
+   "comp": "FeLa3",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.461,
+   "relax_energy_drop_per_atom": -5.413
+  },
+  {
+   "comp": "NiSn3",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.421,
+   "relax_energy_drop_per_atom": -4.317
+  },
+  {
+   "comp": "Al3La",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.403,
+   "relax_energy_drop_per_atom": -4.293
+  },
+  {
+   "comp": "Ag3Sc",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.21,
+   "relax_energy_drop_per_atom": -3.875
+  },
+  {
+   "comp": "La3Mo",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.165,
+   "relax_energy_drop_per_atom": -5.78
+  },
+  {
+   "comp": "Fe3Mo",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.156,
+   "relax_energy_drop_per_atom": -8.787
+  },
+  {
+   "comp": "Cr3Pb",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.125,
+   "relax_energy_drop_per_atom": -7.332
+  },
+  {
+   "comp": "Ag3Co",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.085,
+   "relax_energy_drop_per_atom": -3.439
+  },
+  {
+   "comp": "FeSn3",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.078,
+   "relax_energy_drop_per_atom": -4.708
+  },
+  {
+   "comp": "Fe3V",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.076,
+   "relax_energy_drop_per_atom": -8.469
+  },
+  {
+   "comp": "Fe3Ta",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.034,
+   "relax_energy_drop_per_atom": -9.19
+  },
+  {
+   "comp": "CuFe3",
+   "structure": "L12",
+   "facet": 111,
+   "surf_disp_mean_A": 3.011,
+   "relax_energy_drop_per_atom": -7.042
+  }
+ ],
+ "notes": {
+  "A": "采集函数顶部、红旗过滤、in_domain",
+  "B": "HER×ORR score 最近邻、无红旗；oh_in_training=False 即外推，DFT 结果=逃逸角裁决独立证据",
+  "C": "CHGNet 弛豫位移 Top30（三结构分层），裁决 Route 2 弛豫悬案"
+ },
+ "sha256": "d331e15c6c47bd31e39e95f0d1a5793733c696600b8a72532796c6452c38b121"
+}

@@ -1,0 +1,26 @@
+surface,deltaG_lit_eV,source,year,doi_or_url,our_true_E,our_pred_dG,abs_diff,notes
+Pt(111),-0.09,"Nørskov et al., J. Electrochem. Soc. 152, J23 (Trends in the Exchange Current for Hydrogen Evolution)",2005,10.1149/1.1856988,-0.312,-0.106,0.016,"计算(RPBE,0.25 ML);经 TUM 学位论文 Table 2.3 亲见核实；pred_dG vs 文献ΔG"
+Ir(111),0.03,"Nørskov et al., J. Electrochem. Soc. 152, J23",2005,10.1149/1.1856988,-0.324,-0.055,0.085,"计算(RPBE,0.25 ML);同上；pred_dG vs 文献ΔG"
+Cu(111),0.19,"Nørskov et al., J. Electrochem. Soc. 152, J23",2005,10.1149/1.1856988,-0.054,0.166,0.024,"计算(RPBE,0.25 ML);同上；pred_dG vs 文献ΔG"
+Au(111),0.45,"Nørskov et al., J. Electrochem. Soc. 152, J23",2005,10.1149/1.1856988,0.322,0.234,0.216,"计算(RPBE,0.25 ML);同上；pred_dG vs 文献ΔG"
+Ag(111),0.51,"Nørskov et al., J. Electrochem. Soc. 152, J23",2005,10.1149/1.1856988,0.338,0.343,0.167,"计算(RPBE,0.25 ML);同上；pred_dG vs 文献ΔG"
+Pt,-0.46,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,-0.312,-0.106,0.114,计算 HBE;同上;与 Turaczy 2023 的 DFT 值一致；pred_E_ads vs 文献HBE(ΔE_H)
+Pd,-0.62,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,-0.29,0.02,0.4,计算 HBE;同上；pred_E_ads vs 文献HBE(ΔE_H)
+Co,-0.51,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,-0.449,0.132,0.402,计算 HBE;同上；pred_E_ads vs 文献HBE(ΔE_H)
+Ni,-0.51,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,,,,计算 HBE;数据集中缺失(无纯 Ni 条目)；数据集中缺失
+Fe,-0.59,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,-0.957,-0.052,0.298,"计算 HBE(四重空位, bcc(110)-类);同上；pred_E_ads vs 文献HBE(ΔE_H)"
+W,-0.8,"Sheng et al., Energy Environ. Sci. 6, 1509",2013,10.1039/c3ee00045a,-0.88,-0.826,0.266,"计算 HBE(桥位, bcc(110)-类);同上；pred_E_ads vs 文献HBE(ΔE_H)"
+Pt(111),-0.41,"Turaczy et al., ACS Catal. 13(21) (TPD 实测 HBE)",2023,https://www.osti.gov/biblio/2267554,-0.312,-0.106,0.064,实验(TPD ΔH_ad);原文 -9.5 kcal/mol；pred_E_ads vs 文献HBE(ΔE_H)
+Pd(111),-0.93,"Turaczy et al., ACS Catal. 13(21) (TPD 实测 HBE)",2023,https://www.osti.gov/biblio/2267554,-0.29,0.02,0.71,实验(TPD ΔH_ad ±0.05)；pred_E_ads vs 文献HBE(ΔE_H)
+Mo2N(111),-0.87,"Turaczy et al., ACS Catal. 13(21)",2023,https://www.osti.gov/biblio/2267554,,,,计算 ΔE_H(N 顶位);数据集中缺失(无氮化物)；数据集中缺失
+Pt/Mo2N(111),-0.34,"Turaczy et al., ACS Catal. 13(21)",2023,https://www.osti.gov/biblio/2267554,,,,实验 TPD ΔH_ad ±0.03(单层 Pt);数据集中缺失；数据集中缺失
+MoS2 Mo-edge(1010),0.08,"Hinnemann et al., J. Am. Chem. Soc. 127, 5308 (Biomimetic Hydrogen Evolution)",2005,10.1021/ja0504690,,,,计算 ΔG_H(50% H 覆盖 Mo 边);数据集中缺失(无硫化物)；数据集中缺失
+MoS2 basal(0001),1.92,"Hinnemann et al., J. Am. Chem. Soc. 127, 5308",2005,10.1021/ja0504690,,,,计算 ΔG_H(惰性基面);数据集中缺失；数据集中缺失
+WS2 edge,0.22,"Bonde et al., Faraday Discuss. 140, 219 (HER on transition metal sulfides)",2009,10.1039/b803857k,,,,计算 ΔG_H(边位);数据集中缺失；数据集中缺失
+Pt(110),-0.12,"Zheng et al., Sci. Adv. 2, e1501602 (HBE vs pH)",2016,10.1126/sciadv.1501602,,,,实验推导:pH=0 时 Hupd 峰 0.12 V vs RHE→ΔG_H≈-E_peak;数据集仅含 (111)；数据集中缺失
+Pt(100),-0.22,"Zheng et al., Sci. Adv. 2, e1501602",2016,10.1126/sciadv.1501602,,,,实验推导:pH=0 时 Hupd 峰 0.22 V→ΔG_H≈-0.22 eV;数据集仅含 (111)；数据集中缺失
+Rh(111),-0.33,ChemRxiv 2022-f0r9r (H/SH/S 在金属(111)上的结合能表),2022,10.26434/chemrxiv-2022-f0r9r,-0.284,-0.098,0.008,"计算 ΔE_H(预印本,(111)面)；pred_E_ads vs 文献HBE(ΔE_H)"
+Ru(111),-0.45,ChemRxiv 2022-f0r9r,2022,10.26434/chemrxiv-2022-f0r9r,-0.411,-0.237,0.027,计算 ΔE_H;与 Ru@GnP 文献(Ru(001) 0.54 eV 结合能)一致；pred_E_ads vs 文献HBE(ΔE_H)
+Re(111),-0.55,ChemRxiv 2022-f0r9r,2022,10.26434/chemrxiv-2022-f0r9r,-0.512,-0.218,0.092,计算 ΔE_H(预印本)；pred_E_ads vs 文献HBE(ΔE_H)
+Cr,-1.273,"Pasti et al., Catalysts 12, 1541 (HER volcano, Table A1)",2022,10.3390/catal12121541,-0.879,-1.197,0.164,"计算 HBE(文献平均, bcc(110) 0.25 ML);数据集为 (111)；pred_E_ads vs 文献HBE(ΔE_H)"
+Zn,0.39,"Pasti et al., Catalysts 12, 1541 (Table A1)",2022,10.3390/catal12121541,0.553,0.729,0.099,"计算 HBE(本文自算, (0001) 0.25 ML);数据集为 (111)；pred_E_ads vs 文献HBE(ΔE_H)"

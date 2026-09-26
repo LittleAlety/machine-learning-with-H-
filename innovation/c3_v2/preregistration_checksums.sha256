@@ -1,0 +1,12 @@
+# C-3 v2 预注册独立校验文件（detached checksums）
+# 生成日期：2026-09-20（预检迭代后补建，见 PREREGISTRATION_AMENDMENT_1.md）
+# 用途：batches_preregistered.json 内嵌 sha256 字段存在自引用问题，
+#       本文件为权威校验入口。核验方法：sha256sum -c 或逐条比对。
+# ---- 冻结批次清单 ----
+8c033501c42975490d437c9b20e27aa0c3a21571429ba2c884e5ba634eceecb7  batches_preregistered.json
+# ---- 规范内容摘要（payload 去除 sha256 字段后，json.dumps(sort_keys=True, separators=(",",":"), ensure_ascii=False) 的 SHA256）----
+bbe92129c03a73c587b0c7b5e7c77cf4cc353ea574b8ecc0d3c2b1975a29ea8a  batches_preregistered.json::canonical_payload
+# ---- 上游源文件（批次重算输入）----
+8ede51597cf54207effdd4000c5a516c446d99ceb715c95bca9eadd650eb2a11  ../../outputs/active_learning_candidates_all.csv
+e6e87b8939def8abe2c8afba7667c0713afe9d4a877d57fa331c4efd78338b38  dual_all_ranked.csv
+73b1c5bb947b4f5b0a3568c63b183a568a85bedb29dce8d05c594773e27ef3f0  ../continuous_local/continuous_local_features.csv

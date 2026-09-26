@@ -1,0 +1,199 @@
+{
+  "descriptors": [
+    {
+      "adsorbate": "H",
+      "mae": 0.1206472930794511,
+      "n": 1836,
+      "tier": "large",
+      "n_atoms": 1,
+      "valence_e": 1,
+      "multiatom": 0,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "S",
+      "mae": 0.1635127336050889,
+      "n": 1806,
+      "tier": "large",
+      "n_atoms": 1,
+      "valence_e": 6,
+      "multiatom": 0,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "2H",
+      "mae": 0.2362871726263111,
+      "n": 1802,
+      "tier": "large",
+      "n_atoms": 2,
+      "valence_e": 2,
+      "multiatom": 0,
+      "dimer": 1
+    },
+    {
+      "adsorbate": "N",
+      "mae": 0.277770201644183,
+      "n": 1796,
+      "tier": "large",
+      "n_atoms": 1,
+      "valence_e": 5,
+      "multiatom": 0,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "O",
+      "mae": 0.2230959398416473,
+      "n": 1795,
+      "tier": "large",
+      "n_atoms": 1,
+      "valence_e": 6,
+      "multiatom": 0,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "C",
+      "mae": 0.3064675472387833,
+      "n": 1776,
+      "tier": "large",
+      "n_atoms": 1,
+      "valence_e": 4,
+      "multiatom": 0,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "2N",
+      "mae": 0.5487102023684344,
+      "n": 1761,
+      "tier": "large",
+      "n_atoms": 2,
+      "valence_e": 10,
+      "multiatom": 0,
+      "dimer": 1
+    },
+    {
+      "adsorbate": "2O",
+      "mae": 0.4405757468189102,
+      "n": 1680,
+      "tier": "large",
+      "n_atoms": 2,
+      "valence_e": 12,
+      "multiatom": 0,
+      "dimer": 1
+    },
+    {
+      "adsorbate": "NH",
+      "mae": 0.2055821084075643,
+      "n": 352,
+      "tier": "small",
+      "n_atoms": 2,
+      "valence_e": 6,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "CH",
+      "mae": 0.2222697062375878,
+      "n": 347,
+      "tier": "small",
+      "n_atoms": 2,
+      "valence_e": 5,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "SH",
+      "mae": 0.2234798766995512,
+      "n": 342,
+      "tier": "small",
+      "n_atoms": 2,
+      "valence_e": 7,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "H2O",
+      "mae": 0.0765036229509055,
+      "n": 326,
+      "tier": "small",
+      "n_atoms": 3,
+      "valence_e": 8,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "CH2",
+      "mae": 0.280237886967873,
+      "n": 319,
+      "tier": "small",
+      "n_atoms": 3,
+      "valence_e": 6,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "CH3",
+      "mae": 0.1558890085935011,
+      "n": 318,
+      "tier": "small",
+      "n_atoms": 4,
+      "valence_e": 7,
+      "multiatom": 1,
+      "dimer": 0
+    },
+    {
+      "adsorbate": "OH",
+      "mae": 0.2102232196664369,
+      "n": 243,
+      "tier": "small",
+      "n_atoms": 2,
+      "valence_e": 7,
+      "multiatom": 1,
+      "dimer": 0
+    }
+  ],
+  "n_atoms": {
+    "spearman_rho": -0.121,
+    "spearman_p": 0.667,
+    "pearson_r": -0.12,
+    "pearson_p": 0.671
+  },
+  "valence_e": {
+    "spearman_rho": 0.11,
+    "spearman_p": 0.695,
+    "pearson_r": 0.529,
+    "pearson_p": 0.0427
+  },
+  "multiatom": {
+    "spearman_rho": -0.402,
+    "spearman_p": 0.137,
+    "pearson_r": -0.404,
+    "pearson_p": 0.135
+  },
+  "dimer": {
+    "spearman_rho": 0.579,
+    "spearman_p": 0.0238,
+    "pearson_r": 0.705,
+    "pearson_p": 0.00336
+  },
+  "empirical_relation": {
+    "formula": "MAE[eV] = -0.0162 * n_atoms + 0.2774",
+    "slope": -0.0162,
+    "intercept": 0.2774,
+    "r": -0.12,
+    "p": 0.671
+  },
+  "empirical_relation_large_tier": {
+    "formula": "MAE[eV] = 0.1902 * n_atoms + 0.0281",
+    "slope": 0.1902,
+    "intercept": 0.0281,
+    "r": 0.691,
+    "p": 0.0577,
+    "n": 8
+  },
+  "dimer_large_tier": {
+    "spearman_rho": 0.62,
+    "spearman_p": 0.101,
+    "note": "dissociated-dimer flag (2H/2N/2O), large tier only (n=8)"
+  },
+  "hypothesis_check": "NOT SUPPORTED: Spearman rho(MAE, n_atoms)=-0.12 over 15 adsorbates"
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "feature": "site_spread (T1 目标泄漏)",
+    "k_dims": 1,
+    "mae_base_10seeds": 0.11959830244769601,
+    "mae_gold_10seeds": 0.10380187383853394,
+    "delta_A": 0.015796428609162073,
+    "delta_A_std": 0.0008561549666467707,
+    "seeds_win": "10/10",
+    "delta_B_inferred": -0.0007270030392441534,
+    "retention": -0.046023253561408496,
+    "verdict": "LEAK"
+  },
+  {
+    "feature": "n_raw (T3 元数据泄漏)",
+    "k_dims": 1,
+    "mae_base_10seeds": 0.11959830244769601,
+    "mae_gold_10seeds": 0.10995136743789172,
+    "delta_A": 0.009646935009804302,
+    "delta_A_std": 0.0007281563058831015,
+    "seeds_win": "10/10",
+    "delta_B_inferred": -0.001459105027009855,
+    "retention": -0.15125063302768682,
+    "verdict": "LEAK"
+  },
+  {
+    "feature": "melting_point 族（v3 采纳）",
+    "k_dims": 5,
+    "mae_base_10seeds": 0.11959830244769601,
+    "mae_gold_10seeds": 0.11568345234957782,
+    "delta_A": 0.003914850098118189,
+    "delta_A_std": 0.0006907517053121551,
+    "seeds_win": "10/10",
+    "delta_B_inferred": -0.0018090931755360834,
+    "retention": -0.4621104589434185,
+    "verdict": "NO_GAIN"
+  },
+  {
+    "feature": "CatApp CO* 线同表面能量极差（构造性 T1 案例）",
+    "note": "CatApp 共 367 条 CO* 记录，355 个表面键，12 个键极差>0；该特征与标签同分布机械耦合，若入模必过线 A（与标签同源的统计量），但新表面不可计算 → 闸门判 LEAK。构造即证，不实际入模（节省算力，机制与案例 1 同构）。",
+    "verdict": "LEAK (by construction)"
+  }
+]

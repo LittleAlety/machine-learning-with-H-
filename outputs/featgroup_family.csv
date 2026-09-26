@@ -1,0 +1,3 @@
+family,mean_abs_shap_sum,n_features,share_pct,share_pct_fold_mean,share_pct_fold_std
+组成-元素性质族,0.75172484,31,98.50912,98.55034,0.23637308
+结构/晶面族,0.011376969,5,1.4908848,1.4496579,0.23637922

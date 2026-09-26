@@ -1,0 +1,15 @@
+# fair_contract.yaml — plan-hb v2.0 r14 公平契约（30_lockbox_split.py 生成）
+lockbox:
+  file: splits/lockbox_v1.json
+  rule: "lockbox 自划定起对开发不可见，最终模型只评一次（A-5）；其余任何步骤不得触碰"
+  fraction: 0.15
+  stratify: "structure only（禁用目标值）"
+  group: 规范化 comp
+adoption:  # 精度优化采纳门槛
+  multi_seed_oof_mae_gain_eV: 0.005      # 相对基线 10 种子 OOF MAE 均值改善需 > 0.005
+  direction_consistency: "10/10 种子方向一致"
+  nested_cv: "外层 GroupKFold(5) 复核通过方判定采纳"
+seeds: [0, 1, 2, 7, 13, 42, 99, 123, 2024, 31337]
+fold_protocol: "GroupKFold(n_splits=5, groups=规范化comp)，禁止重切"
+baseline_v3_oof_mae_10seed: 0.11374
+created_utc: "2026-09-16T04:45:31.175909+00:00"

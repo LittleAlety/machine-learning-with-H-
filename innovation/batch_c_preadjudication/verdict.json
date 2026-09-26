@@ -1,0 +1,2124 @@
+{
+  "task": "Phase6 batch C atomic-level direct pre-adjudication",
+  "protocol": "口径A: DFT 弛豫清洁 slab (star) 直接可得; 理想截断由 star 固定底两层外推",
+  "protocol_limitations": [
+    "原型 slab (2x2 超胞, 半径估算晶格常数, 128/32 原子) 与 DFT db slab (12 原子小胞, DFT 晶格常数) 晶胞不同, CHGNet末态 vs DFT末态 的逐原子 RMSD 跨胞无定义; 直接对照以'相对各自理想截断的弛豫位移场'同物理量进行",
+    "DFT 理想截断重构假设层间平移堆垛 (fcc 衍生 A1/L10/L12 成立), 固定层残差 t_err 已逐体系记录",
+    "CHGNet 弛豫含晶胞自由度; 位移在原型晶格分数坐标最小像下度量, 晶格变化率 chg_dlat_pct 另报",
+    "每体系多 star ref 时取顶层位移中位代表, 全部取值记录在 verdict.details"
+  ],
+  "thresholds": {
+    "artifact_dft_top_mean_max_A": 0.5,
+    "artifact_chg_surf_mean_min_A": 1.0
+  },
+  "n_systems": 25,
+  "verdict_counts": {
+    "ARTIFACT": 25,
+    "REAL_RECONSTRUCTION": 0,
+    "MIXED": 0
+  },
+  "frozen_crosscheck": {
+    "n_matched_within_1e-3": 25,
+    "n_total": 25
+  },
+  "indirect_preadjudication_consistency": {
+    "indirect": "CHGNet 位移中位 3.503 Å vs DFT 吸附诱导(star→Hstar)位移中位 0.210 Å, 比值 22×",
+    "direct": {
+      "chg_surf_disp_median_A": 3.5026694289786335,
+      "dft_ideal_to_relaxed_top_median_A": 0.1168710936936916,
+      "ratio_chg_over_dft_median": 40.546815725427244
+    },
+    "consistent": true,
+    "note": "直接对照 DFT 侧为原型→清洁弛豫态位移(中位 ~0.12 Å), 与间接对照的吸附诱导位移(0.210 Å)同为亚 Å 量级; CHGNet/DFT 直接比值中位 ~40×,方向与间接 22× 一致且更强 (直接对照分离了吸附贡献, 更纯净)。"
+  },
+  "sentinel_protocol_recommendation": {
+    "sentinel_8": [
+      {
+        "name": "Cr3Pb_L12_111",
+        "why": "DFT 侧位移最大 (0.40 Å, 最接近 REAL 判据), L12"
+      },
+      {
+        "name": "LaPb_L10_101",
+        "why": "CHGNet 位移最大 (6.71 Å) 且 DFT 侧次高, L10"
+      },
+      {
+        "name": "CrTl_L10_101",
+        "why": "DFT 侧第三高 (0.26 Å, 顶层 Tl 起伏), L10, Tl 毒性注记"
+      },
+      {
+        "name": "Co_A1_111",
+        "why": "唯一 A1 结构类型代表"
+      },
+      {
+        "name": "CuFe3_L12_111",
+        "why": "CHGNet 位移最小 (3.01 Å, 最接近伪影判据边界), L12"
+      },
+      {
+        "name": "Fe3Mo_L12_111",
+        "why": "CHGNet 能降最大 (-8.79 eV/atom), L12"
+      },
+      {
+        "name": "FeTi_L10_101",
+        "why": "L10 高能降 (-8.34) 代表"
+      },
+      {
+        "name": "Ag3Sc_L12_111",
+        "why": "DFT 位移最小 (0.041 Å) 的干净伪影对照, L12"
+      }
+    ],
+    "coverage": "3 种结构类型 (L10×3, A1×1, L12×4); 结局覆盖: 本预裁全部为 ARTIFACT, 无法覆盖 REAL 结局 — 哨兵选取改为覆盖'最接近 REAL 边界'(DFT 位移最大) 与'最干净 ARTIFACT'(DFT 位移最小) 两端",
+    "stop_rule": "8 哨兵 DFT 弛豫完成后, 若 ≥6/8 复现 DFT 顶层层均位移 <0.5 Å (与预裁一致), 则批次 C 全体判 ARTIFACT, 停止剩余 17 体系的 DFT 审计; 若 ≥3/8 出现 DFT ≥0.5 Å 重构, 升级为全批次 DFT 审计"
+  },
+  "rows": [
+    {
+      "comp": "LaPb",
+      "structure": "L10",
+      "facet": 101,
+      "name": "LaPb_L10_101",
+      "frozen_chg_surf_disp": 6.71,
+      "frozen_e_drop": -4.854,
+      "chg_disp_mean_seq": 4.455184774027428,
+      "chg_disp_max_seq": 7.818338047275641,
+      "chg_disp_surf_mean_seq": 6.7102537388103265,
+      "chg_disp_mean_hung": 3.409025483367545,
+      "chg_disp_max_hung": 6.4971111236787875,
+      "chg_disp_surf_mean_hung": 4.274947868407679,
+      "chg_d12_relax_pct": -17.13246525425271,
+      "chg_top_disp_per_species": {
+        "La": 4.290823044713658,
+        "Pb": 4.259072692101699
+      },
+      "chg_dlat_pct": [
+        5.013908482049565,
+        -4.0819046469949365,
+        -8.208345543755431
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -4.85435751453042,
+      "converged": true,
+      "fmax_final": 0.011481464840471745,
+      "dft_disp_relaxed_mean": 0.2986172123460198,
+      "dft_disp_relaxed_max": 0.32275408163698693,
+      "dft_disp_top_mean": 0.2986172123460198,
+      "dft_disp_top_max": 0.32275408163698693,
+      "dft_d12_relax_pct": -1.796754932315363,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 22.471088274157772,
+      "r2_surf_disp_mean_A": 6.7102537388103265,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "LaSc",
+      "structure": "L10",
+      "facet": 101,
+      "name": "LaSc_L10_101",
+      "frozen_chg_surf_disp": 6.068,
+      "frozen_e_drop": -5.433,
+      "chg_disp_mean_seq": 3.886617796530485,
+      "chg_disp_max_seq": 6.883500867875205,
+      "chg_disp_surf_mean_seq": 6.0682679526869805,
+      "chg_disp_mean_hung": 3.1211312314485817,
+      "chg_disp_max_hung": 7.271028526173401,
+      "chg_disp_surf_mean_hung": 4.955465429737773,
+      "chg_d12_relax_pct": 4.785692734132167,
+      "chg_top_disp_per_species": {
+        "La": 4.71326871802308,
+        "Sc": 5.197662141452466
+      },
+      "chg_dlat_pct": [
+        -2.815129721054814,
+        3.4411969415887746,
+        7.5946715662665625
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.432593941688538,
+      "converged": true,
+      "fmax_final": 0.01448938436806202,
+      "dft_disp_relaxed_mean": 0.24395319569695187,
+      "dft_disp_relaxed_max": 0.280306458311144,
+      "dft_disp_top_mean": 0.24395319569695187,
+      "dft_disp_top_max": 0.280306458311144,
+      "dft_d12_relax_pct": -1.8959392545306157,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 24.8747221177017,
+      "r2_surf_disp_mean_A": 6.0682679526869805,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "PbSc",
+      "structure": "L10",
+      "facet": 101,
+      "name": "PbSc_L10_101",
+      "frozen_chg_surf_disp": 5.872,
+      "frozen_e_drop": -5.354,
+      "chg_disp_mean_seq": 3.7791708729181717,
+      "chg_disp_max_seq": 6.896963385380374,
+      "chg_disp_surf_mean_seq": 5.871995147547614,
+      "chg_disp_mean_hung": 2.937415216510889,
+      "chg_disp_max_hung": 5.8815644940869545,
+      "chg_disp_surf_mean_hung": 3.6117604600399726,
+      "chg_d12_relax_pct": -24.444920783738798,
+      "chg_top_disp_per_species": {
+        "Sc": 3.829801970447291,
+        "Pb": 3.393718949632654
+      },
+      "chg_dlat_pct": [
+        5.543102781302851,
+        -3.644325868515101,
+        -7.664373639571422
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.35381668433547,
+      "converged": true,
+      "fmax_final": 0.01011214405298233,
+      "dft_disp_relaxed_mean": 0.23063583908674296,
+      "dft_disp_relaxed_max": 0.23853559831110138,
+      "dft_disp_top_mean": 0.23063583908674296,
+      "dft_disp_top_max": 0.23853559831110138,
+      "dft_d12_relax_pct": 0.13585543271913608,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 25.460028982482363,
+      "r2_surf_disp_mean_A": 5.871995147547614,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "FeSc",
+      "structure": "L10",
+      "facet": 101,
+      "name": "FeSc_L10_101",
+      "frozen_chg_surf_disp": 5.809,
+      "frozen_e_drop": -7.338,
+      "chg_disp_mean_seq": 3.682522880443318,
+      "chg_disp_max_seq": 6.810263815532985,
+      "chg_disp_surf_mean_seq": 5.809073962113711,
+      "chg_disp_mean_hung": 2.555130841400805,
+      "chg_disp_max_hung": 4.755666105183972,
+      "chg_disp_surf_mean_hung": 3.039235657879554,
+      "chg_d12_relax_pct": -11.036611640467259,
+      "chg_top_disp_per_species": {
+        "Sc": 2.998117215127463,
+        "Fe": 3.080354100631645
+      },
+      "chg_dlat_pct": [
+        1.505028590079279,
+        -6.68629504621931,
+        -8.136153501008604
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -7.337738987058401,
+      "converged": true,
+      "fmax_final": 0.0364370197057724,
+      "dft_disp_relaxed_mean": 0.0883122599931675,
+      "dft_disp_relaxed_max": 0.09873125469884471,
+      "dft_disp_top_mean": 0.0883122599931675,
+      "dft_disp_top_max": 0.09873125469884471,
+      "dft_d12_relax_pct": 0.4709083559226743,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 65.77879404924236,
+      "r2_surf_disp_mean_A": 5.809073962113711,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "LaY",
+      "structure": "L10",
+      "facet": 101,
+      "name": "LaY_L10_101",
+      "frozen_chg_surf_disp": 5.455,
+      "frozen_e_drop": -5.528,
+      "chg_disp_mean_seq": 3.5395737837831236,
+      "chg_disp_max_seq": 6.201513422598864,
+      "chg_disp_surf_mean_seq": 5.455042172748957,
+      "chg_disp_mean_hung": 3.0866935845308108,
+      "chg_disp_max_hung": 7.301287381714147,
+      "chg_disp_surf_mean_hung": 4.748529346027258,
+      "chg_d12_relax_pct": 7.705616794043111,
+      "chg_top_disp_per_species": {
+        "La": 4.770407409362813,
+        "Y": 4.726651282691703
+      },
+      "chg_dlat_pct": [
+        -4.1864477304035566,
+        2.623947061157171,
+        6.5765326849159935
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.527612276375294,
+      "converged": true,
+      "fmax_final": 0.01041132677346468,
+      "dft_disp_relaxed_mean": 0.07672074791749568,
+      "dft_disp_relaxed_max": 0.13511597839009587,
+      "dft_disp_top_mean": 0.07672074791749568,
+      "dft_disp_top_max": 0.13511597839009587,
+      "dft_d12_relax_pct": -2.0471548260066625,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 71.10256769935593,
+      "r2_surf_disp_mean_A": 5.455042172748957,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "NiY",
+      "structure": "L10",
+      "facet": 101,
+      "name": "NiY_L10_101",
+      "frozen_chg_surf_disp": 5.252,
+      "frozen_e_drop": -6.374,
+      "chg_disp_mean_seq": 3.263081713603582,
+      "chg_disp_max_seq": 6.369965199068169,
+      "chg_disp_surf_mean_seq": 5.252221072930698,
+      "chg_disp_mean_hung": 2.614971340269347,
+      "chg_disp_max_hung": 5.748312613422768,
+      "chg_disp_surf_mean_hung": 2.8435855080506003,
+      "chg_d12_relax_pct": -18.52588872129772,
+      "chg_top_disp_per_species": {
+        "Y": 2.7626571941444604,
+        "Ni": 2.92451382195674
+      },
+      "chg_dlat_pct": [
+        4.648753551561828,
+        -2.58831155116537,
+        -7.136499092041914
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -6.374409317970276,
+      "converged": true,
+      "fmax_final": 0.037353724241256714,
+      "dft_disp_relaxed_mean": 0.12953473605664645,
+      "dft_disp_relaxed_max": 0.24040458768865805,
+      "dft_disp_top_mean": 0.12953473605664642,
+      "dft_disp_top_max": 0.24040458768865805,
+      "dft_d12_relax_pct": -4.984605904175913,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 40.546815725427244,
+      "r2_surf_disp_mean_A": 5.252221072930698,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "LaNi",
+      "structure": "L10",
+      "facet": 101,
+      "name": "LaNi_L10_101",
+      "frozen_chg_surf_disp": 5.236,
+      "frozen_e_drop": -5.535,
+      "chg_disp_mean_seq": 3.355259846803768,
+      "chg_disp_max_seq": 6.696217788089479,
+      "chg_disp_surf_mean_seq": 5.236344854459649,
+      "chg_disp_mean_hung": 2.7237489341362657,
+      "chg_disp_max_hung": 6.109443123811318,
+      "chg_disp_surf_mean_hung": 2.9935627151407265,
+      "chg_d12_relax_pct": -63.08704210951964,
+      "chg_top_disp_per_species": {
+        "La": 3.1396730151432672,
+        "Ni": 2.8474524151381853
+      },
+      "chg_dlat_pct": [
+        3.4442942245855384,
+        -2.791791116086526,
+        -7.0079200600811
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.535178009420633,
+      "converged": false,
+      "fmax_final": 0.07041969895362854,
+      "dft_disp_relaxed_mean": 0.15909945346214494,
+      "dft_disp_relaxed_max": 0.2965484381790569,
+      "dft_disp_top_mean": 0.15909945346214494,
+      "dft_disp_top_max": 0.2965484381790569,
+      "dft_d12_relax_pct": -5.451440061985892,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 32.91240001465844,
+      "r2_surf_disp_mean_A": 5.236344854459649,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "CuLa",
+      "structure": "L10",
+      "facet": 101,
+      "name": "CuLa_L10_101",
+      "frozen_chg_surf_disp": 5.172,
+      "frozen_e_drop": -4.576,
+      "chg_disp_mean_seq": 3.30987301697969,
+      "chg_disp_max_seq": 6.325403182159078,
+      "chg_disp_surf_mean_seq": 5.171627683363813,
+      "chg_disp_mean_hung": 2.6593167386654653,
+      "chg_disp_max_hung": 5.476492062827383,
+      "chg_disp_surf_mean_hung": 2.7846909553128256,
+      "chg_d12_relax_pct": -21.011130327991594,
+      "chg_top_disp_per_species": {
+        "La": 2.705270885633878,
+        "Cu": 2.8641110249917725
+      },
+      "chg_dlat_pct": [
+        6.657161033688272,
+        -2.020724623680658,
+        -6.727325357560937
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -4.576424196362495,
+      "converged": true,
+      "fmax_final": 0.014028660021722317,
+      "dft_disp_relaxed_mean": 0.1168710936936916,
+      "dft_disp_relaxed_max": 0.2262973676004719,
+      "dft_disp_top_mean": 0.1168710936936916,
+      "dft_disp_top_max": 0.2262973676004719,
+      "dft_d12_relax_pct": -4.2868380813658495,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 44.25069980878397,
+      "r2_surf_disp_mean_A": 5.171627683363813,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "FeZr",
+      "structure": "L10",
+      "facet": 101,
+      "name": "FeZr_L10_101",
+      "frozen_chg_surf_disp": 5.108,
+      "frozen_e_drop": -8.478,
+      "chg_disp_mean_seq": 3.122040805744437,
+      "chg_disp_max_seq": 6.039371905846681,
+      "chg_disp_surf_mean_seq": 5.107985317678519,
+      "chg_disp_mean_hung": 2.3911340792887037,
+      "chg_disp_max_hung": 5.011629982143871,
+      "chg_disp_surf_mean_hung": 2.8732971232169113,
+      "chg_d12_relax_pct": -16.06244622256678,
+      "chg_top_disp_per_species": {
+        "Zr": 3.11451241179482,
+        "Fe": 2.6320818346390027
+      },
+      "chg_dlat_pct": [
+        5.694375058714938,
+        -3.5071288208711597,
+        -7.2122308744453205
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -8.477770373225212,
+      "converged": true,
+      "fmax_final": 0.028426527976989746,
+      "dft_disp_relaxed_mean": 0.1076174238776341,
+      "dft_disp_relaxed_max": 0.12599749202777719,
+      "dft_disp_top_mean": 0.10761742387763412,
+      "dft_disp_top_max": 0.12599749202777719,
+      "dft_d12_relax_pct": -0.8282248670795087,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 47.464296520297026,
+      "r2_surf_disp_mean_A": 5.107985317678519,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "FeTi",
+      "structure": "L10",
+      "facet": 101,
+      "name": "FeTi_L10_101",
+      "frozen_chg_surf_disp": 5.082,
+      "frozen_e_drop": -8.339,
+      "chg_disp_mean_seq": 3.052819939300671,
+      "chg_disp_max_seq": 5.985097844362538,
+      "chg_disp_surf_mean_seq": 5.082041134438714,
+      "chg_disp_mean_hung": 2.261471248859971,
+      "chg_disp_max_hung": 4.67932346494333,
+      "chg_disp_surf_mean_hung": 2.8675808720089764,
+      "chg_d12_relax_pct": -16.580607975121556,
+      "chg_top_disp_per_species": {
+        "Ti": 2.960367320753874,
+        "Fe": 2.774794423264078
+      },
+      "chg_dlat_pct": [
+        3.716379913253055,
+        -4.5536493257357264,
+        -7.421771006063309
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -8.338502280414104,
+      "converged": true,
+      "fmax_final": 0.046149853616952896,
+      "dft_disp_relaxed_mean": 0.08611959335864862,
+      "dft_disp_relaxed_max": 0.11194245872038033,
+      "dft_disp_top_mean": 0.08611959335864862,
+      "dft_disp_top_max": 0.11194245872038033,
+      "dft_d12_relax_pct": -1.2330706997287812,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 59.01143904935016,
+      "r2_surf_disp_mean_A": 5.082041134438714,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "CrTl",
+      "structure": "L10",
+      "facet": 101,
+      "name": "CrTl_L10_101",
+      "frozen_chg_surf_disp": 4.887,
+      "frozen_e_drop": -5.2,
+      "chg_disp_mean_seq": 3.3076313504728887,
+      "chg_disp_max_seq": 5.633050090719112,
+      "chg_disp_surf_mean_seq": 4.8870386184596875,
+      "chg_disp_mean_hung": 2.6513860614360785,
+      "chg_disp_max_hung": 4.8372480021643085,
+      "chg_disp_surf_mean_hung": 2.874259661770314,
+      "chg_d12_relax_pct": -3.1327603313292296,
+      "chg_top_disp_per_species": {
+        "Tl": 2.889091097188914,
+        "Cr": 2.8594282263517146
+      },
+      "chg_dlat_pct": [
+        -2.3868918970607105,
+        -6.583604068188202,
+        -6.375355843207853
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.199699185788631,
+      "converged": true,
+      "fmax_final": 0.03399257734417915,
+      "dft_disp_relaxed_mean": 0.26188474986544136,
+      "dft_disp_relaxed_max": 0.34913678777265134,
+      "dft_disp_top_mean": 0.26188474986544136,
+      "dft_disp_top_max": 0.34913678777265134,
+      "dft_d12_relax_pct": 3.764558476412247,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 18.661027879518336,
+      "r2_surf_disp_mean_A": 4.8870386184596875,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "CuY",
+      "structure": "L10",
+      "facet": 101,
+      "name": "CuY_L10_101",
+      "frozen_chg_surf_disp": 4.8,
+      "frozen_e_drop": -5.393,
+      "chg_disp_mean_seq": 3.0270053925477756,
+      "chg_disp_max_seq": 5.742798357019843,
+      "chg_disp_surf_mean_seq": 4.799674790843093,
+      "chg_disp_mean_hung": 2.524096473556768,
+      "chg_disp_max_hung": 5.541931927641344,
+      "chg_disp_surf_mean_hung": 2.2365621766203816,
+      "chg_d12_relax_pct": -18.017252030976653,
+      "chg_top_disp_per_species": {
+        "Y": 2.3475891026583087,
+        "Cu": 2.1255352505824545
+      },
+      "chg_dlat_pct": [
+        7.303176806081294,
+        -1.1083023917719264,
+        -6.496168945150214
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.392880335450172,
+      "converged": true,
+      "fmax_final": 0.006801076699048281,
+      "dft_disp_relaxed_mean": 0.09490143698991224,
+      "dft_disp_relaxed_max": 0.18280710348983076,
+      "dft_disp_top_mean": 0.09490143698991224,
+      "dft_disp_top_max": 0.18280710348983076,
+      "dft_d12_relax_pct": -3.8432245046922824,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 50.57536474767274,
+      "r2_surf_disp_mean_A": 4.799674790843093,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Co",
+      "structure": "A1",
+      "facet": 111,
+      "name": "Co_A1_111",
+      "frozen_chg_surf_disp": 3.503,
+      "frozen_e_drop": -6.711,
+      "chg_disp_mean_seq": 2.584965875315067,
+      "chg_disp_max_seq": 3.8600603856203426,
+      "chg_disp_surf_mean_seq": 3.5026694289786335,
+      "chg_disp_mean_hung": 1.6690980876947528,
+      "chg_disp_max_hung": 2.0915528360697317,
+      "chg_disp_surf_mean_hung": 1.9412606541967612,
+      "chg_d12_relax_pct": -8.49735374627471,
+      "chg_top_disp_per_species": {
+        "Co": 1.9412606541967612
+      },
+      "chg_dlat_pct": [
+        -8.488058413850275,
+        -8.48909209387656,
+        -6.835192189351727
+      ],
+      "n_atoms": 32,
+      "e_drop_per_atom": -6.7111546993255615,
+      "converged": true,
+      "fmax_final": 0.023830266669392586,
+      "dft_disp_relaxed_mean": 0.05380355147980509,
+      "dft_disp_relaxed_max": 0.056095909132968726,
+      "dft_disp_top_mean": 0.05380355147980509,
+      "dft_disp_top_max": 0.056095909132968726,
+      "dft_d12_relax_pct": -2.626232312019162,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 65.10108222676237,
+      "r2_surf_disp_mean_A": 3.5026694289786335,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "FeLa3",
+      "structure": "L12",
+      "facet": 111,
+      "name": "FeLa3_L12_111",
+      "frozen_chg_surf_disp": 3.461,
+      "frozen_e_drop": -5.413,
+      "chg_disp_mean_seq": 2.4031731889952694,
+      "chg_disp_max_seq": 4.337175224646252,
+      "chg_disp_surf_mean_seq": 3.4614442061791486,
+      "chg_disp_mean_hung": 2.1374611914955977,
+      "chg_disp_max_hung": 5.5666099145593115,
+      "chg_disp_surf_mean_hung": 2.6200193670288296,
+      "chg_d12_relax_pct": -17.110873537179263,
+      "chg_top_disp_per_species": {
+        "La": 2.2893820332550145,
+        "Fe": 3.4649814422285816
+      },
+      "chg_dlat_pct": [
+        -7.121810361004212,
+        -7.1218161693272055,
+        -5.303260443084418
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.412568729370832,
+      "converged": true,
+      "fmax_final": 0.041902463883161545,
+      "dft_disp_relaxed_mean": 0.20501823535628944,
+      "dft_disp_relaxed_max": 0.41625567387775075,
+      "dft_disp_top_mean": 0.20501823535628944,
+      "dft_disp_top_max": 0.41625567387775075,
+      "dft_d12_relax_pct": -1.491846418138547,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 16.883591843250933,
+      "r2_surf_disp_mean_A": 3.4614442061791486,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "NiSn3",
+      "structure": "L12",
+      "facet": 111,
+      "name": "NiSn3_L12_111",
+      "frozen_chg_surf_disp": 3.421,
+      "frozen_e_drop": -4.317,
+      "chg_disp_mean_seq": 2.093206733839314,
+      "chg_disp_max_seq": 4.250257385755035,
+      "chg_disp_surf_mean_seq": 3.42096333322828,
+      "chg_disp_mean_hung": 2.054772483725817,
+      "chg_disp_max_hung": 5.767024470772002,
+      "chg_disp_surf_mean_hung": 3.266485442246983,
+      "chg_d12_relax_pct": -22.313123332911587,
+      "chg_top_disp_per_species": {
+        "Ni": 2.918803562077215,
+        "Sn": 3.3823794023035725
+      },
+      "chg_dlat_pct": [
+        5.4806675456908795,
+        5.4801894661444805,
+        5.2052786257540316
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -4.31710615567863,
+      "converged": false,
+      "fmax_final": 0.7723997235298157,
+      "dft_disp_relaxed_mean": 0.22770712815272018,
+      "dft_disp_relaxed_max": 0.6910847533881539,
+      "dft_disp_top_mean": 0.22770712815272015,
+      "dft_disp_top_max": 0.6910847533881539,
+      "dft_d12_relax_pct": -7.67251343560365,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 15.02352324664112,
+      "r2_surf_disp_mean_A": 3.42096333322828,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Al3La",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Al3La_L12_111",
+      "frozen_chg_surf_disp": 3.403,
+      "frozen_e_drop": -4.293,
+      "chg_disp_mean_seq": 2.07256524571729,
+      "chg_disp_max_seq": 4.348728403209921,
+      "chg_disp_surf_mean_seq": 3.403389943930268,
+      "chg_disp_mean_hung": 2.0432459081776093,
+      "chg_disp_max_hung": 5.057770087119843,
+      "chg_disp_surf_mean_hung": 3.2837743330397617,
+      "chg_d12_relax_pct": 33.6760324798329,
+      "chg_top_disp_per_species": {
+        "La": 3.5381179274463137,
+        "Al": 3.184248578706763
+      },
+      "chg_dlat_pct": [
+        5.334793221573684,
+        5.334795990854474,
+        5.12712022317694
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -4.293407119810581,
+      "converged": true,
+      "fmax_final": 0.026583589613437653,
+      "dft_disp_relaxed_mean": 0.28557032318489867,
+      "dft_disp_relaxed_max": 0.3402383292481843,
+      "dft_disp_top_mean": 0.28557032318489867,
+      "dft_disp_top_max": 0.3402383292481843,
+      "dft_d12_relax_pct": -5.949151253669306,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 11.9178698471643,
+      "r2_surf_disp_mean_A": 3.403389943930268,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Ag3Sc",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Ag3Sc_L12_111",
+      "frozen_chg_surf_disp": 3.21,
+      "frozen_e_drop": -3.875,
+      "chg_disp_mean_seq": 2.2393078009017753,
+      "chg_disp_max_seq": 3.953208915755062,
+      "chg_disp_surf_mean_seq": 3.2095504769242167,
+      "chg_disp_mean_hung": 1.9349010992606148,
+      "chg_disp_max_hung": 4.9183451906207685,
+      "chg_disp_surf_mean_hung": 2.3204487465448373,
+      "chg_d12_relax_pct": -13.152513226728132,
+      "chg_top_disp_per_species": {
+        "Sc": 3.1836662080608162,
+        "Ag": 1.982668000734237
+      },
+      "chg_dlat_pct": [
+        -7.608377396492242,
+        -7.608376930201222,
+        -5.495548879689349
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -3.875338342040777,
+      "converged": true,
+      "fmax_final": 0.02493099868297577,
+      "dft_disp_relaxed_mean": 0.041232454323895246,
+      "dft_disp_relaxed_max": 0.08733139643481212,
+      "dft_disp_top_mean": 0.041232454323895246,
+      "dft_disp_top_max": 0.08733139643481212,
+      "dft_d12_relax_pct": -1.6646264101676918,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 77.84039367902001,
+      "r2_surf_disp_mean_A": 3.2095504769242167,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "La3Mo",
+      "structure": "L12",
+      "facet": 111,
+      "name": "La3Mo_L12_111",
+      "frozen_chg_surf_disp": 3.165,
+      "frozen_e_drop": -5.78,
+      "chg_disp_mean_seq": 2.185101920461599,
+      "chg_disp_max_seq": 4.024219886923972,
+      "chg_disp_surf_mean_seq": 3.1652768961657767,
+      "chg_disp_mean_hung": 2.0391553019696453,
+      "chg_disp_max_hung": 5.460178880161676,
+      "chg_disp_surf_mean_hung": 2.6441235567262744,
+      "chg_d12_relax_pct": -18.622172773101,
+      "chg_top_disp_per_species": {
+        "La": 2.388959232294538,
+        "Mo": 3.2962101636073795
+      },
+      "chg_dlat_pct": [
+        -6.345287730762237,
+        -6.345286782907669,
+        -4.82365012597878
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -5.780275896191597,
+      "converged": true,
+      "fmax_final": 0.034453194588422775,
+      "dft_disp_relaxed_mean": 0.19599205121056826,
+      "dft_disp_relaxed_max": 0.4769873664294995,
+      "dft_disp_top_mean": 0.19599205121056826,
+      "dft_disp_top_max": 0.4769873664294995,
+      "dft_d12_relax_pct": -4.117809756487963,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 16.150026884330597,
+      "r2_surf_disp_mean_A": 3.1652768961657767,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Fe3Mo",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Fe3Mo_L12_111",
+      "frozen_chg_surf_disp": 3.156,
+      "frozen_e_drop": -8.787,
+      "chg_disp_mean_seq": 2.174706251534176,
+      "chg_disp_max_seq": 3.840265298606828,
+      "chg_disp_surf_mean_seq": 3.1559561154580695,
+      "chg_disp_mean_hung": 1.7917527897237746,
+      "chg_disp_max_hung": 5.481179104139335,
+      "chg_disp_surf_mean_hung": 1.9190297561183547,
+      "chg_d12_relax_pct": -10.814967711413525,
+      "chg_top_disp_per_species": {
+        "Fe": 1.8012093818997055,
+        "Mo": 2.1439595614448668
+      },
+      "chg_dlat_pct": [
+        -8.206639358651742,
+        -8.206639546559673,
+        -6.031931425995175
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -8.787252448499203,
+      "converged": true,
+      "fmax_final": 0.04126906022429466,
+      "dft_disp_relaxed_mean": 0.027539435933195702,
+      "dft_disp_relaxed_max": 0.028075111305594282,
+      "dft_disp_top_mean": 0.0275394359331957,
+      "dft_disp_top_max": 0.028075111305594282,
+      "dft_d12_relax_pct": 0.14444809034294198,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 114.59770356639436,
+      "r2_surf_disp_mean_A": 3.1559561154580695,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Cr3Pb",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Cr3Pb_L12_111",
+      "frozen_chg_surf_disp": 3.125,
+      "frozen_e_drop": -7.332,
+      "chg_disp_mean_seq": 2.188400310782188,
+      "chg_disp_max_seq": 3.6688148969298706,
+      "chg_disp_surf_mean_seq": 3.1251798052510718,
+      "chg_disp_mean_hung": 1.8719623091015603,
+      "chg_disp_max_hung": 5.26822515694519,
+      "chg_disp_surf_mean_hung": 2.276304468334514,
+      "chg_d12_relax_pct": 13.73694883368201,
+      "chg_top_disp_per_species": {
+        "Cr": 1.954336624406148,
+        "Pb": 2.984633724976921
+      },
+      "chg_dlat_pct": [
+        -7.784577862664162,
+        -7.784514345674864,
+        -5.651792865659251
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -7.3323981165885925,
+      "converged": false,
+      "fmax_final": 0.08845135569572449,
+      "dft_disp_relaxed_mean": 0.402943117356837,
+      "dft_disp_relaxed_max": 0.4875996702261707,
+      "dft_disp_top_mean": 0.402943117356837,
+      "dft_disp_top_max": 0.4875996702261707,
+      "dft_d12_relax_pct": -1.3563237532576327,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 7.7558833260414906,
+      "r2_surf_disp_mean_A": 3.1251798052510718,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Ag3Co",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Ag3Co_L12_111",
+      "frozen_chg_surf_disp": 3.085,
+      "frozen_e_drop": -3.439,
+      "chg_disp_mean_seq": 2.1531741900653705,
+      "chg_disp_max_seq": 3.819426375993787,
+      "chg_disp_surf_mean_seq": 3.084850898725935,
+      "chg_disp_mean_hung": 1.8559285920273572,
+      "chg_disp_max_hung": 4.717654710026417,
+      "chg_disp_surf_mean_hung": 2.2173230801904786,
+      "chg_d12_relax_pct": -14.794896780308084,
+      "chg_top_disp_per_species": {
+        "Co": 3.0317520626326204,
+        "Ag": 1.898633478365292
+      },
+      "chg_dlat_pct": [
+        -7.619180225423772,
+        -7.61918129520191,
+        -5.476280402240103
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -3.438747612759471,
+      "converged": true,
+      "fmax_final": 0.028013842180371284,
+      "dft_disp_relaxed_mean": 0.10173281491923687,
+      "dft_disp_relaxed_max": 0.11883869159591837,
+      "dft_disp_top_mean": 0.10173281491923687,
+      "dft_disp_top_max": 0.11883869159591837,
+      "dft_d12_relax_pct": 1.775506916847849,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 30.32306636924301,
+      "r2_surf_disp_mean_A": 3.084850898725935,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "FeSn3",
+      "structure": "L12",
+      "facet": 111,
+      "name": "FeSn3_L12_111",
+      "frozen_chg_surf_disp": 3.078,
+      "frozen_e_drop": -4.708,
+      "chg_disp_mean_seq": 1.866808971045795,
+      "chg_disp_max_seq": 3.762872730323561,
+      "chg_disp_surf_mean_seq": 3.0781830302755115,
+      "chg_disp_mean_hung": 1.861450016819104,
+      "chg_disp_max_hung": 5.522160777448475,
+      "chg_disp_surf_mean_hung": 3.056747213368748,
+      "chg_d12_relax_pct": -23.140354271069793,
+      "chg_top_disp_per_species": {
+        "Fe": 2.555777304065663,
+        "Sn": 3.2237371831364428
+      },
+      "chg_dlat_pct": [
+        4.5891787583678445,
+        4.611603799206174,
+        4.497964246068512
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -4.707886125892401,
+      "converged": false,
+      "fmax_final": 0.8281344771385193,
+      "dft_disp_relaxed_mean": 0.19960359331820307,
+      "dft_disp_relaxed_max": 0.6164822658668063,
+      "dft_disp_top_mean": 0.19960359331820307,
+      "dft_disp_top_max": 0.6164822658668063,
+      "dft_d12_relax_pct": -5.179018465617668,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 15.421481042018863,
+      "r2_surf_disp_mean_A": 3.0781830302755115,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Fe3V",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Fe3V_L12_111",
+      "frozen_chg_surf_disp": 3.076,
+      "frozen_e_drop": -8.469,
+      "chg_disp_mean_seq": 2.1113093628430475,
+      "chg_disp_max_seq": 3.74409556023124,
+      "chg_disp_surf_mean_seq": 3.075940489849709,
+      "chg_disp_mean_hung": 1.754098288730142,
+      "chg_disp_max_hung": 5.435524463630062,
+      "chg_disp_surf_mean_hung": 1.9966668447522693,
+      "chg_d12_relax_pct": -11.320410606994395,
+      "chg_top_disp_per_species": {
+        "V": 2.4217831013405,
+        "Fe": 1.7739869008251012
+      },
+      "chg_dlat_pct": [
+        -8.063277882946934,
+        -8.063278804104684,
+        -5.959376885422085
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -8.46850873529911,
+      "converged": true,
+      "fmax_final": 0.03099736012518406,
+      "dft_disp_relaxed_mean": 0.04232825694016881,
+      "dft_disp_relaxed_max": 0.046714427333637135,
+      "dft_disp_top_mean": 0.04232825694016881,
+      "dft_disp_top_max": 0.046714427333637135,
+      "dft_d12_relax_pct": 2.030047309282748,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 72.66872562689187,
+      "r2_surf_disp_mean_A": 3.075940489849709,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "Fe3Ta",
+      "structure": "L12",
+      "facet": 111,
+      "name": "Fe3Ta_L12_111",
+      "frozen_chg_surf_disp": 3.034,
+      "frozen_e_drop": -9.19,
+      "chg_disp_mean_seq": 2.118001156569332,
+      "chg_disp_max_seq": 3.7305813788518645,
+      "chg_disp_surf_mean_seq": 3.0335106762238295,
+      "chg_disp_mean_hung": 1.7526756446778,
+      "chg_disp_max_hung": 5.272135147846021,
+      "chg_disp_surf_mean_hung": 2.006313811882631,
+      "chg_d12_relax_pct": -15.301754982198442,
+      "chg_top_disp_per_species": {
+        "Ta": 2.5461647058566266,
+        "Fe": 1.7609270418944514
+      },
+      "chg_dlat_pct": [
+        -8.17249991772893,
+        -8.172499671714117,
+        -5.8056208984468824
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -9.189869433641434,
+      "converged": true,
+      "fmax_final": 0.03472219035029411,
+      "dft_disp_relaxed_mean": 0.04858642780512737,
+      "dft_disp_relaxed_max": 0.05332895295560612,
+      "dft_disp_top_mean": 0.04858642780512737,
+      "dft_disp_top_max": 0.05332895295560612,
+      "dft_d12_relax_pct": 0.8573602455309195,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 62.43535104887255,
+      "r2_surf_disp_mean_A": 3.0335106762238295,
+      "frozen_reproduced": true
+    },
+    {
+      "comp": "CuFe3",
+      "structure": "L12",
+      "facet": 111,
+      "name": "CuFe3_L12_111",
+      "frozen_chg_surf_disp": 3.011,
+      "frozen_e_drop": -7.042,
+      "chg_disp_mean_seq": 2.093630651544655,
+      "chg_disp_max_seq": 3.6343133974383273,
+      "chg_disp_surf_mean_seq": 3.0110861609674897,
+      "chg_disp_mean_hung": 1.7339323679039509,
+      "chg_disp_max_hung": 5.157017865193588,
+      "chg_disp_surf_mean_hung": 1.9891044549711083,
+      "chg_d12_relax_pct": -3.7948964105945087,
+      "chg_top_disp_per_species": {
+        "Fe": 1.7261261695882317,
+        "Cu": 2.567656682813437
+      },
+      "chg_dlat_pct": [
+        -8.18269438367723,
+        -8.18269712359648,
+        -5.857399110227821
+      ],
+      "n_atoms": 128,
+      "e_drop_per_atom": -7.041593234986067,
+      "converged": true,
+      "fmax_final": 0.02681911550462246,
+      "dft_disp_relaxed_mean": 0.022189274910332624,
+      "dft_disp_relaxed_max": 0.06367540700932312,
+      "dft_disp_top_mean": 0.022189274910332624,
+      "dft_disp_top_max": 0.06367540700932312,
+      "dft_d12_relax_pct": 0.46781537172573306,
+      "dft_n_layers": 3,
+      "verdict": "ARTIFACT",
+      "disp_ratio_chg_over_dft": 135.70007010753434,
+      "r2_surf_disp_mean_A": 3.0110861609674897,
+      "frozen_reproduced": true
+    }
+  ],
+  "details": {
+    "LaPb_L10_101": {
+      "name": "LaPb_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 4.455184774027428,
+        "chg_disp_max_seq": 7.818338047275641,
+        "chg_disp_surf_mean_seq": 6.7102537388103265,
+        "chg_disp_mean_hung": 3.409025483367545,
+        "chg_disp_max_hung": 6.4971111236787875,
+        "chg_disp_surf_mean_hung": 4.274947868407679,
+        "chg_d12_relax_pct": -17.13246525425271,
+        "chg_top_disp_per_species": {
+          "La": 4.290823044713658,
+          "Pb": 4.259072692101699
+        },
+        "chg_dlat_pct": [
+          5.013908482049565,
+          -4.0819046469949365,
+          -8.208345543755431
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -4.85435751453042,
+        "converged": true,
+        "fmax_final": 0.011481464840471745
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.2986172123460198
+      ],
+      "dft_star_ref_md5": "cef31e83dd6932fb42f60cbbf1e24cdc",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.2986172123460198,
+        "dft_disp_relaxed_max": 0.32275408163698693,
+        "dft_disp_top_mean": 0.2986172123460198,
+        "dft_disp_top_max": 0.32275408163698693,
+        "dft_d12_relax_pct": -1.796754932315363,
+        "dft_top_disp_per_species": {
+          "La": 0.27463577378506243,
+          "Pb": 0.32259865090697715
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 4.440892098500626e-16
+      }
+    },
+    "LaSc_L10_101": {
+      "name": "LaSc_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.886617796530485,
+        "chg_disp_max_seq": 6.883500867875205,
+        "chg_disp_surf_mean_seq": 6.0682679526869805,
+        "chg_disp_mean_hung": 3.1211312314485817,
+        "chg_disp_max_hung": 7.271028526173401,
+        "chg_disp_surf_mean_hung": 4.955465429737773,
+        "chg_d12_relax_pct": 4.785692734132167,
+        "chg_top_disp_per_species": {
+          "La": 4.71326871802308,
+          "Sc": 5.197662141452466
+        },
+        "chg_dlat_pct": [
+          -2.815129721054814,
+          3.4411969415887746,
+          7.5946715662665625
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.432593941688538,
+        "converged": true,
+        "fmax_final": 0.01448938436806202
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.24395319569695187
+      ],
+      "dft_star_ref_md5": "faa0124b53e44a9e9c3ad73f18f2f00b",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.24395319569695187,
+        "dft_disp_relaxed_max": 0.280306458311144,
+        "dft_disp_top_mean": 0.24395319569695187,
+        "dft_disp_top_max": 0.280306458311144,
+        "dft_d12_relax_pct": -1.8959392545306157,
+        "dft_top_disp_per_species": {
+          "Sc": 0.2802879956469807,
+          "La": 0.20761839574692303
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 0.0
+      }
+    },
+    "PbSc_L10_101": {
+      "name": "PbSc_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.7791708729181717,
+        "chg_disp_max_seq": 6.896963385380374,
+        "chg_disp_surf_mean_seq": 5.871995147547614,
+        "chg_disp_mean_hung": 2.937415216510889,
+        "chg_disp_max_hung": 5.8815644940869545,
+        "chg_disp_surf_mean_hung": 3.6117604600399726,
+        "chg_d12_relax_pct": -24.444920783738798,
+        "chg_top_disp_per_species": {
+          "Sc": 3.829801970447291,
+          "Pb": 3.393718949632654
+        },
+        "chg_dlat_pct": [
+          5.543102781302851,
+          -3.644325868515101,
+          -7.664373639571422
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.35381668433547,
+        "converged": true,
+        "fmax_final": 0.01011214405298233
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.23063583908674296
+      ],
+      "dft_star_ref_md5": "b202c97368607bd6ada3767c94440db0",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.23063583908674296,
+        "dft_disp_relaxed_max": 0.23853559831110138,
+        "dft_disp_top_mean": 0.23063583908674296,
+        "dft_disp_top_max": 0.23853559831110138,
+        "dft_d12_relax_pct": 0.13585543271913608,
+        "dft_top_disp_per_species": {
+          "Sc": 0.23738923584105398,
+          "Pb": 0.22388244233243193
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.155133597044475e-16
+      }
+    },
+    "FeSc_L10_101": {
+      "name": "FeSc_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.682522880443318,
+        "chg_disp_max_seq": 6.810263815532985,
+        "chg_disp_surf_mean_seq": 5.809073962113711,
+        "chg_disp_mean_hung": 2.555130841400805,
+        "chg_disp_max_hung": 4.755666105183972,
+        "chg_disp_surf_mean_hung": 3.039235657879554,
+        "chg_d12_relax_pct": -11.036611640467259,
+        "chg_top_disp_per_species": {
+          "Sc": 2.998117215127463,
+          "Fe": 3.080354100631645
+        },
+        "chg_dlat_pct": [
+          1.505028590079279,
+          -6.68629504621931,
+          -8.136153501008604
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -7.337738987058401,
+        "converged": true,
+        "fmax_final": 0.0364370197057724
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.0883122599931675
+      ],
+      "dft_star_ref_md5": "de051ae9f78d87e2043115489c8ae4af",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.0883122599931675,
+        "dft_disp_relaxed_max": 0.09873125469884471,
+        "dft_disp_top_mean": 0.0883122599931675,
+        "dft_disp_top_max": 0.09873125469884471,
+        "dft_d12_relax_pct": 0.4709083559226743,
+        "dft_top_disp_per_species": {
+          "Fe": 0.07793535915805457,
+          "Sc": 0.09868916082828043
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091476e-08
+      }
+    },
+    "LaY_L10_101": {
+      "name": "LaY_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.5395737837831236,
+        "chg_disp_max_seq": 6.201513422598864,
+        "chg_disp_surf_mean_seq": 5.455042172748957,
+        "chg_disp_mean_hung": 3.0866935845308108,
+        "chg_disp_max_hung": 7.301287381714147,
+        "chg_disp_surf_mean_hung": 4.748529346027258,
+        "chg_d12_relax_pct": 7.705616794043111,
+        "chg_top_disp_per_species": {
+          "La": 4.770407409362813,
+          "Y": 4.726651282691703
+        },
+        "chg_dlat_pct": [
+          -4.1864477304035566,
+          2.623947061157171,
+          6.5765326849159935
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.527612276375294,
+        "converged": true,
+        "fmax_final": 0.01041132677346468
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.07672074791749568
+      ],
+      "dft_star_ref_md5": "da657df6e2de7f128336a438f3ec579e",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.07672074791749568,
+        "dft_disp_relaxed_max": 0.13511597839009587,
+        "dft_disp_top_mean": 0.07672074791749568,
+        "dft_disp_top_max": 0.13511597839009587,
+        "dft_d12_relax_pct": -2.0471548260066625,
+        "dft_top_disp_per_species": {
+          "Y": 0.1350733450754935,
+          "La": 0.018368150759497853
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091477e-08
+      }
+    },
+    "NiY_L10_101": {
+      "name": "NiY_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.263081713603582,
+        "chg_disp_max_seq": 6.369965199068169,
+        "chg_disp_surf_mean_seq": 5.252221072930698,
+        "chg_disp_mean_hung": 2.614971340269347,
+        "chg_disp_max_hung": 5.748312613422768,
+        "chg_disp_surf_mean_hung": 2.8435855080506003,
+        "chg_d12_relax_pct": -18.52588872129772,
+        "chg_top_disp_per_species": {
+          "Y": 2.7626571941444604,
+          "Ni": 2.92451382195674
+        },
+        "chg_dlat_pct": [
+          4.648753551561828,
+          -2.58831155116537,
+          -7.136499092041914
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -6.374409317970276,
+        "converged": true,
+        "fmax_final": 0.037353724241256714
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.12953473605664642
+      ],
+      "dft_star_ref_md5": "46616eb031430e8c9dda385d90924cf9",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.12953473605664645,
+        "dft_disp_relaxed_max": 0.24040458768865805,
+        "dft_disp_top_mean": 0.12953473605664642,
+        "dft_disp_top_max": 0.24040458768865805,
+        "dft_d12_relax_pct": -4.984605904175913,
+        "dft_top_disp_per_species": {
+          "Ni": 0.24038951893119453,
+          "Y": 0.01867995318209834
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999228682555e-08
+      }
+    },
+    "LaNi_L10_101": {
+      "name": "LaNi_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.355259846803768,
+        "chg_disp_max_seq": 6.696217788089479,
+        "chg_disp_surf_mean_seq": 5.236344854459649,
+        "chg_disp_mean_hung": 2.7237489341362657,
+        "chg_disp_max_hung": 6.109443123811318,
+        "chg_disp_surf_mean_hung": 2.9935627151407265,
+        "chg_d12_relax_pct": -63.08704210951964,
+        "chg_top_disp_per_species": {
+          "La": 3.1396730151432672,
+          "Ni": 2.8474524151381853
+        },
+        "chg_dlat_pct": [
+          3.4442942245855384,
+          -2.791791116086526,
+          -7.0079200600811
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.535178009420633,
+        "converged": false,
+        "fmax_final": 0.07041969895362854
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.15909945346214494
+      ],
+      "dft_star_ref_md5": "c2081c1eebaaa2c1fed090337ad76956",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.15909945346214494,
+        "dft_disp_relaxed_max": 0.2965484381790569,
+        "dft_disp_top_mean": 0.15909945346214494,
+        "dft_disp_top_max": 0.2965484381790569,
+        "dft_d12_relax_pct": -5.451440061985892,
+        "dft_top_disp_per_species": {
+          "Ni": 0.29624472494554766,
+          "La": 0.02195418197874222
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999317500397e-08
+      }
+    },
+    "CuLa_L10_101": {
+      "name": "CuLa_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.30987301697969,
+        "chg_disp_max_seq": 6.325403182159078,
+        "chg_disp_surf_mean_seq": 5.171627683363813,
+        "chg_disp_mean_hung": 2.6593167386654653,
+        "chg_disp_max_hung": 5.476492062827383,
+        "chg_disp_surf_mean_hung": 2.7846909553128256,
+        "chg_d12_relax_pct": -21.011130327991594,
+        "chg_top_disp_per_species": {
+          "La": 2.705270885633878,
+          "Cu": 2.8641110249917725
+        },
+        "chg_dlat_pct": [
+          6.657161033688272,
+          -2.020724623680658,
+          -6.727325357560937
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -4.576424196362495,
+        "converged": true,
+        "fmax_final": 0.014028660021722317
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.1168710936936916
+      ],
+      "dft_star_ref_md5": "8fcdd5b7e4fcda7464f2d3921235583d",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.1168710936936916,
+        "dft_disp_relaxed_max": 0.2262973676004719,
+        "dft_disp_top_mean": 0.1168710936936916,
+        "dft_disp_top_max": 0.2262973676004719,
+        "dft_d12_relax_pct": -4.2868380813658495,
+        "dft_top_disp_per_species": {
+          "Cu": 0.22626659605663374,
+          "La": 0.007475591330749477
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 0.0
+      }
+    },
+    "FeZr_L10_101": {
+      "name": "FeZr_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.122040805744437,
+        "chg_disp_max_seq": 6.039371905846681,
+        "chg_disp_surf_mean_seq": 5.107985317678519,
+        "chg_disp_mean_hung": 2.3911340792887037,
+        "chg_disp_max_hung": 5.011629982143871,
+        "chg_disp_surf_mean_hung": 2.8732971232169113,
+        "chg_d12_relax_pct": -16.06244622256678,
+        "chg_top_disp_per_species": {
+          "Zr": 3.11451241179482,
+          "Fe": 2.6320818346390027
+        },
+        "chg_dlat_pct": [
+          5.694375058714938,
+          -3.5071288208711597,
+          -7.2122308744453205
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -8.477770373225212,
+        "converged": true,
+        "fmax_final": 0.028426527976989746
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.10761742387763412
+      ],
+      "dft_star_ref_md5": "517d3b144a942e16d5f0bda55798c9c3",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.1076174238776341,
+        "dft_disp_relaxed_max": 0.12599749202777719,
+        "dft_disp_top_mean": 0.10761742387763412,
+        "dft_disp_top_max": 0.12599749202777719,
+        "dft_d12_relax_pct": -0.8282248670795087,
+        "dft_top_disp_per_species": {
+          "Fe": 0.12596968047291704,
+          "Zr": 0.08926516728235118
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091476e-08
+      }
+    },
+    "FeTi_L10_101": {
+      "name": "FeTi_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.052819939300671,
+        "chg_disp_max_seq": 5.985097844362538,
+        "chg_disp_surf_mean_seq": 5.082041134438714,
+        "chg_disp_mean_hung": 2.261471248859971,
+        "chg_disp_max_hung": 4.67932346494333,
+        "chg_disp_surf_mean_hung": 2.8675808720089764,
+        "chg_d12_relax_pct": -16.580607975121556,
+        "chg_top_disp_per_species": {
+          "Ti": 2.960367320753874,
+          "Fe": 2.774794423264078
+        },
+        "chg_dlat_pct": [
+          3.716379913253055,
+          -4.5536493257357264,
+          -7.421771006063309
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -8.338502280414104,
+        "converged": true,
+        "fmax_final": 0.046149853616952896
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.08611959335864862
+      ],
+      "dft_star_ref_md5": "00eed80d55416f627954b40f775c3cd6",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.08611959335864862,
+        "dft_disp_relaxed_max": 0.11194245872038033,
+        "dft_disp_top_mean": 0.08611959335864862,
+        "dft_disp_top_max": 0.11194245872038033,
+        "dft_d12_relax_pct": -1.2330706997287812,
+        "dft_top_disp_per_species": {
+          "Fe": 0.11189654072980387,
+          "Ti": 0.060342645987493365
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091476e-08
+      }
+    },
+    "CrTl_L10_101": {
+      "name": "CrTl_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.3076313504728887,
+        "chg_disp_max_seq": 5.633050090719112,
+        "chg_disp_surf_mean_seq": 4.8870386184596875,
+        "chg_disp_mean_hung": 2.6513860614360785,
+        "chg_disp_max_hung": 4.8372480021643085,
+        "chg_disp_surf_mean_hung": 2.874259661770314,
+        "chg_d12_relax_pct": -3.1327603313292296,
+        "chg_top_disp_per_species": {
+          "Tl": 2.889091097188914,
+          "Cr": 2.8594282263517146
+        },
+        "chg_dlat_pct": [
+          -2.3868918970607105,
+          -6.583604068188202,
+          -6.375355843207853
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.199699185788631,
+        "converged": true,
+        "fmax_final": 0.03399257734417915
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.26188474986544136
+      ],
+      "dft_star_ref_md5": "cfb4d752afc92e7b9f769faed49b5e54",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.26188474986544136,
+        "dft_disp_relaxed_max": 0.34913678777265134,
+        "dft_disp_top_mean": 0.26188474986544136,
+        "dft_disp_top_max": 0.34913678777265134,
+        "dft_d12_relax_pct": 3.764558476412247,
+        "dft_top_disp_per_species": {
+          "Cr": 0.17464393129433092,
+          "Tl": 0.3491255684365518
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091476e-08
+      }
+    },
+    "CuY_L10_101": {
+      "name": "CuY_L10_101",
+      "chgnet": {
+        "chg_disp_mean_seq": 3.0270053925477756,
+        "chg_disp_max_seq": 5.742798357019843,
+        "chg_disp_surf_mean_seq": 4.799674790843093,
+        "chg_disp_mean_hung": 2.524096473556768,
+        "chg_disp_max_hung": 5.541931927641344,
+        "chg_disp_surf_mean_hung": 2.2365621766203816,
+        "chg_d12_relax_pct": -18.017252030976653,
+        "chg_top_disp_per_species": {
+          "Y": 2.3475891026583087,
+          "Cu": 2.1255352505824545
+        },
+        "chg_dlat_pct": [
+          7.303176806081294,
+          -1.1083023917719264,
+          -6.496168945150214
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.392880335450172,
+        "converged": true,
+        "fmax_final": 0.006801076699048281
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.09490143698991224
+      ],
+      "dft_star_ref_md5": "620e9cfc038f00ceefc97e7b249d8414",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.09490143698991224,
+        "dft_disp_relaxed_max": 0.18280710348983076,
+        "dft_disp_top_mean": 0.09490143698991224,
+        "dft_disp_top_max": 0.18280710348983076,
+        "dft_d12_relax_pct": -3.8432245046922824,
+        "dft_top_disp_per_species": {
+          "Cu": 0.1828070060666644,
+          "Y": 0.006995867913160102
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999228682555e-08
+      }
+    },
+    "Co_A1_111": {
+      "name": "Co_A1_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.584965875315067,
+        "chg_disp_max_seq": 3.8600603856203426,
+        "chg_disp_surf_mean_seq": 3.5026694289786335,
+        "chg_disp_mean_hung": 1.6690980876947528,
+        "chg_disp_max_hung": 2.0915528360697317,
+        "chg_disp_surf_mean_hung": 1.9412606541967612,
+        "chg_d12_relax_pct": -8.49735374627471,
+        "chg_top_disp_per_species": {
+          "Co": 1.9412606541967612
+        },
+        "chg_dlat_pct": [
+          -8.488058413850275,
+          -8.48909209387656,
+          -6.835192189351727
+        ],
+        "n_atoms": 32,
+        "e_drop_per_atom": -6.7111546993255615,
+        "converged": true,
+        "fmax_final": 0.023830266669392586
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.05380355147980509
+      ],
+      "dft_star_ref_md5": "7ee907b95a0543751a92407f9812a617",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.05380355147980509,
+        "dft_disp_relaxed_max": 0.056095909132968726,
+        "dft_disp_top_mean": 0.05380355147980509,
+        "dft_disp_top_max": 0.056095909132968726,
+        "dft_d12_relax_pct": -2.626232312019162,
+        "dft_top_disp_per_species": {
+          "Co": 0.05380355147980509
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999996386511611e-10
+      }
+    },
+    "FeLa3_L12_111": {
+      "name": "FeLa3_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.4031731889952694,
+        "chg_disp_max_seq": 4.337175224646252,
+        "chg_disp_surf_mean_seq": 3.4614442061791486,
+        "chg_disp_mean_hung": 2.1374611914955977,
+        "chg_disp_max_hung": 5.5666099145593115,
+        "chg_disp_surf_mean_hung": 2.6200193670288296,
+        "chg_d12_relax_pct": -17.110873537179263,
+        "chg_top_disp_per_species": {
+          "La": 2.2893820332550145,
+          "Fe": 3.4649814422285816
+        },
+        "chg_dlat_pct": [
+          -7.121810361004212,
+          -7.1218161693272055,
+          -5.303260443084418
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.412568729370832,
+        "converged": true,
+        "fmax_final": 0.041902463883161545
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.20501823535628944
+      ],
+      "dft_star_ref_md5": "e8232d2c1aafd19f6a709e8a9932743b",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.20501823535628944,
+        "dft_disp_relaxed_max": 0.41625567387775075,
+        "dft_disp_top_mean": 0.20501823535628944,
+        "dft_disp_top_max": 0.41625567387775075,
+        "dft_d12_relax_pct": -1.491846418138547,
+        "dft_top_disp_per_species": {
+          "Fe": 0.41625567387775075,
+          "La": 0.13460575584913564
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 0.0
+      }
+    },
+    "NiSn3_L12_111": {
+      "name": "NiSn3_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.093206733839314,
+        "chg_disp_max_seq": 4.250257385755035,
+        "chg_disp_surf_mean_seq": 3.42096333322828,
+        "chg_disp_mean_hung": 2.054772483725817,
+        "chg_disp_max_hung": 5.767024470772002,
+        "chg_disp_surf_mean_hung": 3.266485442246983,
+        "chg_d12_relax_pct": -22.313123332911587,
+        "chg_top_disp_per_species": {
+          "Ni": 2.918803562077215,
+          "Sn": 3.3823794023035725
+        },
+        "chg_dlat_pct": [
+          5.4806675456908795,
+          5.4801894661444805,
+          5.2052786257540316
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -4.31710615567863,
+        "converged": false,
+        "fmax_final": 0.7723997235298157
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.22770712815272015
+      ],
+      "dft_star_ref_md5": "08487a70d5b4c2569988d097924fc72a",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.22770712815272018,
+        "dft_disp_relaxed_max": 0.6910847533881539,
+        "dft_disp_top_mean": 0.22770712815272015,
+        "dft_disp_top_max": 0.6910847533881539,
+        "dft_d12_relax_pct": -7.67251343560365,
+        "dft_top_disp_per_species": {
+          "Ni": 0.6910847533881539,
+          "Sn": 0.07324791974090891
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 2.999999779440812e-07
+      }
+    },
+    "Al3La_L12_111": {
+      "name": "Al3La_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.07256524571729,
+        "chg_disp_max_seq": 4.348728403209921,
+        "chg_disp_surf_mean_seq": 3.403389943930268,
+        "chg_disp_mean_hung": 2.0432459081776093,
+        "chg_disp_max_hung": 5.057770087119843,
+        "chg_disp_surf_mean_hung": 3.2837743330397617,
+        "chg_d12_relax_pct": 33.6760324798329,
+        "chg_top_disp_per_species": {
+          "La": 3.5381179274463137,
+          "Al": 3.184248578706763
+        },
+        "chg_dlat_pct": [
+          5.334793221573684,
+          5.334795990854474,
+          5.12712022317694
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -4.293407119810581,
+        "converged": true,
+        "fmax_final": 0.026583589613437653
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.28557032318489867
+      ],
+      "dft_star_ref_md5": "36c9b04f9a7fd8c292af978dfbfd5284",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.28557032318489867,
+        "dft_disp_relaxed_max": 0.3402383292481843,
+        "dft_disp_top_mean": 0.28557032318489867,
+        "dft_disp_top_max": 0.3402383292481843,
+        "dft_d12_relax_pct": -5.949151253669306,
+        "dft_top_disp_per_species": {
+          "Al": 0.3400339303097451,
+          "La": 0.12217950181035934
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 3.999999714899096e-07
+      }
+    },
+    "Ag3Sc_L12_111": {
+      "name": "Ag3Sc_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.2393078009017753,
+        "chg_disp_max_seq": 3.953208915755062,
+        "chg_disp_surf_mean_seq": 3.2095504769242167,
+        "chg_disp_mean_hung": 1.9349010992606148,
+        "chg_disp_max_hung": 4.9183451906207685,
+        "chg_disp_surf_mean_hung": 2.3204487465448373,
+        "chg_d12_relax_pct": -13.152513226728132,
+        "chg_top_disp_per_species": {
+          "Sc": 3.1836662080608162,
+          "Ag": 1.982668000734237
+        },
+        "chg_dlat_pct": [
+          -7.608377396492242,
+          -7.608376930201222,
+          -5.495548879689349
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -3.875338342040777,
+        "converged": true,
+        "fmax_final": 0.02493099868297577
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.041232454323895246
+      ],
+      "dft_star_ref_md5": "535fb9b2bdb033c8455d742eadfb74d1",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.041232454323895246,
+        "dft_disp_relaxed_max": 0.08733139643481212,
+        "dft_disp_top_mean": 0.041232454323895246,
+        "dft_disp_top_max": 0.08733139643481212,
+        "dft_d12_relax_pct": -1.6646264101676918,
+        "dft_top_disp_per_species": {
+          "Sc": 0.08733139643481212,
+          "Ag": 0.02586614028692295
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 4.999999642237418e-07
+      }
+    },
+    "La3Mo_L12_111": {
+      "name": "La3Mo_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.185101920461599,
+        "chg_disp_max_seq": 4.024219886923972,
+        "chg_disp_surf_mean_seq": 3.1652768961657767,
+        "chg_disp_mean_hung": 2.0391553019696453,
+        "chg_disp_max_hung": 5.460178880161676,
+        "chg_disp_surf_mean_hung": 2.6441235567262744,
+        "chg_d12_relax_pct": -18.622172773101,
+        "chg_top_disp_per_species": {
+          "La": 2.388959232294538,
+          "Mo": 3.2962101636073795
+        },
+        "chg_dlat_pct": [
+          -6.345287730762237,
+          -6.345286782907669,
+          -4.82365012597878
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -5.780275896191597,
+        "converged": true,
+        "fmax_final": 0.034453194588422775
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.19599205121056826
+      ],
+      "dft_star_ref_md5": "397071b6d11b0ad98de0265eed261856",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.19599205121056826,
+        "dft_disp_relaxed_max": 0.4769873664294995,
+        "dft_disp_top_mean": 0.19599205121056826,
+        "dft_disp_top_max": 0.4769873664294995,
+        "dft_d12_relax_pct": -4.117809756487963,
+        "dft_top_disp_per_species": {
+          "Mo": 0.4769873664294995,
+          "La": 0.10232694613759118
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 1.4142134595727057e-07
+      }
+    },
+    "Fe3Mo_L12_111": {
+      "name": "Fe3Mo_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.174706251534176,
+        "chg_disp_max_seq": 3.840265298606828,
+        "chg_disp_surf_mean_seq": 3.1559561154580695,
+        "chg_disp_mean_hung": 1.7917527897237746,
+        "chg_disp_max_hung": 5.481179104139335,
+        "chg_disp_surf_mean_hung": 1.9190297561183547,
+        "chg_d12_relax_pct": -10.814967711413525,
+        "chg_top_disp_per_species": {
+          "Fe": 1.8012093818997055,
+          "Mo": 2.1439595614448668
+        },
+        "chg_dlat_pct": [
+          -8.206639358651742,
+          -8.206639546559673,
+          -6.031931425995175
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -8.787252448499203,
+        "converged": true,
+        "fmax_final": 0.04126906022429466
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.0275394359331957
+      ],
+      "dft_star_ref_md5": "1f85e7af191e66c91c65560860bde80a",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.027539435933195702,
+        "dft_disp_relaxed_max": 0.028075111305594282,
+        "dft_disp_top_mean": 0.0275394359331957,
+        "dft_disp_top_max": 0.028075111305594282,
+        "dft_d12_relax_pct": 0.14444809034294198,
+        "dft_top_disp_per_species": {
+          "Mo": 0.028075111305594282,
+          "Fe": 0.027360877475729507
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 2.9999997825545943e-07
+      }
+    },
+    "Cr3Pb_L12_111": {
+      "name": "Cr3Pb_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.188400310782188,
+        "chg_disp_max_seq": 3.6688148969298706,
+        "chg_disp_surf_mean_seq": 3.1251798052510718,
+        "chg_disp_mean_hung": 1.8719623091015603,
+        "chg_disp_max_hung": 5.26822515694519,
+        "chg_disp_surf_mean_hung": 2.276304468334514,
+        "chg_d12_relax_pct": 13.73694883368201,
+        "chg_top_disp_per_species": {
+          "Cr": 1.954336624406148,
+          "Pb": 2.984633724976921
+        },
+        "chg_dlat_pct": [
+          -7.784577862664162,
+          -7.784514345674864,
+          -5.651792865659251
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -7.3323981165885925,
+        "converged": false,
+        "fmax_final": 0.08845135569572449
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.402943117356837
+      ],
+      "dft_star_ref_md5": "27b180ae86049fbc0fcdad58935e11a1",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.402943117356837,
+        "dft_disp_relaxed_max": 0.4875996702261707,
+        "dft_disp_top_mean": 0.402943117356837,
+        "dft_disp_top_max": 0.4875996702261707,
+        "dft_d12_relax_pct": -1.3563237532576327,
+        "dft_top_disp_per_species": {
+          "Cr": 0.37472426640039247,
+          "Pb": 0.4875996702261707
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 4.1231053384925333e-07
+      }
+    },
+    "Ag3Co_L12_111": {
+      "name": "Ag3Co_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.1531741900653705,
+        "chg_disp_max_seq": 3.819426375993787,
+        "chg_disp_surf_mean_seq": 3.084850898725935,
+        "chg_disp_mean_hung": 1.8559285920273572,
+        "chg_disp_max_hung": 4.717654710026417,
+        "chg_disp_surf_mean_hung": 2.2173230801904786,
+        "chg_d12_relax_pct": -14.794896780308084,
+        "chg_top_disp_per_species": {
+          "Co": 3.0317520626326204,
+          "Ag": 1.898633478365292
+        },
+        "chg_dlat_pct": [
+          -7.619180225423772,
+          -7.61918129520191,
+          -5.476280402240103
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -3.438747612759471,
+        "converged": true,
+        "fmax_final": 0.028013842180371284
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.10173281491923687
+      ],
+      "dft_star_ref_md5": "ef8b913087bcc3c7c3e884dec18b9488",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.10173281491923687,
+        "dft_disp_relaxed_max": 0.11883869159591837,
+        "dft_disp_top_mean": 0.10173281491923687,
+        "dft_disp_top_max": 0.11883869159591837,
+        "dft_d12_relax_pct": 1.775506916847849,
+        "dft_top_disp_per_species": {
+          "Co": 0.11883869159591837,
+          "Ag": 0.09603085602700971
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091478e-08
+      }
+    },
+    "FeSn3_L12_111": {
+      "name": "FeSn3_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 1.866808971045795,
+        "chg_disp_max_seq": 3.762872730323561,
+        "chg_disp_surf_mean_seq": 3.0781830302755115,
+        "chg_disp_mean_hung": 1.861450016819104,
+        "chg_disp_max_hung": 5.522160777448475,
+        "chg_disp_surf_mean_hung": 3.056747213368748,
+        "chg_d12_relax_pct": -23.140354271069793,
+        "chg_top_disp_per_species": {
+          "Fe": 2.555777304065663,
+          "Sn": 3.2237371831364428
+        },
+        "chg_dlat_pct": [
+          4.5891787583678445,
+          4.611603799206174,
+          4.497964246068512
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -4.707886125892401,
+        "converged": false,
+        "fmax_final": 0.8281344771385193
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.19960359331820307
+      ],
+      "dft_star_ref_md5": "d75e77872ea88589f0bca7cc3c4ace42",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.19960359331820307,
+        "dft_disp_relaxed_max": 0.6164822658668063,
+        "dft_disp_top_mean": 0.19960359331820307,
+        "dft_disp_top_max": 0.6164822658668063,
+        "dft_d12_relax_pct": -5.179018465617668,
+        "dft_top_disp_per_species": {
+          "Fe": 0.6164822658668063,
+          "Sn": 0.060644035802002005
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 2.2360678067755118e-07
+      }
+    },
+    "Fe3V_L12_111": {
+      "name": "Fe3V_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.1113093628430475,
+        "chg_disp_max_seq": 3.74409556023124,
+        "chg_disp_surf_mean_seq": 3.075940489849709,
+        "chg_disp_mean_hung": 1.754098288730142,
+        "chg_disp_max_hung": 5.435524463630062,
+        "chg_disp_surf_mean_hung": 1.9966668447522693,
+        "chg_d12_relax_pct": -11.320410606994395,
+        "chg_top_disp_per_species": {
+          "V": 2.4217831013405,
+          "Fe": 1.7739869008251012
+        },
+        "chg_dlat_pct": [
+          -8.063277882946934,
+          -8.063278804104684,
+          -5.959376885422085
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -8.46850873529911,
+        "converged": true,
+        "fmax_final": 0.03099736012518406
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.04232825694016881
+      ],
+      "dft_star_ref_md5": "5b046981180d58a7f00e2236176e9a1f",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.04232825694016881,
+        "dft_disp_relaxed_max": 0.046714427333637135,
+        "dft_disp_top_mean": 0.04232825694016881,
+        "dft_disp_top_max": 0.046714427333637135,
+        "dft_d12_relax_pct": 2.030047309282748,
+        "dft_top_disp_per_species": {
+          "V": 0.02931649809591702,
+          "Fe": 0.04666550988825274
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 4.1231053343127677e-07
+      }
+    },
+    "Fe3Ta_L12_111": {
+      "name": "Fe3Ta_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.118001156569332,
+        "chg_disp_max_seq": 3.7305813788518645,
+        "chg_disp_surf_mean_seq": 3.0335106762238295,
+        "chg_disp_mean_hung": 1.7526756446778,
+        "chg_disp_max_hung": 5.272135147846021,
+        "chg_disp_surf_mean_hung": 2.006313811882631,
+        "chg_d12_relax_pct": -15.301754982198442,
+        "chg_top_disp_per_species": {
+          "Ta": 2.5461647058566266,
+          "Fe": 1.7609270418944514
+        },
+        "chg_dlat_pct": [
+          -8.17249991772893,
+          -8.172499671714117,
+          -5.8056208984468824
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -9.189869433641434,
+        "converged": true,
+        "fmax_final": 0.03472219035029411
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.04858642780512737
+      ],
+      "dft_star_ref_md5": "79f47a84e4d2bf56cd20bfcd77195a39",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.04858642780512737,
+        "dft_disp_relaxed_max": 0.05332895295560612,
+        "dft_disp_top_mean": 0.04858642780512737,
+        "dft_disp_top_max": 0.05332895295560612,
+        "dft_d12_relax_pct": 0.8573602455309195,
+        "dft_top_disp_per_species": {
+          "Ta": 0.034400314137975056,
+          "Fe": 0.05331513236084481
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 2.999999796923814e-07
+      }
+    },
+    "CuFe3_L12_111": {
+      "name": "CuFe3_L12_111",
+      "chgnet": {
+        "chg_disp_mean_seq": 2.093630651544655,
+        "chg_disp_max_seq": 3.6343133974383273,
+        "chg_disp_surf_mean_seq": 3.0110861609674897,
+        "chg_disp_mean_hung": 1.7339323679039509,
+        "chg_disp_max_hung": 5.157017865193588,
+        "chg_disp_surf_mean_hung": 1.9891044549711083,
+        "chg_d12_relax_pct": -3.7948964105945087,
+        "chg_top_disp_per_species": {
+          "Fe": 1.7261261695882317,
+          "Cu": 2.567656682813437
+        },
+        "chg_dlat_pct": [
+          -8.18269438367723,
+          -8.18269712359648,
+          -5.857399110227821
+        ],
+        "n_atoms": 128,
+        "e_drop_per_atom": -7.041593234986067,
+        "converged": true,
+        "fmax_final": 0.02681911550462246
+      },
+      "dft_n_star_refs": 1,
+      "dft_star_top_mean_all": [
+        0.022189274910332624
+      ],
+      "dft_star_ref_md5": "8706a1518968cf214cbd0683c3e1751e",
+      "dft": {
+        "dft_disp_relaxed_mean": 0.022189274910332624,
+        "dft_disp_relaxed_max": 0.06367540700932312,
+        "dft_disp_top_mean": 0.022189274910332624,
+        "dft_disp_top_max": 0.06367540700932312,
+        "dft_d12_relax_pct": 0.46781537172573306,
+        "dft_top_disp_per_species": {
+          "Fe": 0.008360564210669124,
+          "Cu": 0.06367540700932312
+        },
+        "dft_n_layers": 3,
+        "dft_n_fixed": 8,
+        "dft_t_err": 9.999999273091477e-08
+      }
+    }
+  },
+  "runtime_min": 0.06637258132298787
+}

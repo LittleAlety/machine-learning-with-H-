@@ -1,0 +1,55 @@
+{
+  "workstream": "H_chgnet_feature_factory",
+  "timestamp_utc": "2026-09-17T20:21:23.001949Z",
+  "redlines": {
+    "11": "CHGNet 仅作特征生成器 - 遵守",
+    "14": "lockbox 冻结 SHA256 留证 - 遵守"
+  },
+  "checkpoints": {
+    "H0": {
+      "verdict": "PASS",
+      "detail": "chgnet 0.4.2 + v0.3.0 weights, CPU"
+    },
+    "H1": {
+      "verdict": "PASS",
+      "build_rate": 1.0,
+      "n": 1836
+    },
+    "H6": {
+      "verdict": "DONE",
+      "freeze_sha256": "689a4ea9c707b557e710f857d00b0e4aa9c30cca5ce112951861c252b9731cbb"
+    },
+    "H2": {
+      "verdict": "NO_GAIN",
+      "delta_A": 0.00249975775890945,
+      "retention": 0.516313824309901
+    },
+    "H3": {
+      "verdict": "FAIL",
+      "delta": 0.00249975775890945,
+      "seeds_win": 10
+    },
+    "H4": {
+      "verdict": "FAIL_near_miss",
+      "delta": 0.017293815517979906,
+      "n_subset": 398
+    },
+    "H5": {
+      "verdict": "PASS",
+      "per_element": {
+        "Mn": -0.019686647938561563,
+        "Fe": -0.058937945518466206,
+        "Co": -0.013677087954929654,
+        "Ni": -0.01906952003220197
+      }
+    }
+  },
+  "headline": {
+    "base_oof_mae": 0.11959830244769601,
+    "gold_oof_mae": 0.11709854468878655,
+    "mag3d_delta": 0.017293815517979906,
+    "loeo_fe_gain": 0.058937945518466206
+  },
+  "conclusion": "全局公平契约未过 (H2 NO_GAIN); 3d 磁性组成有方向一致的真实增益 (H4 差 0.0027 eV 未达 0.02 线, LOEO Fe/Mn 显著改善)。特征不入主交付模型, 保留作磁性机制子课题。",
+  "charges": "N/A (CHGNet v0.3.0 无电荷输出)"
+}

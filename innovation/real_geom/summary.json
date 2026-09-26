@@ -1,0 +1,99 @@
+{
+  "stage": "Phase6-S4 real_geom (branch α)",
+  "parse": {
+    "records": 7048,
+    "parsed": 6898,
+    "success_rate": 0.9787,
+    "comps": "1832/1836"
+  },
+  "features": [
+    "site_cn",
+    "site_gcn",
+    "h_height_A",
+    "nn_cn_mean",
+    "nn_cn_min",
+    "nn_cn_std",
+    "nn_gcn_mean",
+    "nn_gcn_min",
+    "nn_gcn_std",
+    "nn_en_mean",
+    "nn_en_std",
+    "nn_d_mean",
+    "nn_d_std",
+    "d12_relaxed_A",
+    "d12_relax_pct",
+    "surf_disp_mean_A",
+    "surf_disp_max_A",
+    "surf_rumpling_A"
+  ],
+  "surface": {
+    "baseline_oof_subset": 0.11497052907512344,
+    "mean18": {
+      "gold": 0.09203855466571302,
+      "delta": 0.022931974409410427,
+      "wins": "10/10"
+    },
+    "min18": {
+      "gold": 0.08864686079410672,
+      "delta": 0.02632366828101674,
+      "wins": "10/10"
+    },
+    "meanmin36_main": {
+      "gold": 0.09003333162178262,
+      "delta": 0.024937197453340824,
+      "wins": "10/10",
+      "passed": true
+    },
+    "mag3d": {
+      "n": 398,
+      "delta": 0.0428427768275807,
+      "wins": "10/10",
+      "phase3_ref": 0.0173
+    },
+    "nested_cv": {
+      "delta": 0.023683231755236,
+      "folds_win": "5/5"
+    }
+  },
+  "site_level": {
+    "geom18_oof": 0.10424787745974731,
+    "onehot_F3_replica": 0.12060187392211907,
+    "geom18_plus_onehot": 0.1009677860845019,
+    "F3_ref": 0.1156,
+    "target_0.090": "NOT MET",
+    "min_agg_surface_mae": 0.10300110705316284
+  },
+  "gates": {
+    "G1_feature_portability": {
+      "delta_A": 0.024937197453340824,
+      "delta_B": -0.00397790508305172,
+      "retention": -0.15951692608981616,
+      "retain_thresh": 0.8,
+      "verdict": "LEAK"
+    },
+    "G2_minsite_selection": {
+      "delta_A_label_selected": 0.029457649492532205,
+      "delta_B_ridge_selected": 0.017385080684199018,
+      "retention": 0.5901720260676705,
+      "retain_thresh": 0.8,
+      "verdict": "LEAK",
+      "note": "F4 教训：min-energy 位点选择是标签耦合操作；线 B 用训练折 Ridge 预测位点能量选位点，模拟部署可得性。判 LEAK 则 mins 口径不可采纳。"
+    }
+  },
+  "verdict": {
+    "label": "contract_passed_gate_failed",
+    "condition": "契约与嵌套过阈但 G1 闸门未过——信号不可移植，不可采纳",
+    "mins18_usable": false,
+    "site_target_met": false
+  },
+  "sha256": {
+    "s1_parse_features.py": "ffc6458058d77f87693b99f35e4b56bfb58c86722c9cbdb85b10f4c946324b3d",
+    "s2_eval.py": "7568577bef5661a57671d6e4593dd264431a9009ca7f1cb4aaa832ae173655f3",
+    "real_geom_site_features.csv": "8f7aba937adee3ae4b7d6a9bcdff88e370c628f79e08bb0ba44ebde7b22c5e46",
+    "parse_failures.csv": "83e894d5cf36468f81decd9e134102c7f8c0046c4010a79e45318645908b1704",
+    "s1_parse_report.json": "33e57315331735516457d1f7f73f729f03cc0b0f34d8601dc6d6dbe66b91b37f",
+    "real_geom_eval.json": "8c25064255e8a58c047841114f6cbc2832c257e6daa4f6bfadc57473f43de9f0",
+    "log_eval.txt": "241cbc6edf710b8d49e0fb51dd0364e1585cf15f0839dfaee5c89975aae6ef97",
+    "README.md": "8191119e87248fb3069c7c5f0d584269fa637d91291aa22534cc0fa92b382262"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "protocol": {
+    "folds": "GroupKFold(5,shuffle=True,random_state=42) by comp; seeds (0,1,2); v3 XGB hyperparams"
+  },
+  "fair_contract": "improvement>0.005 eV AND 3/3 seed direction",
+  "n_pooled_wins": 2,
+  "mean_delta_eV": -0.0273,
+  "verdict": "SEPARATE WINS: pooled-with-one-hot wins fair contract on 2/15 adsorbates; mean delta(sep-pooled)=-0.0273 eV. The data-sharing benefit is largely absorbed by the adsorbate indicator feature (or offset by cross-adsorbate interference); per-adsorbate models remain the reference.",
+  "per_adsorbate": [
+    {
+      "adsorbate": "CH2",
+      "n": 319,
+      "separate_mae": 0.2802,
+      "pooled_mae": 0.2542,
+      "delta_sep_minus_pooled": 0.026,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": true
+    },
+    {
+      "adsorbate": "NH",
+      "n": 352,
+      "separate_mae": 0.2056,
+      "pooled_mae": 0.2005,
+      "delta_sep_minus_pooled": 0.0051,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": true
+    },
+    {
+      "adsorbate": "2O",
+      "n": 1680,
+      "separate_mae": 0.4406,
+      "pooled_mae": 0.449,
+      "delta_sep_minus_pooled": -0.0084,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "CH",
+      "n": 347,
+      "separate_mae": 0.2223,
+      "pooled_mae": 0.2367,
+      "delta_sep_minus_pooled": -0.0144,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "OH",
+      "n": 243,
+      "separate_mae": 0.2102,
+      "pooled_mae": 0.2247,
+      "delta_sep_minus_pooled": -0.0145,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "C",
+      "n": 1776,
+      "separate_mae": 0.3065,
+      "pooled_mae": 0.326,
+      "delta_sep_minus_pooled": -0.0196,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "SH",
+      "n": 342,
+      "separate_mae": 0.2235,
+      "pooled_mae": 0.2433,
+      "delta_sep_minus_pooled": -0.0199,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "N",
+      "n": 1796,
+      "separate_mae": 0.2778,
+      "pooled_mae": 0.2991,
+      "delta_sep_minus_pooled": -0.0213,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "S",
+      "n": 1806,
+      "separate_mae": 0.1635,
+      "pooled_mae": 0.1922,
+      "delta_sep_minus_pooled": -0.0287,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "H",
+      "n": 1836,
+      "separate_mae": 0.1206,
+      "pooled_mae": 0.152,
+      "delta_sep_minus_pooled": -0.0314,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "CH3",
+      "n": 318,
+      "separate_mae": 0.1559,
+      "pooled_mae": 0.1883,
+      "delta_sep_minus_pooled": -0.0324,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "2H",
+      "n": 1802,
+      "separate_mae": 0.2363,
+      "pooled_mae": 0.2745,
+      "delta_sep_minus_pooled": -0.0382,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "2N",
+      "n": 1761,
+      "separate_mae": 0.5487,
+      "pooled_mae": 0.5919,
+      "delta_sep_minus_pooled": -0.0432,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "O",
+      "n": 1795,
+      "separate_mae": 0.2231,
+      "pooled_mae": 0.283,
+      "delta_sep_minus_pooled": -0.0599,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    },
+    {
+      "adsorbate": "H2O",
+      "n": 326,
+      "separate_mae": 0.0765,
+      "pooled_mae": 0.1856,
+      "delta_sep_minus_pooled": -0.1091,
+      "direction_consistent_3of3": true,
+      "pooled_wins_fair": false
+    }
+  ]
+}

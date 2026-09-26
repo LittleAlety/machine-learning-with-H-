@@ -1,0 +1,35 @@
+  [M1_64_32_relu] seed 0: 0.1442
+  [M1_64_32_relu] seed 1: 0.1465
+  [M1_64_32_relu] seed 2: 0.1434
+  [M1_64_32_relu] seed 7: 0.1436
+  [M1_64_32_relu] seed 13: 0.1488
+  [M1_64_32_relu] seed 42: 0.1465
+  [M1_64_32_relu] seed 99: 0.1516
+  [M1_64_32_relu] seed 123: 0.1522
+  [M1_64_32_relu] seed 2024: 0.1479
+  [M1_64_32_relu] seed 31337: 0.1439
+[M1_64_32_relu] 0.1469±0.0031
+  [M2_64_32_relu_bn] seed 0: 0.1555
+  [M2_64_32_relu_bn] seed 1: 0.1600
+  [M2_64_32_relu_bn] seed 2: 0.1501
+  [M2_64_32_relu_bn] seed 7: 0.1644
+  [M2_64_32_relu_bn] seed 13: 0.1534
+  [M2_64_32_relu_bn] seed 42: 0.1566
+  [M2_64_32_relu_bn] seed 99: 0.1670
+  [M2_64_32_relu_bn] seed 123: 0.1507
+  [M2_64_32_relu_bn] seed 2024: 0.1512
+  [M2_64_32_relu_bn] seed 31337: 0.1531
+[M2_64_32_relu_bn] 0.1562±0.0055
+  [M3_32_16_tanh] seed 0: 0.1564
+  [M3_32_16_tanh] seed 1: 0.1571
+  [M3_32_16_tanh] seed 2: 0.1604
+  [M3_32_16_tanh] seed 7: 0.1609
+  [M3_32_16_tanh] seed 13: 0.1618
+  [M3_32_16_tanh] seed 42: 0.1611
+  [M3_32_16_tanh] seed 99: 0.1756
+  [M3_32_16_tanh] seed 123: 0.1636
+  [M3_32_16_tanh] seed 2024: 0.1549
+  [M3_32_16_tanh] seed 31337: 0.1582
+[M3_32_16_tanh] 0.1610±0.0055
+[判定] MLP 受试者仅记录输赢，不参与 v4 交付候选；最佳 M1_64_32_relu 0.1469 vs v3 0.11374
+[写出] outputs/r14_a4_mlp.json

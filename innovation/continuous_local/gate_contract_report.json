@@ -1,0 +1,178 @@
+{
+  "timestamp_utc": "2026-09-19T13:15:40.191657+00:00",
+  "coverage": {
+    "n_covered": 256,
+    "n_total": 1836,
+    "frac": 0.1394335511982571,
+    "comps_covered": 256,
+    "comps_total": 1836
+  },
+  "features": [
+    "relax_energy_drop_per_atom",
+    "surf_cn_mean",
+    "surf_cn_min",
+    "surf_cn_std",
+    "surf_gcn_mean",
+    "surf_gcn_std",
+    "surf_gcn_min",
+    "surf_nn_en_mean",
+    "surf_nn_en_std",
+    "surf_nn_d_mean",
+    "surf_nn_d_std",
+    "d12_relaxed_A",
+    "d12_relax_pct",
+    "surf_disp_mean_A",
+    "surf_disp_max_A",
+    "surf_rumpling_A"
+  ],
+  "honesty": "条件性: 弛豫质量未经 DFT 锚定 (本会话无 DFT 能力); 评估限于弛豫覆盖子集 (行内同折同种子公平)",
+  "portability_gate": {
+    "delta_A": 0.012933115680717,
+    "delta_B": -0.014463942853665323,
+    "retention": -1.1183649176842014,
+    "retain_thresh": 0.8,
+    "verdict": "LEAK",
+    "note": "物理可即时计算性: 全部特征仅需结构弛豫后的几何+元素周期表量, 无需目标值/DFT -> 预期 PASS, 实测如上"
+  },
+  "contract_covered": {
+    "tag": "covered_subset",
+    "n": 256,
+    "base_mae_mean": 0.19846886843139774,
+    "gold_mae_mean": 0.18553575275068074,
+    "delta_mean": 0.012933115680717,
+    "delta_std": 0.0037416717341942243,
+    "seeds_win": 10,
+    "thresh": 0.005,
+    "passed": true,
+    "per_seed_delta": {
+      "0": 0.010437939158307596,
+      "1": 0.00995770351214742,
+      "2": 0.00878556539975528,
+      "7": 0.009563330051079788,
+      "13": 0.018282477301598377,
+      "42": 0.012969031505087214,
+      "99": 0.019631129640038436,
+      "123": 0.012296426876951427,
+      "2024": 0.016966513385655357,
+      "31337": 0.010441039976549105
+    }
+  },
+  "contract_full_nan": {
+    "tag": "full1836_nanfill",
+    "n": 1836,
+    "base_mae_mean": 0.11959830244769601,
+    "gold_mae_mean": 0.12108947690164287,
+    "delta_mean": -0.001491174453946871,
+    "delta_std": 0.0005852785182650161,
+    "seeds_win": 0,
+    "thresh": 0.005,
+    "passed": false,
+    "per_seed_delta": {
+      "0": -0.002022426509586339,
+      "1": -0.001300060442917056,
+      "2": -0.001509282205843343,
+      "7": -0.0006148507122894636,
+      "13": -0.0026295139386590394,
+      "42": -0.0018148416162444697,
+      "99": -0.0008117059302823471,
+      "123": -0.0019417779053126916,
+      "2024": -0.0012272609603517087,
+      "31337": -0.0010400243179822521
+    }
+  },
+  "mag3d_sublayer": {
+    "tag": "mag3d_covered",
+    "n": 155,
+    "base_mae_mean": 0.2648829181696987,
+    "gold_mae_mean": 0.27309050205354796,
+    "delta_mean": -0.008207583883849252,
+    "delta_std": 0.004258225996983886,
+    "seeds_win": 0,
+    "thresh": 0.005,
+    "passed": false,
+    "per_seed_delta": {
+      "0": -0.0062603140315552475,
+      "1": -0.00950263187622502,
+      "2": -0.002215589837846643,
+      "7": -0.004354393556880332,
+      "13": -0.011848338071365594,
+      "42": -0.005680700623292567,
+      "99": -0.008186764744141706,
+      "123": -0.005100828605277941,
+      "2024": -0.017425256549232382,
+      "31337": -0.011501020942675078
+    },
+    "phase3_ref": 0.0173,
+    "phase4_ref": 0.0109
+  },
+  "nested_cv_covered": {
+    "per_fold": [
+      {
+        "outer_fold": 1,
+        "best_params": {
+          "learning_rate": 0.05,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.1686579598203519,
+        "outer_mae_base": 0.18488724782742538
+      },
+      {
+        "outer_fold": 2,
+        "best_params": {
+          "learning_rate": 0.08,
+          "max_depth": 5,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.16299514871501258,
+        "outer_mae_base": 0.1765795704588887
+      },
+      {
+        "outer_fold": 3,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 5,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.1508364608234636,
+        "outer_mae_base": 0.17942720446010846
+      },
+      {
+        "outer_fold": 4,
+        "best_params": {
+          "learning_rate": 0.03,
+          "max_depth": 7,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.19860648859215543,
+        "outer_mae_base": 0.22995993393912922
+      },
+      {
+        "outer_fold": 5,
+        "best_params": {
+          "learning_rate": 0.08,
+          "max_depth": 5,
+          "n_estimators": 400,
+          "subsample": 0.8
+        },
+        "outer_mae_gold": 0.22422468537427628,
+        "outer_mae_base": 0.22402942575637627
+      }
+    ],
+    "gold_mae_mean": 0.18106414866505197,
+    "base_mae_mean": 0.1989766764883856,
+    "delta_mean": 0.017912527823333645,
+    "folds_win": 4
+  },
+  "verdict": {
+    "label": "subset_signal_gate_failed",
+    "conditional": true,
+    "condition": "弛豫质量未经 DFT 锚定; 覆盖率 14%",
+    "site_oof_target_0.090": false
+  },
+  "runtime_min": 3.282853849728902
+}

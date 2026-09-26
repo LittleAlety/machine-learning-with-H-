@@ -1,0 +1,92 @@
+{
+  "protocol": "v3 OOF (GroupKFold5, 10 seeds) residual r = y - OOF_mean; distill with locked small models (depth<=3 tree / linear), same GroupKFold OOF",
+  "v3_oof_mae_10seeds_mean": 0.11373615715042826,
+  "v3_oof_mae_10seeds_std": 0.0003832897139796704,
+  "v3_oof_mae_seedavg": 0.11256668034879938,
+  "residual_std_eV": 0.2333611147177955,
+  "residual_abs_mean_eV": 0.11256668034879938,
+  "magnitude_prediction": {
+    "tree_depth3": {
+      "oof_R2": -0.023276213754965358,
+      "oof_MAE": 0.10166576905663267
+    },
+    "ridge_linear": {
+      "oof_R2": 0.0974116818714309,
+      "oof_MAE": 0.10145927276563001
+    },
+    "constant_baseline_MAE": 0.10687024101618355
+  },
+  "sign_prediction": {
+    "tree_depth3_acc": 0.5212418300653595,
+    "logreg_acc": 0.525599128540305,
+    "majority_baseline_acc": 0.5582788671023965
+  },
+  "distill_top_features_tree_abs": [
+    {
+      "feature": "melting_point_max",
+      "importance": 0.3035534939447876
+    },
+    {
+      "feature": "mendeleev_number_mode",
+      "importance": 0.2707652825250111
+    },
+    {
+      "feature": "mendeleev_number_wmean",
+      "importance": 0.15610971291933268
+    },
+    {
+      "feature": "melting_point_range",
+      "importance": 0.15137841670362343
+    },
+    {
+      "feature": "n_valence_max",
+      "importance": 0.07028555107730457
+    },
+    {
+      "feature": "covalent_radius_wstd",
+      "importance": 0.0479075428299407
+    }
+  ],
+  "distill_top_features_ridge_abs": [
+    {
+      "feature": "covalent_radius_wstd",
+      "abs_coef": 0.13998623898322451
+    },
+    {
+      "feature": "nd_unfilled_wmean",
+      "abs_coef": 0.13152524991417522
+    },
+    {
+      "feature": "n_unfilled_range",
+      "abs_coef": 0.12974326738215575
+    },
+    {
+      "feature": "radius_wmean",
+      "abs_coef": 0.12541649156803342
+    },
+    {
+      "feature": "group_wmean",
+      "abs_coef": 0.12385968398541612
+    },
+    {
+      "feature": "melting_point_wstd",
+      "abs_coef": 0.11693887025783327
+    },
+    {
+      "feature": "n_unfilled_wstd",
+      "abs_coef": 0.1147796577893563
+    },
+    {
+      "feature": "group_min",
+      "abs_coef": 0.10843411332133482
+    },
+    {
+      "feature": "n_valence_wstd",
+      "abs_coef": 0.10776695205129529
+    },
+    {
+      "feature": "period_wstd",
+      "abs_coef": 0.10393238674720728
+    }
+  ]
+}

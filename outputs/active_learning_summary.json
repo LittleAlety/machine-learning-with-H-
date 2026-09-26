@@ -1,0 +1,21 @@
+{
+  "oof_mae": 0.1198,
+  "A_quantile": {
+    "spearman": 0.3886,
+    "coverage90": 0.8954,
+    "mean_width_eV": 0.687
+  },
+  "B_bootstrap": {
+    "spearman": 0.5453,
+    "coverage90": 0.6193,
+    "mean_width_eV": 0.2216,
+    "n_boot": 20
+  },
+  "selected": "A:quantile",
+  "n_candidates": 426,
+  "n_in_domain": 199,
+  "top50_in_domain": 20,
+  "top50_absdG_le_0.2": 50,
+  "exploit_top20_median_width": 0.6385,
+  "explore_top20_median_width": 1.4513
+}

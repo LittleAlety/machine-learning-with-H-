@@ -1,0 +1,14 @@
+# 运行环境：Python 3.10+（已在 3.12 验证）；随机种子统一 42
+# 数据与数值计算
+pandas>=2.0
+numpy>=1.26
+scipy>=1.11
+# 机器学习与可解释性
+scikit-learn>=1.4
+xgboost>=3.4
+shap>=0.52
+# 元素描述符与绘图
+mendeleev>=1.2
+matplotlib>=3.8
+# 注：网络下载（scripts/05、13、14）与 .env 读取均基于标准库 urllib/os，
+# 不依赖 requests / python-dotenv。

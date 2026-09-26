@@ -1,0 +1,7 @@
+covered rows: 256/1836 (13.9%), covered comps: 256/1836
+gate: LEAK dA=0.0129 dB=-0.0145 r=-1.12
+contract(covered): Δ=0.0129 wins=10/10
+contract(full NaN): Δ=-0.0015
+3d sublayer: n=155 Δ=-0.0082
+nested: gold=0.1811 base=0.1990 folds_win=4/5
+{"label": "subset_signal_gate_failed", "conditional": true, "condition": "弛豫质量未经 DFT 锚定; 覆盖率 14%", "site_oof_target_0.090": false}

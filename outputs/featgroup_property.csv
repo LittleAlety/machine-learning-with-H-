@@ -1,0 +1,7 @@
+property,property_cn,n_features,mean_abs_shap_sum,share_pct
+group,族号 group,5,0.43490654,56.99194
+en,电负性 en,5,0.08854733,11.603605
+d_el,d电子数 d_el,5,0.08472831,11.103146
+radius,原子半径 radius,5,0.05887351,7.715027
+ie1,第一电离能 ie1,5,0.047325347,6.2017083
+period,周期 period,5,0.036787063,4.820728

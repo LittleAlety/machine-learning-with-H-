@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H* 吸附能预测与 HER 催化位点筛选</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b05c34'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='%23faf7f2' font-family='sans-serif' font-weight='bold'%3EH*%3C/text%3E%3C/svg%3E">
+<script src="vendor/echarts.min.js"></script>
+<script src="assets/predict.js"></script>
+<style>
+  :root{
+    --bg:#faf7f2;
+    --card:#fffdf8;
+    --border:#e7dccb;
+    --ink:#3b2f26;
+    --ink-soft:#7a6a58;
+    --ink-faint:#a8977f;
+    --terra:#b05c34;
+    --terra-soft:#d8a07e;
+    --ochre:#c2924a;
+    --sage:#7d8f6a;
+    --clay-bg:#f4ece1;
+    --good-bg:#eef2e6; --good-ink:#5a7150; --good-bd:#cdd8bd;
+    --warn-bg:#f6ecdd; --warn-ink:#8a6420; --warn-bd:#e4cd9f;
+    --bad-bg:#f5e4dc;  --bad-ink:#9c4a2e;  --bad-bd:#e2bda9;
+    --neut-bg:#f0ebe3; --neut-ink:#6f6355; --neut-bd:#d9cfc0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+    line-height:1.75; font-size:15px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  /* ---------- 页头 ---------- */
+  header.top{
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#fbf8f3,#faf7f2);
+    padding:56px 0 40px;
+  }
+  .kicker{
+    display:inline-block;font-size:12.5px;letter-spacing:.18em;color:var(--terra);
+    border:1px solid var(--bad-bd);border-radius:999px;padding:3px 14px;margin-bottom:18px;
+    background:#fdf6ef;font-weight:600;
+  }
+  header.top h1{font-size:30px;font-weight:700;letter-spacing:.02em;margin-bottom:10px}
+  header.top p.sub{color:var(--ink-soft);max-width:760px;font-size:15px}
+  nav.anchors{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  nav.anchors a{
+    text-decoration:none;color:var(--ink-soft);font-size:13.5px;
+    border:1px solid var(--border);background:var(--card);
+    padding:5px 14px;border-radius:999px;transition:all .15s;
+  }
+  nav.anchors a:hover{color:var(--terra);border-color:var(--terra-soft)}
+
+  /* ---------- 板块 ---------- */
+  section{padding:52px 0 8px}
+  .sec-head{margin-bottom:26px}
+  .sec-head .no{color:var(--terra);font-weight:700;font-size:13px;letter-spacing:.15em}
+  .sec-head h2{font-size:22px;font-weight:700;margin-top:2px}
+  .sec-head p{color:var(--ink-soft);font-size:14px;margin-top:6px;max-width:820px}
+
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:26px 28px;box-shadow:0 1px 3px rgba(90,70,50,.05);
+  }
+  .card + .card{margin-top:20px}
+
+  /* ---------- 预测器 ---------- */
+  .pred-form{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:12.5px;color:var(--ink-soft);font-weight:600;letter-spacing:.05em}
+  .field input,.field select{
+    font:inherit;color:var(--ink);background:#fff;
+    border:1px solid var(--border);border-radius:9px;padding:9px 13px;outline:none;
+  }
+  .field input{width:260px}
+  .field input:focus,.field select:focus{border-color:var(--terra-soft);box-shadow:0 0 0 3px rgba(176,92,52,.10)}
+  button.btn{
+    font:inherit;font-weight:600;color:#fff;background:var(--terra);
+    border:none;border-radius:9px;padding:10px 26px;cursor:pointer;transition:background .15s;
+  }
+  button.btn:hover:not(:disabled){background:#9c4f2b}
+  button.btn:disabled{background:#cdbba8;cursor:not-allowed}
+  .load-note{font-size:13px;color:var(--warn-ink);background:var(--warn-bg);
+    border:1px solid var(--warn-bd);border-radius:9px;padding:8px 14px;margin-top:14px}
+  .err-note{font-size:13.5px;color:var(--bad-ink);background:var(--bad-bg);
+    border:1px solid var(--bad-bd);border-radius:9px;padding:10px 16px;margin-top:16px;display:none}
+
+  #predResult{display:none;margin-top:24px;border-top:1px dashed var(--border);padding-top:24px}
+  .res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .metric{background:var(--clay-bg);border-radius:11px;padding:14px 18px}
+  .metric .k{font-size:12.5px;color:var(--ink-soft);letter-spacing:.04em}
+  .metric .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+  .metric .v small{font-size:13px;font-weight:500;color:var(--ink-soft)}
+  .badge{display:inline-block;font-size:13px;font-weight:600;border-radius:999px;padding:4px 14px;border:1px solid}
+  .badge.good{background:var(--good-bg);color:var(--good-ink);border-color:var(--good-bd)}
+  .badge.warn{background:var(--warn-bg);color:var(--warn-ink);border-color:var(--warn-bd)}
+  .badge.bad{background:var(--bad-bg);color:var(--bad-ink);border-color:var(--bad-bd)}
+  .badge.neut{background:var(--neut-bg);color:var(--neut-ink);border-color:var(--neut-bd)}
+  .res-line{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft)}
+  .warn-list{margin-top:10px;font-size:13px;color:var(--warn-ink)}
+  .warn-list li{margin-left:18px}
+
+  .pct-block{margin-top:22px}
+  .pct-block h4{font-size:14px;margin-bottom:4px}
+  .pct-block .hint{font-size:12.5px;color:var(--ink-faint);margin-bottom:12px}
+  .pct-row{display:grid;grid-template-columns:170px 1fr 110px;gap:12px;align-items:center;margin-bottom:9px;font-size:13px}
+  .pct-row .name{color:var(--ink-soft)}
+  .pct-track{position:relative;height:14px;background:var(--clay-bg);border-radius:7px}
+  .pct-fill{position:absolute;top:0;bottom:0;left:0;background:var(--terra-soft);border-radius:7px;opacity:.45}
+  .pct-marker{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--terra);border-radius:2px;transform:translateX(-50%)}
+  .pct-row .val{font-variant-numeric:tabular-nums;color:var(--ink);text-align:right}
+
+  /* ---------- 候选表 ---------- */
+  .tbl-tools{display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+  .tbl-tools input{
+    font:inherit;border:1px solid var(--border);border-radius:9px;padding:8px 13px;width:240px;background:#fff;outline:none;
+  }
+  .tbl-tools input:focus{border-color:var(--terra-soft);box-shadow:0 0 0 3px rgba(176,92,52,.10)}
+  .tbl-tools .cnt{font-size:13px;color:var(--ink-faint)}
+  .tbl-scroll{overflow-x:auto}
+  table.cand{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.cand th{
+    text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);
+    color:var(--ink-soft);font-size:12.5px;letter-spacing:.05em;white-space:nowrap;
+    cursor:pointer;user-select:none;
+  }
+  table.cand th:hover{color:var(--terra)}
+  table.cand th .arr{color:var(--terra);margin-left:3px}
+  table.cand td{padding:8px 12px;border-bottom:1px solid #f0e8db;vertical-align:top;font-variant-numeric:tabular-nums}
+  table.cand tr:hover td{background:#fbf6ee}
+  td.comp{font-weight:700;color:var(--terra)}
+  .flag{display:inline-block;font-size:12px;background:var(--warn-bg);color:var(--warn-ink);
+    border:1px solid var(--warn-bd);border-radius:6px;padding:1px 8px;margin:1px 3px 1px 0;white-space:nowrap}
+  .flag-note{font-size:12.5px;color:var(--ink-faint);margin-top:14px;line-height:1.9}
+
+  /* ---------- 图表 ---------- */
+  .chart{width:100%;height:420px}
+  .chart.tall{height:460px}
+  .chart-note{font-size:12.5px;color:var(--ink-faint);margin-top:8px}
+  .chart-toggle{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-soft);margin-bottom:10px;flex-wrap:wrap}
+  .chart-toggle button{
+    font:inherit;font-size:12.5px;padding:4px 14px;border-radius:999px;cursor:pointer;
+    border:1px solid var(--border);background:#fff;color:var(--ink-soft);
+  }
+  .chart-toggle button.on{background:var(--terra);border-color:var(--terra);color:#fff}
+
+  /* ---------- 方法 ---------- */
+  table.perf{width:100%;border-collapse:collapse;font-size:14px}
+  table.perf th,table.perf td{padding:10px 14px;border-bottom:1px solid #f0e8db;text-align:left}
+  table.perf th{color:var(--ink-soft);font-size:12.5px;letter-spacing:.05em;border-bottom:2px solid var(--border)}
+  table.perf td.num{font-variant-numeric:tabular-nums;font-weight:600}
+  .honesty{background:var(--clay-bg);border-left:4px solid var(--ochre);border-radius:0 10px 10px 0;
+    padding:18px 22px;font-size:14px;color:var(--ink)}
+  .honesty li{margin:6px 0 6px 20px}
+  .parity-badge{
+    display:inline-flex;align-items:center;gap:8px;margin-top:14px;
+    background:var(--good-bg);border:1px solid var(--good-bd);color:var(--good-ink);
+    border-radius:999px;padding:6px 18px;font-size:13.5px;font-weight:600;
+  }
+  .src-line{font-size:13.5px;color:var(--ink-soft);margin-top:16px}
+
+  footer{
+    margin-top:64px;border-top:1px solid var(--border);padding:28px 0 44px;
+    color:var(--ink-faint);font-size:13px;text-align:center;
+  }
+
+  #loadToast{
+    position:fixed;right:24px;bottom:24px;z-index:99;display:none;
+    background:#3b2f26;color:#faf7f2;border-radius:10px;padding:12px 20px;font-size:13.5px;
+    box-shadow:0 6px 24px rgba(60,45,30,.25);
+  }
+
+  /* ================= 动效层（纯加法，不改变版式） ================= */
+  /* ---------- 模型加载：原子轨道 loader ---------- */
+  #modelLoader{
+    position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:20px;
+    background:rgba(250,247,242,.92);
+    transition:opacity .45s ease;
+  }
+  #modelLoader.done{opacity:0;pointer-events:none}
+  .atom{position:relative;width:96px;height:96px}
+  .atom .nucleus{
+    position:absolute;left:50%;top:50%;width:18px;height:18px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#d8a07e,#b05c34 70%);
+    transform:translate(-50%,-50%);
+    animation:atomPulse 1.6s ease-in-out infinite;
+  }
+  .atom .orbit{
+    position:absolute;inset:0;border:1.5px solid rgba(176,92,52,.28);border-radius:50%;
+  }
+  .atom .orbit.o1{transform:rotate(0deg) scaleY(.46)}
+  .atom .orbit.o2{transform:rotate(60deg) scaleY(.46)}
+  .atom .orbit.o3{transform:rotate(120deg) scaleY(.46)}
+  .atom .e-wrap{position:absolute;inset:0;animation:atomSpin 2.4s linear infinite}
+  .atom .e-wrap.w2{animation-duration:3.1s;animation-direction:reverse}
+  .atom .e-wrap.w3{animation-duration:3.8s}
+  .atom .electron{
+    position:absolute;left:50%;top:50%;width:9px;height:9px;border-radius:50%;
+    background:var(--terra);box-shadow:0 0 6px rgba(176,92,52,.5);
+  }
+  .atom .e-wrap.w1 .electron{transform:rotate(0deg) translateX(44px) scaleY(2.1)}
+  .atom .e-wrap.w2 .electron{transform:rotate(60deg) translateX(44px) scaleY(2.1);background:var(--ochre)}
+  .atom .e-wrap.w3 .electron{transform:rotate(120deg) translateX(44px) scaleY(2.1);background:var(--terra-soft)}
+  @keyframes atomSpin{to{transform:rotate(360deg)}}
+  @keyframes atomPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.22)}}
+  #modelLoader .ml-text{font-size:14px;color:var(--ink-soft);letter-spacing:.06em}
+  #modelLoader .ml-pct{font-size:26px;font-weight:700;color:var(--terra);font-variant-numeric:tabular-nums}
+  #modelLoader .ml-bar{width:220px;height:5px;border-radius:3px;background:var(--clay-bg);overflow:hidden}
+  #modelLoader .ml-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,var(--terra-soft),var(--terra));
+    transition:width .18s ease-out}
+
+  /* ---------- 预测面板淡入（模型就绪后） ---------- */
+  #predictor .card.pred-panel{opacity:0;transform:translateY(10px);
+    transition:opacity .6s ease,transform .6s ease}
+  #predictor .card.pred-panel.ready{opacity:1;transform:none}
+
+  /* ---------- Hero 字符浮现 + 背景粒子 ---------- */
+  header.top{position:relative;overflow:hidden}
+  header.top .wrap{position:relative;z-index:1}
+  #heroFx{position:absolute;inset:0;width:100%;height:100%;opacity:.14;pointer-events:none;z-index:0}
+  .hero-ch{display:inline-block;opacity:0;transform:translateY(.55em);
+    animation:heroCh .55s cubic-bezier(.22,.8,.36,1) forwards}
+  .hero-ch.sp{width:.32em}
+  @keyframes heroCh{to{opacity:1;transform:none}}
+
+  /* ---------- 滚动入场（fade-up，一次） ---------- */
+  .fx-on .fx-reveal{opacity:0;transform:translateY(24px);
+    transition:opacity .6s ease-out,transform .6s ease-out}
+  .fx-on .fx-reveal.fx-in{opacity:1;transform:none}
+
+  /* ---------- 结果卡 stagger 入场 ---------- */
+  #predResult .metric{opacity:0;transform:translateY(14px);
+    transition:opacity .5s ease-out,transform .5s ease-out}
+  #predResult.fx-live .metric{opacity:1;transform:none}
+  #predResult.fx-live .metric:nth-child(1){transition-delay:0ms}
+  #predResult.fx-live .metric:nth-child(2){transition-delay:120ms}
+  #predResult.fx-live .metric:nth-child(3){transition-delay:240ms}
+  #predResult.fx-live .metric:nth-child(4){transition-delay:360ms}
+  #mVerdict .badge{display:inline-block}
+  #predResult.fx-live #mVerdict .badge{animation:badgePop .42s cubic-bezier(.3,1.6,.5,1) .24s backwards}
+  @keyframes badgePop{0%{transform:scale(.55);opacity:0}100%{transform:scale(1);opacity:1}}
+
+  /* ---------- ΔG_H* 火山迷你标尺 ---------- */
+  .dg-ruler{margin-top:18px;opacity:0;transform:translateY(10px);
+    transition:opacity .5s ease-out .42s,transform .5s ease-out .42s}
+  #predResult.fx-live .dg-ruler{opacity:1;transform:none}
+  .dg-ruler .dg-track{
+    position:relative;height:10px;border-radius:5px;margin:26px 6px 30px;
+    background:linear-gradient(90deg,#e8d9c8,#f2e8da 30%,#e6eee0 46%,#d9e5cf 50%,#e6eee0 54%,#f2e8da 70%,#e8d9c8);
+    border:1px solid var(--border);
+  }
+  .dg-ruler .dg-win{
+    position:absolute;top:-3px;bottom:-3px;left:45%;width:10%;border-radius:5px;
+    background:rgba(125,143,106,.22);border:1px solid rgba(125,143,106,.45);
+  }
+  .dg-ruler .dg-peak{
+    position:absolute;left:50%;top:-9px;transform:translateX(-50%);
+    width:2px;height:26px;background:var(--terra);border-radius:1px;
+  }
+  .dg-ruler .dg-peak::after{
+    content:'火山顶 ΔG=0';position:absolute;left:50%;transform:translateX(-50%);
+    bottom:28px;font-size:11px;color:var(--terra);white-space:nowrap;letter-spacing:.04em;
+  }
+  .dg-ruler .dg-peak::before{
+    content:'';position:absolute;left:50%;top:-6px;transform:translateX(-50%);
+    border:5px solid transparent;border-top-color:var(--terra);
+  }
+  .dg-ruler .dg-ptr{
+    position:absolute;left:0;top:50%;width:16px;height:16px;border-radius:50%;
+    background:var(--terra);border:2.5px solid #fffdf8;
+    box-shadow:0 1px 6px rgba(140,58,29,.45);
+    transform:translate(-8px,-50%);
+    transition:transform .8s cubic-bezier(.25,.9,.3,1);
+    z-index:2;
+  }
+  .dg-ruler .dg-scale{
+    display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);
+    margin:0 2px;font-variant-numeric:tabular-nums;
+  }
+  .dg-ruler .dg-cap{font-size:12px;color:var(--ink-faint);margin-top:2px}
+
+  /* ---------- 描述符百分位条：进入视口填充 ---------- */
+  .pct-fill{width:0 !important;transition:width .8s cubic-bezier(.25,.8,.3,1)}
+  .pct-row.fx-fill .pct-fill{width:100% !important}
+  .pct-marker{opacity:0;transition:opacity .4s ease .5s}
+  .pct-row.fx-fill .pct-marker{opacity:1}
+
+  /* ---------- 描述符分布定位面板（小倍数直方图） ---------- */
+  .dist-panel{margin-top:24px;border-top:1px dashed var(--border);padding-top:20px}
+  .dist-panel h4{font-size:14px;margin-bottom:4px}
+  .dist-panel .hint{font-size:12.5px;color:var(--ink-faint);margin-bottom:14px}
+  .dist-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .dist-cell{
+    background:#fbf6ee;border:1px solid var(--border);border-radius:11px;padding:12px 14px 10px;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .5s ease-out,transform .5s ease-out,background .3s,border-color .3s;
+  }
+  #predResult.fx-live .dist-cell{opacity:1;transform:none}
+  #predResult.fx-live .dist-cell:nth-child(1){transition-delay:120ms}
+  #predResult.fx-live .dist-cell:nth-child(2){transition-delay:220ms}
+  #predResult.fx-live .dist-cell:nth-child(3){transition-delay:320ms}
+  #predResult.fx-live .dist-cell:nth-child(4){transition-delay:420ms}
+  #predResult.fx-live .dist-cell:nth-child(5){transition-delay:520ms}
+  #predResult.fx-live .dist-cell:nth-child(6){transition-delay:620ms}
+  .dist-cell.warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+  .dist-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .dist-title .en{font-weight:400;color:var(--ink-faint);font-size:11px;margin-left:5px}
+  .dist-cell svg{display:block;width:100%;height:auto}
+  .dist-mk{transition:transform .6s ease-out}
+  .dist-cap{font-size:12px;color:var(--ink-soft);margin-top:6px;font-variant-numeric:tabular-nums}
+  .dist-cap b{color:var(--terra)}
+  .dist-note{font-size:12px;color:var(--warn-ink);margin-top:3px;line-height:1.55}
+
+  /* ---------- 微交互 ---------- */
+  button.btn{transition:background .15s,transform .15s ease,box-shadow .15s ease}
+  button.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 16px rgba(176,92,52,.28)}
+  button.btn:active:not(:disabled){transform:translateY(0)}
+  .card{transition:transform .2s ease,box-shadow .2s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(90,70,50,.09)}
+  table.cand tbody tr{transition:background .18s ease}
+  table.cand tr:hover td{background:#f6ecdd}
+  nav.anchors a{transition:all .18s ease}
+  nav.anchors a:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(90,70,50,.10)}
+
+  /* ---------- 表格排序/过滤重排过渡 ---------- */
+  #candBody tr{animation:rowFade .32s ease both}
+  #candBody tr:nth-child(1){animation-delay:0ms}
+  #candBody tr:nth-child(2){animation-delay:25ms}
+  #candBody tr:nth-child(3){animation-delay:50ms}
+  #candBody tr:nth-child(4){animation-delay:75ms}
+  #candBody tr:nth-child(5){animation-delay:100ms}
+  #candBody tr:nth-child(6){animation-delay:125ms}
+  #candBody tr:nth-child(7){animation-delay:150ms}
+  #candBody tr:nth-child(8){animation-delay:175ms}
+  #candBody tr:nth-child(n+9){animation-delay:200ms}
+  @keyframes rowFade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+  /* ---------- 方法板块：表格行 stagger ---------- */
+  .fx-on table.perf tbody tr{opacity:0;transform:translateY(10px);
+    transition:opacity .45s ease-out,transform .45s ease-out}
+  .fx-on table.perf.fx-rows tbody tr{opacity:1;transform:none}
+  table.perf.fx-rows tbody tr:nth-child(1){transition-delay:0ms}
+  table.perf.fx-rows tbody tr:nth-child(2){transition-delay:90ms}
+  table.perf.fx-rows tbody tr:nth-child(3){transition-delay:180ms}
+  table.perf.fx-rows tbody tr:nth-child(4){transition-delay:270ms}
+  table.perf.fx-rows tbody tr:nth-child(5){transition-delay:360ms}
+
+  /* ---------- 降级： prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001s !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001s !important;
+      transition-delay:0s !important;
+    }
+    html{scroll-behavior:auto}
+    #heroFx{display:none}
+  }
+
+  /* ---------- 指标带 ---------- */
+  .metric-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;margin-top:26px}
+  .metric-strip .ms{background:rgba(255,253,248,.7);border:1px solid var(--border);
+    border-radius:12px;padding:14px 16px}
+  .metric-strip .ms .k{font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+  .metric-strip .ms .v{font-size:23px;font-weight:700;color:var(--terra);
+    font-variant-numeric:tabular-nums;line-height:1.2;margin-top:2px}
+  .metric-strip .ms .v small{font-size:12px;font-weight:500;color:var(--ink-soft)}
+
+  /* ---------- GitHub 角标 ---------- */
+  .gh-ribbon{position:fixed;top:0;right:0;z-index:150;display:flex;gap:8px;align-items:center;
+    background:#3b2f26;color:#faf7f2;font-size:12.5px;padding:7px 14px;border-radius:0 0 0 12px;
+    text-decoration:none;box-shadow:0 2px 10px rgba(60,45,30,.25)}
+  .gh-ribbon:hover{background:var(--terra)}
+
+  /* ---------- 闸门板块 ---------- */
+  .gate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:6px}
+  .gate{background:var(--card);border:1px solid var(--border);border-left-width:4px;border-radius:12px;padding:18px 20px}
+  .gate.st-good{border-left-color:var(--sage)}
+  .gate.st-warn{border-left-color:var(--ochre)}
+  .gate.st-bad{border-left-color:var(--terra)}
+  .gate .g-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .gate .g-step{font-size:12px;letter-spacing:.12em;color:var(--ink-faint);font-weight:700}
+  .gate .g-title{font-size:15px;font-weight:700;margin:2px 0 8px}
+  .gate .g-note{font-size:13px;color:var(--ink-soft);line-height:1.65}
+  .gate .g-badge{font-size:12px;font-weight:700;border-radius:999px;padding:3px 11px;border:1px solid;white-space:nowrap}
+  .g-badge.ok{background:var(--good-bg);color:var(--good-ink);border-color:var(--good-bd)}
+  .g-badge.pend{background:var(--warn-bg);color:var(--warn-ink);border-color:var(--warn-bd)}
+  .g-badge.block{background:var(--bad-bg);color:var(--bad-ink);border-color:var(--bad-bd)}
+  .loop-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
+  .loop-kv .kv{background:var(--clay-bg);border-radius:10px;padding:12px 16px}
+  .loop-kv .kv .n{font-size:12px;color:var(--ink-soft)}
+  .loop-kv .kv .v{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+  @media(max-width:720px){
+    .pct-row{grid-template-columns:1fr;gap:4px;margin-bottom:14px}
+    .pct-row .val{text-align:left}
+    .field input{width:100%}
+    .dist-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<a class="gh-ribbon" href="https://github.com/LittleAlety/machine-learning-with-H-" target="_blank" rel="noopener">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.7-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+  GitHub 仓库 · 论文
+</a>
+
+<header class="top">
+  <canvas id="heroFx" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="kicker">HER 催化剂计算筛选</span>
+    <h1 id="heroTitle">H* 吸附能预测与 HER 催化位点筛选</h1>
+    <p class="sub">基于 1836 条 DFT 氢吸附能数据训练的 XGBoost 模型（400 棵树、84 个元素描述符，分组样本外 MAE = 0.1134 eV），在浏览器端即时预测合金表面的 H* 吸附能与析氢反应（HER）自由能 ΔG<sub>H*</sub>，并浏览模型给出的候选位点排序。所有推理在本地完成，不上传任何数据。</p>
+    <div class="metric-strip">
+      <div class="ms"><div class="k">样本外 MAE（OOF）</div><div class="v">0.113<small> eV</small></div></div>
+      <div class="ms"><div class="k">训练表面 / 元素</div><div class="v">1836<small> / 37</small></div></div>
+      <div class="ms"><div class="k">外部验证 MAE（CatHub）</div><div class="v">0.177<small> eV</small></div></div>
+      <div class="ms"><div class="k">训练数据官方核对</div><div class="v">99.2<small>% / 98.4%</small></div></div>
+    </div>
+    <nav class="anchors">
+      <a href="#predictor">① 在线预测器</a>
+      <a href="#candidates">② 候选浏览</a>
+      <a href="#volcano">③ 火山图总览</a>
+      <a href="#method">④ 方法与边界</a>
+      <a href="#loop">⑤ DFT 迭代闸门</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ ① 在线预测器 ============ -->
+<section id="predictor">
+  <div class="sec-head">
+    <div class="no">01 · PREDICTOR</div>
+    <h2>在线预测器</h2>
+    <p>输入化学式（自动规范化为字典序并约简计量数），模型在浏览器内完成 400 棵树的推理。结构/晶面默认按计量模式自动推断（纯金属 → A1(111)，3:1 → L1₂(111)，1:1 → L1₀(101)），也可手动覆盖。ΔG<sub>H*</sub> = E_ads + 0.24 eV（标准 HER 自由能校正）。</p>
+  </div>
+  <div class="card pred-panel">
+    <div class="pred-form">
+      <div class="field">
+        <label for="compInput">组成（化学式）</label>
+        <input id="compInput" type="text" placeholder="如 CuPt3 / Pt / AgNi3Zr" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="structSel">结构覆盖（可选）</label>
+        <select id="structSel">
+          <option value="">自动推断</option>
+          <option value="A1">A1（fcc 纯金属）</option>
+          <option value="L12">L1₂（3:1 有序合金）</option>
+          <option value="L10">L1₀（1:1 有序合金）</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="facetSel">晶面覆盖（可选）</label>
+        <select id="facetSel">
+          <option value="">自动推断</option>
+          <option value="111">(111)</option>
+          <option value="101">(101)</option>
+        </select>
+      </div>
+      <button class="btn" id="predBtn" disabled>模型加载中…</button>
+    </div>
+    <div class="load-note" id="loadNote">首次加载需下载约 4.6 MB 的模型文件（400 棵树的 JSON），请稍候；加载完成后即可离线反复预测。</div>
+    <div class="err-note" id="errNote"></div>
+
+    <div id="predResult">
+      <div class="res-grid">
+        <div class="metric">
+          <div class="k">H* 吸附能 E_ads</div>
+          <div class="v" id="mEads">—</div>
+        </div>
+        <div class="metric">
+          <div class="k">HER 自由能 ΔG<sub>H*</sub>（= E_ads + 0.24）</div>
+          <div class="v" id="mDG">—</div>
+        </div>
+        <div class="metric">
+          <div class="k">HER 活性判定</div>
+          <div class="v" style="font-size:17px;line-height:2.1" id="mVerdict">—</div>
+        </div>
+        <div class="metric">
+          <div class="k">定义域 / 结构</div>
+          <div class="v" style="font-size:15px;line-height:2.2" id="mDomain">—</div>
+        </div>
+      </div>
+      <div class="dg-ruler" aria-hidden="true">
+        <div class="dg-track" id="dgTrack">
+          <div class="dg-win"></div>
+          <div class="dg-peak"></div>
+          <div class="dg-ptr" id="dgPtr"></div>
+        </div>
+        <div class="dg-scale"><span>-1 eV</span><span>-0.5</span><span>0</span><span>+0.5</span><span>+1 eV</span></div>
+        <div class="dg-cap">ΔG<sub>H*</sub> 在 Sabatier 火山标尺上的位置（绿色窗口 |ΔG<sub>H*</sub>| ≤ 0.1 eV 为优秀区）</div>
+      </div>
+      <div class="res-line" id="mMeta"></div>
+      <ul class="warn-list" id="mWarns"></ul>
+
+      <div class="pct-block">
+        <h4>关键描述符在训练分布中的位置</h4>
+        <div class="hint">竖线为当前输入的特征取值，浅色带为训练集 1836 条样本的 min→max 区间；右侧为近似百分位（由 min / 中位数 / max 分段线性估计）。所选特征来自 SHAP 全局重要性前列。</div>
+        <div id="pctRows"></div>
+      </div>
+
+      <div class="dist-panel" id="distPanel">
+        <h4>描述符分布定位</h4>
+        <div class="hint">每个小图为训练集 1836 条样本中该描述符的分布直方图：浅绿带为 5–95 百分位区间（训练分布主要范围），灰色虚线为均值，醒目竖线为当前输入的取值位置。所选特征为全局 SHAP 重要性前列中物理意义直观的 6 个。</div>
+        <div class="dist-grid" id="distGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ② 候选浏览 ============ -->
+<section id="candidates">
+  <div class="sec-head">
+    <div class="no">02 · CANDIDATES</div>
+    <h2>候选浏览 · Top 50</h2>
+    <p>按预测 |ΔG<sub>H*</sub>| 从小到大排序的前 50 个候选位点。注意：排头部候选彼此在统计上不可区分（差异远小于模型误差），应视为同一候选簇而非严格名次。表中预测值来自建模流程的 OOF（out-of-fold）预测，与上方实时推理可能存在约 0.005 eV 的微小差异，属正常现象。</p>
+  </div>
+  <div class="card">
+    <div class="tbl-tools">
+      <input id="candSearch" type="text" placeholder="搜索组成，如 Pt、Ni…">
+      <span class="cnt" id="candCnt"></span>
+    </div>
+    <div class="tbl-scroll">
+      <table class="cand" id="candTable">
+        <thead>
+          <tr>
+            <th data-k="rank">排名</th>
+            <th data-k="comp">组成</th>
+            <th data-k="structure">结构</th>
+            <th data-k="facet">晶面</th>
+            <th data-k="pred_dG">预测 ΔG<sub>H*</sub> (eV)</th>
+            <th data-k="true_dG">实测 ΔG<sub>H*</sub> (eV)</th>
+            <th data-k="p_near">P<sub>near</sub></th>
+            <th data-k="red_flags">风险提示</th>
+          </tr>
+        </thead>
+        <tbody id="candBody"></tbody>
+      </table>
+    </div>
+    <div class="flag-note">
+      <b>风险提示含义：</b>
+      「强亲氧 X(表面稳定性存疑)」— 该元素亲氧性强，实际表面易氧化或重构，理想表面预测的可信度下降；
+      「含 LOEO 高误差元素 X」— 该元素在留一元素外推（LOEO）评估中误差偏高，预测不确定性更大；
+      「含放射性 Tc」— 涉及放射性元素，实验可操作性与应用价值受限。
+      无提示不代表已完成实验验证，仅表示未触发上述统计性检查。
+      P<sub>near</sub> 为 conformal 校准后的近热中性概率 P(|ΔG<sub>H*</sub>| ≤ 0.05 eV)，全库最大值为 0.391（受模型分辨力限制），点击表头可按其排序；「—」表示该组成暂无校准概率。
+    </div>
+  </div>
+</section>
+
+<!-- ============ ③ 火山图总览 ============ -->
+<section id="volcano">
+  <div class="sec-head">
+    <div class="no">03 · OVERVIEW</div>
+    <h2>火山图总览</h2>
+    <p>训练集 1836 条位点的样本外（OOF）预测结果全景。横轴与纵轴均为<b>导出量</b>而非原始测量：x 为 OOF 预测 ΔG<sub>H*</sub>，y 为其负绝对值（Sabatier 活性代理，越接近峰顶 0 越好）。在预测器中查询组成后，对应位点会在图上高亮。</p>
+  </div>
+  <div class="card">
+    <div class="chart-toggle">
+      <span>着色方式：</span>
+      <button data-color="n" class="on">按元素数（纯金属 / 合金）</button>
+      <button data-color="d">按定义域（域内 / 外推）</button>
+    </div>
+    <div id="volcanoChart" class="chart tall"></div>
+    <div class="chart-note">数据来源：predictions_all.json（训练集 OOF 预测）。x 轴标签「ΔG_H*（导出量）= E_ads + 0.24 eV」，y 轴「−|ΔG_H*|（导出量，活性代理）」。</div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <div id="histChart" class="chart" style="height:300px"></div>
+    <div class="chart-note">预测 ΔG<sub>H*</sub>（导出量）分布直方图。阴影区 |ΔG<sub>H*</sub>| ≤ 0.1 eV 为「优秀候选」窗口。</div>
+  </div>
+</section>
+
+<!-- ============ ④ 方法与边界 ============ -->
+<section id="method">
+  <div class="sec-head">
+    <div class="no">04 · METHOD & LIMITS</div>
+    <h2>方法与边界</h2>
+    <p>模型：XGBoost 回归（400 棵树，max_depth=7，η=0.03），输入为 84 个元素描述符（13 项元素属性的加权统计与众数 + 结构/晶面 one-hot），目标为最稳定位点 H* 吸附能 E_ads。当前上线版本（v3，84 特征）的分组样本外（OOF）MAE = 0.1134 eV；下表为上一代 36 特征模型（v2）的四种验证口径 MAE（单位 eV），供口径对比参考：</p>
+  </div>
+  <div class="card">
+    <table class="perf">
+      <thead><tr><th>评估口径</th><th>MAE (eV)</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><b>v3（84 特征）GroupKFold 样本外（OOF）</b></td><td class="num"><b>0.1134</b></td><td>当前上线模型；候选表与火山图均为此口径预测</td></tr>
+        <tr><td>v2 随机 5 折交叉验证</td><td class="num">0.120 ± 0.011</td><td>随机划分，含组成/位点泄漏，偏乐观</td></tr>
+        <tr><td>v2 GroupKFold（按组成分组）</td><td class="num">0.120</td><td>同一组成的不同位点不跨折，更接近真实泛化</td></tr>
+        <tr><td>v2 LOEO（留一元素外推）</td><td class="num">0.155</td><td>对未见元素的外推能力，诚实下限</td></tr>
+        <tr><td>v2 EqV2 跨库对比</td><td class="num">0.347</td><td>跨数据库、跨计算设置的粗筛口径，仅供相对比较</td></tr>
+        <tr><td>v2 CatHub 同质外部验证</td><td class="num">0.177</td><td>与训练集同源数据库的独立样本验证</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div id="shapChart" class="chart" style="height:380px"></div>
+    <div class="chart-note">SHAP 全局特征重要性（mean |SHAP|，单位 eV，对 1836 条训练样本的 TreeExplainer 结果）。族号与熔点类描述符主导预测，与 d 带理论的物理直觉一致。</div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <ul class="honesty">
+      <li><b>定位：</b>本工具在训练域内（37 种元素、A1/L1₀/L1₂ 表面）是<b>定量工具</b>（样本外 OOF MAE ≈ 0.113 eV）；跨数据库或域外组成仅为<b>粗筛参考</b>，预测器会以徽标明确标示外推情形。</li>
+      <li><b>候选簇：</b>候选榜单头部为<b>统计上不可区分</b>的一组位点（预测差异 &lt; 0.01 eV，远小于模型误差），排名先后不构成优先级依据。</li>
+      <li><b>位级一致：</b>浏览器端推理引擎与 Python XGBoost 参考实现逐位比对，20 个校验用例（84 特征，含域外组成与 mode 平局）预测与特征 <b>max diff = 0</b>（float32 逐步累加与分裂比较严格对齐，校验页：<a href="parity_check.html" style="color:inherit">parity_check.html</a>）。</li>
+    </ul>
+    <span class="parity-badge">✓ Parity 校验通过 · JS ≡ Python · max diff = 0</span>
+    <p class="src-line">数据来源：Mamun 等 2019 年高通量 H* 吸附数据集，经 CatBench 镜像获取，并已与 Catalysis-Hub 官方库交叉核对（覆盖率 99.2% / 能量一致率 98.4%）。</p>
+  </div>
+</section>
+
+<!-- ============ ⑤ C-3 v2 主动学习 DFT 迭代流水线 ============ -->
+<section id="loop">
+  <div class="sec-head">
+    <div class="no">05 · ACTIVE-LEARNING LOOP</div>
+    <h2>C-3 v2 主动学习 DFT 迭代流水线</h2>
+    <p>模型不是终点：我们预注册了一条带哈希链、锚定闸门与停止规则的 DFT 回灌流水线，用新算的弛豫结构压误差、压力测试外推，并证伪一个 CHGNet 弛豫伪影。闸门不追溯放宽，阴性与失败结果全部保留。当前为零核时审计态（本机无集群/QE），DFT 阶段如实标为未执行。</p>
+  </div>
+
+  <div class="gate-grid">
+    <div class="gate st-bad">
+      <div class="g-head"><span class="g-step">STAGE 1 · 第 1–2 周</span><span class="g-badge block">CONDITIONAL GO</span></div>
+      <div class="g-title">环境与双闸门</div>
+      <div class="g-note">
+        1.1 编译 QE 7.6 源码包 SHA256 已核验（7/7），但本机未编译 pw.x → <b>阻塞</b><br>
+        1.2 锚定闸门（9 个 (111) 表面，|ΔE_ads|≤0.1 eV）→ <b>待集群</b><br>
+        1.3 三探针核时实测 → <b>待集群</b><br>
+        1.4 MACE-MPA-0 辅助路径（可选）→ <b>待验证</b>
+      </div>
+    </div>
+    <div class="gate st-warn">
+      <div class="g-head"><span class="g-step">STAGE 2 · 第 3–8 周</span><span class="g-badge pend">NO-GO（待 Stage1）</span></div>
+      <div class="g-title">批次 A + 批次 B</div>
+      <div class="g-note">
+        <b>批次 A（10 体系，H*）：</b>主动学习采集函数顶部，压全局误差（回溯预期 ≈ −18%）<br>
+        <b>批次 B（10 体系 × H*/OH*）：</b>全部为 OH 外推点，独立压力测试「HER×ORR 空交集」<br>
+        出口判据：≥80% 体系收敛入档后回灌重跑主动学习。
+      </div>
+    </div>
+    <div class="gate st-warn">
+      <div class="g-head"><span class="g-step">STAGE 3 · 第 9–11 周</span><span class="g-badge pend">哨兵待命</span></div>
+      <div class="g-title">批次 C · 8 哨兵</div>
+      <div class="g-note">
+        Cr₃Pb、LaPb、CrTl、Co、CuFe₃、Fe₃Mo、FeTi、Ag₃Sc。<br>
+        停止规则：≥6/8 顶层位移 &lt; 0.5 Å → 确证 CHGNet 伪影、停跑其余 17 个；≥3/8 ≥0.5 Å → 升级全批次 DFT 审计。
+      </div>
+    </div>
+    <div class="gate st-good">
+      <div class="g-head"><span class="g-step">回灌 · 第 11–12 周</span><span class="g-badge pend">v5 条件候选</span></div>
+      <div class="g-title">回灌与 v5 复核</div>
+      <div class="g-note">
+        并入训练表 → 重跑主动学习 → 公平契约（Δ&gt;0.005 eV + 10 种子 + 嵌套 CV）。<br>
+        当前几何特征 v5：表面级 Δ=+0.0249 eV（10/10 种子），位点级 OOF 0.104 eV 未达 0.090 目标，<b>暂不上线</b>。
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="sec-head" style="margin-bottom:10px">
+      <div class="no">WHY THIS LOOP EXISTS</div>
+      <h2 style="font-size:18px;margin-top:2px">一个 40 倍弛豫伪影的预裁证据</h2>
+    </div>
+    <p style="font-size:14px;color:var(--ink-soft)">Phase 5 用 CHGNet 预弛豫时报告了剧烈表面重构。对 25 个候选体系的原子级直接预裁显示：<b>25/25 为 ARTIFACT</b>，而非真实重构。DFT 锚定的顶层层均位移中位数仅 <b>0.117 Å</b>（区间 0.022–0.403 Å），而 CHGNet 报告 <b>3.503 Å</b>——约 40 倍高估。8 个哨兵的 DFT 弛豫就是为了在回灌前把这个伪影钉死。</p>
+    <div class="loop-kv">
+      <div class="kv"><div class="n">预裁体系数</div><div class="v">25 / 25 ARTIFACT</div></div>
+      <div class="kv"><div class="n">DFT 顶层位移中位数</div><div class="v">0.117 Å</div></div>
+      <div class="kv"><div class="n">CHGNet 表面位移中位数</div><div class="v">3.503 Å</div></div>
+      <div class="kv"><div class="n">预算中点（探针前）</div><div class="v">199,875 核时</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    H* 吸附能预测与 HER 催化位点筛选 · 项目开发组 · 2026-09<br>
+    <a href="https://github.com/LittleAlety/machine-learning-with-H-" target="_blank" rel="noopener" style="color:var(--terra)">GitHub 仓库</a> ·
+    <a href="https://github.com/LittleAlety/machine-learning-with-H-/blob/main/PAPER.md" target="_blank" rel="noopener" style="color:var(--terra)">论文 PAPER.md</a> ·
+    数据：Mamun et al. 2019（CC-BY-4.0）经 Catalysis-Hub 官方库核对
+  </div>
+</footer>
+
+<div id="loadToast">正在加载模型文件（约 4.6 MB）…</div>
+
+<div id="modelLoader" role="status" aria-label="模型加载中">
+  <div class="atom">
+    <div class="orbit o1"></div>
+    <div class="orbit o2"></div>
+    <div class="orbit o3"></div>
+    <div class="e-wrap w1"><div class="electron"></div></div>
+    <div class="e-wrap w2"><div class="electron"></div></div>
+    <div class="e-wrap w3"><div class="electron"></div></div>
+    <div class="nucleus"></div>
+  </div>
+  <div class="ml-pct" id="mlPct">0%</div>
+  <div class="ml-bar"><i id="mlBarFill"></i></div>
+  <div class="ml-text" id="mlText">正在加载模型文件（约 4.6 MB）…</div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $ = function(id){ return document.getElementById(id); };
+document.documentElement.classList.add('fx-on');
+
+/* ---------- Hero：主标题字符逐个浮现（保留原文本） ---------- */
+(function heroTitle(){
+  var h = $('heroTitle');
+  if(!h) return;
+  var text = h.textContent;
+  h.setAttribute('aria-label', text);
+  h.textContent = '';
+  var i = 0;
+  Array.prototype.forEach.call(text, function(ch){
+    var sp = document.createElement('span');
+    sp.className = 'hero-ch' + (ch === ' ' ? ' sp' : '');
+    sp.setAttribute('aria-hidden', 'true');
+    sp.textContent = (ch === ' ') ? ' ' : ch;
+    sp.style.animationDelay = (i * 38) + 'ms';
+    h.appendChild(sp);
+    if(ch !== ' ') i++;
+  });
+})();
+
+/* ---------- Hero：低饱和暖色漂浮粒子（≤60，rAF 节流，可降级） ---------- */
+(function heroParticles(){
+  var cv = $('heroFx');
+  if(!cv) return;
+  var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(REDUCED){ cv.remove(); return; }
+  var ctx = cv.getContext('2d');
+  var COLORS = ['#b05c34', '#c2924a', '#7d8f6a', '#d8a07e'];
+  var W = 0, H = 0, dpr = Math.min(2, window.devicePixelRatio || 1);
+  var N = 42, ps = [];
+  function resize(){
+    var r = cv.parentNode.getBoundingClientRect();
+    W = r.width; H = r.height;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function seed(){
+    ps = [];
+    for(var i = 0; i < N; i++){
+      ps.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: 1.2 + Math.random() * 2.6,
+        vx: (Math.random() - .5) * .16, vy: (Math.random() - .5) * .12,
+        c: COLORS[i % COLORS.length],
+        ph: Math.random() * Math.PI * 2
+      });
+    }
+  }
+  resize(); seed();
+  window.addEventListener('resize', function(){ resize(); seed(); });
+  var last = 0;
+  function frame(t){
+    if(t - last < 33){ requestAnimationFrame(frame); return; }  /* ~30fps 节流 */
+    last = t;
+    ctx.clearRect(0, 0, W, H);
+    for(var i = 0; i < ps.length; i++){
+      var p = ps[i];
+      p.x += p.vx; p.y += p.vy; p.ph += .008;
+      if(p.x < -6) p.x = W + 6; if(p.x > W + 6) p.x = -6;
+      if(p.y < -6) p.y = H + 6; if(p.y > H + 6) p.y = -6;
+      var a = .35 + .3 * Math.sin(p.ph);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.c;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------- 全局状态 ---------- */
+var engine = null, descStats = null, allPred = null, lastResult = null, shapData = null, distData = null;
+var volcanoChart = null, histChart = null, shapChart = null;
+
+/* ---------- 描述符中文名 ---------- */
+var FEATURE_LABELS = {
+  group_wmean:'加权平均族号', d_el_wmean:'加权平均 d 电子数', en_wmean:'加权平均电负性',
+  en_min:'最小电负性', radius_min:'最小原子半径 (pm)', group_min:'最小族号',
+  group_max:'最大族号', en_wstd:'电负性加权标准差', period_min:'最小周期',
+  ie1_wmean:'加权平均第一电离能 (eV)', radius_wmean:'加权平均原子半径 (pm)',
+  en_max:'最大电负性', ie1_min:'最小第一电离能 (eV)', radius_wstd:'原子半径加权标准差 (pm)',
+  d_el_min:'最小 d 电子数', n_elements:'元素个数',
+  /* v3（84 特征）新增属性 */
+  melting_point_max:'最大熔点 (K)', melting_point_wmean:'加权平均熔点 (K)',
+  melting_point_wstd:'熔点加权标准差 (K)', melting_point_range:'熔点极差 (K)',
+  group_mode:'族号众数（主组元）', nd_unfilled_wmean:'加权平均未填满 d 电子数',
+  mendeleev_number_wmean:'加权平均门捷列夫数', covalent_radius_wmean:'加权平均共价半径 (pm)',
+  n_valence_wmean:'加权平均价电子数'
+};
+/* 预测器百分位展示的特征（v3 SHAP 全局前 6，物理意义清晰） */
+var PCT_FEATURES = ['group_wmean','melting_point_max','group_mode','nd_unfilled_wmean','melting_point_wmean','en_wmean'];
+
+/* ---------- 资源加载 ---------- */
+function fetchJSON(p){ return fetch(p).then(function(r){
+  if(!r.ok) throw new Error(p+' HTTP '+r.status);
+  return r.json();
+});}
+
+/* ---------- 动效全局：降级偏好 ---------- */
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- 模型加载：原子轨道 loader + 字节进度 ---------- */
+var mlEl = $('modelLoader'), mlPct = $('mlPct'), mlBar = $('mlBarFill'), mlText = $('mlText');
+if(REDUCED && mlEl) mlEl.style.transition = 'none';
+function setLoadProgress(got, total){
+  var pct = total ? Math.min(100, Math.round(got / total * 100)) : 0;
+  mlPct.textContent = pct + '%';
+  mlBar.style.width = pct + '%';
+  mlText.textContent = '正在加载模型文件（' + (got/1048576).toFixed(1) + ' / ' + (total/1048576).toFixed(1) + ' MB）…';
+}
+function fetchModelWithProgress(url){
+  return fetch(url).then(function(r){
+    if(!r.ok) throw new Error(url+' HTTP '+r.status);
+    var total = +r.headers.get('Content-Length') || 4629468;
+    if(!r.body || !r.body.getReader){
+      return r.json().then(function(j){ setLoadProgress(total, total); return j; });
+    }
+    var reader = r.body.getReader(), chunks = [], got = 0;
+    function pump(){
+      return reader.read().then(function(res){
+        if(res.done){
+          var buf = new Uint8Array(got), off = 0;
+          chunks.forEach(function(c){ buf.set(c, off); off += c.byteLength; });
+          setLoadProgress(got, total);
+          return JSON.parse(new TextDecoder('utf-8').decode(buf));
+        }
+        chunks.push(res.value); got += res.value.byteLength;
+        setLoadProgress(got, total);
+        return pump();
+      });
+    }
+    return pump();
+  });
+}
+function dismissLoader(){
+  mlEl.classList.add('done');
+  setTimeout(function(){ if(mlEl.parentNode) mlEl.parentNode.removeChild(mlEl); }, 600);
+  var panel = document.querySelector('#predictor .pred-panel');
+  if(panel) panel.classList.add('ready');
+}
+
+$('loadToast').style.display = 'block';
+
+var modelReady = Promise.all([fetchModelWithProgress('assets/model.json'), fetchJSON('assets/elements.json')])
+  .then(function(rs){
+    engine = HStarPredict.createEngine(rs[0], rs[1]);
+    $('predBtn').disabled = false;
+    $('predBtn').textContent = '预测';
+    $('loadNote').style.display = 'none';
+    $('loadToast').style.display = 'none';
+    dismissLoader();
+  })
+  .catch(function(e){
+    $('loadNote').textContent = '模型加载失败：' + e.message + '（请通过本地 HTTP 服务访问，而非 file:// 直接打开）';
+    $('loadToast').style.display = 'none';
+    dismissLoader();
+  });
+
+var dataReady = Promise.all([
+  fetchJSON('assets/candidates_top.json'),
+  fetchJSON('assets/predictions_all.json'),
+  fetchJSON('assets/shap_global.json'),
+  fetchJSON('assets/descriptor_stats.json'),
+  fetchJSON('assets/descriptor_distributions.json'),
+  fetchJSON('p_near.json')
+]).then(function(rs){
+  initCandidateTable(rs[0], rs[5]);
+  allPred = rs[1];
+  descStats = rs[3].stats;
+  distData = rs[4];
+  initVolcano(allPred);
+  initHist(allPred);
+  shapData = rs[2].top15;
+  armShapReveal();
+}).catch(function(e){
+  console.error('数据资源加载失败:', e);
+});
+
+/* ---------- ① 预测器 ---------- */
+function verdict(dG){
+  var a = Math.abs(dG);
+  if(a <= 0.1) return {t:'优秀候选', c:'good'};
+  if(a <= 0.2) return {t:'潜力候选', c:'warn'};
+  if(dG < -0.2) return {t:'H 结合过强', c:'bad'};
+  return {t:'H 结合过弱', c:'neut'};
+}
+function approxPct(st, v){
+  if(!st) return null;
+  if(v <= st.min) return 0;
+  if(v >= st.max) return 100;
+  if(v <= st.median) return st.median > st.min ? 50*(v-st.min)/(st.median-st.min) : 50;
+  return 50 + (st.max > st.median ? 50*(v-st.median)/(st.max-st.median) : 0);
+}
+function fmt(x, d){ return (x>=0?'+':'') + x.toFixed(d===undefined?4:d); }
+
+/* ---------- 数值 count-up（0→终值，800ms 缓出，可降级） ---------- */
+function countUp(el, target, render){
+  if(REDUCED){ el.innerHTML = render(target); return; }
+  var t0 = null, DUR = 800;
+  function step(t){
+    if(t0 === null) t0 = t;
+    var k = Math.min(1, (t - t0) / DUR);
+    var e = 1 - Math.pow(1 - k, 3);            /* easeOutCubic */
+    el.innerHTML = render(target * e);
+    if(k < 1) requestAnimationFrame(step);
+    else el.innerHTML = render(target);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ---------- ΔG 火山迷你标尺指针（transform 平滑滑动） ---------- */
+function moveDgPointer(dG){
+  var track = $('dgTrack'), ptr = $('dgPtr');
+  if(!track || !ptr) return;
+  var frac = Math.max(0, Math.min(1, (dG + 1) / 2));   /* -1 ~ +1 eV → 0 ~ 1 */
+  var x = frac * track.clientWidth;
+  ptr.style.transform = 'translate(' + (x - 8).toFixed(1) + 'px,-50%)';
+}
+window.addEventListener('resize', function(){
+  if(lastResult) moveDgPointer(lastResult.dG_H);
+});
+
+function runPredict(){
+  var comp = $('compInput').value.trim();
+  var err = $('errNote');
+  err.style.display = 'none';
+  if(!comp){ err.textContent = '请输入化学式，例如 CuPt3'; err.style.display='block'; return; }
+  var opts = {};
+  var st = $('structSel').value, fc = $('facetSel').value;
+  if(st){ opts.structure = st; opts.facet = fc || (st==='L10' ? '101' : '111'); }
+  else if(fc){ opts.structure = (fc==='101') ? 'L10' : 'L12'; opts.facet = fc; }
+  var r;
+  try { r = engine.predictFromComp(comp, opts); }
+  catch(e){ err.textContent = '无法解析：' + e.message; err.style.display='block'; $('predResult').style.display='none'; return; }
+  lastResult = r;
+
+  /* 重置并复用入场动画 */
+  var pr = $('predResult');
+  pr.classList.remove('fx-live');
+
+  countUp($('mEads'), r.E_ads, function(v){ return fmt(v) + ' <small>eV</small>'; });
+  countUp($('mDG'), r.dG_H, function(v){ return fmt(v) + ' <small>eV</small>'; });
+  var vd = verdict(r.dG_H);
+  $('mVerdict').innerHTML = '<span class="badge '+vd.c+'">'+vd.t+'</span>';
+  $('mDomain').innerHTML = r.in_domain
+    ? '<span class="badge good">域内预测</span>'
+    : '<span class="badge bad">外推（仅供参考）</span>';
+  $('mMeta').innerHTML =
+    '规范化组成：<b>'+r.comp+'</b> · 元素数：'+r.n_elements+
+    ' · 结构：'+(r.structure||'未知')+' · 晶面：'+(r.facet||'未知');
+  var wl = $('mWarns'); wl.innerHTML = '';
+  (r.warnings||[]).forEach(function(w){
+    var li = document.createElement('li'); li.textContent = w; wl.appendChild(li);
+  });
+
+  /* 百分位条形 */
+  var box = $('pctRows'); box.innerHTML = '';
+  if(descStats){
+    PCT_FEATURES.forEach(function(f){
+      var stt = descStats[f], v = r.features[f];
+      if(!stt || v === undefined) return;
+      var pct = approxPct(stt, v);
+      var pos = Math.max(0, Math.min(100, pct));
+      var row = document.createElement('div');
+      row.className = 'pct-row';
+      row.innerHTML =
+        '<div class="name">'+(FEATURE_LABELS[f]||f)+'</div>'+
+        '<div class="pct-track"><div class="pct-fill" style="width:100%"></div>'+
+        '<div class="pct-marker" style="left:'+pos.toFixed(1)+'%"></div></div>'+
+        '<div class="val">'+ (+v.toFixed(3)) +' · P'+Math.round(pct)+'</div>';
+      box.appendChild(row);
+      observeFill(row);
+    });
+  }
+  /* 分布定位面板：先以初始态插入，再由 fx-live 触发 stagger 入场 */
+  renderDistPanel(r);
+  pr.style.display = 'block';
+  /* 触发结果入场 stagger（display 切换后强制 reflow 以重放动画） */
+  void pr.offsetWidth;
+  pr.classList.add('fx-live');
+  moveDgPointer(r.dG_H);
+  highlightOnVolcano(r);
+}
+
+/* 百分位条：进入视口后从 0 填充（结果卡通常已在视口内，IO 兼容滚动场景） */
+var fillIO = ('IntersectionObserver' in window) ? new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add('fx-fill'); fillIO.unobserve(en.target); }
+  });
+}, { threshold: .25 }) : null;
+function observeFill(row){
+  if(REDUCED || !fillIO){ row.classList.add('fx-fill'); return; }
+  fillIO.observe(row);
+}
+
+/* ---------- 描述符分布定位面板（小倍数直方图，手绘 SVG） ---------- */
+/* 取 descriptor_distributions.json 中 SHAP 全局前 12 特征的前 6 个
+ *（JSON 内已含中文名映射与排名顺序；缺数据时回退到硬编码清单） */
+var DIST_FEATURES_FALLBACK = ['group_wmean','melting_point_max','group_mode','nd_unfilled_wmean','melting_point_wmean','en_wmean'];
+function distFeatures(){
+  if(distData && distData.features){
+    var ks = Object.keys(distData.features);
+    if(ks.length >= 6) return ks.slice(0, 6);
+  }
+  return DIST_FEATURES_FALLBACK;
+}
+
+function fmtVal(v){
+  var a = Math.abs(v);
+  if(a >= 100) return v.toFixed(0);
+  if(a >= 10) return v.toFixed(1);
+  return (+v.toFixed(3)).toString();
+}
+/* 由直方图计数估计精确百分位（含 bin 内线性插值），优于 min/中位数/max 分段估计 */
+function distPercentile(d, v){
+  var e = d.bin_edges, c = d.counts, n = c.length, total = 0, i;
+  for(i = 0; i < n; i++) total += c[i];
+  if(!total) return 50;
+  if(v <= e[0]) return 0;
+  if(v >= e[n]) return 100;
+  var below = 0;
+  for(i = 0; i < n; i++){
+    if(v >= e[i+1]) below += c[i];
+    else { below += c[i] * (v - e[i]) / (e[i+1] - e[i]); break; }
+  }
+  return below / total * 100;
+}
+
+function renderDistPanel(r){
+  var panel = $('distPanel'), grid = $('distGrid');
+  grid.innerHTML = '';
+  if(!distData || !distData.features){ panel.style.display = 'none'; return; }
+  panel.style.display = '';
+  var globalWarn = !r.in_domain;
+
+  distFeatures().forEach(function(f){
+    var d = distData.features[f]; if(!d) return;
+    var v = r.features[f]; if(v === undefined || v === null || isNaN(v)) return;
+    var e = d.bin_edges, c = d.counts, n = c.length;
+    var e0 = e[0], eN = e[n];
+    var X0 = 8, X1 = 292, YB = 96, H = 80;
+    function sx(x){ return X0 + (x - e0) / (eN - e0) * (X1 - X0); }
+    var maxC = 1, i;
+    for(i = 0; i < n; i++){ if(c[i] > maxC) maxC = c[i]; }
+
+    var pct = distPercentile(d, v);
+    var outRange = (v < d.p5 || v > d.p95);
+    var warn = outRange || globalWarn;
+    var vx = Math.max(X0 - 2, Math.min(X1 + 2, sx(v)));
+    var mx = sx(d.mean);
+    var col = warn ? '#a03c22' : '#b05c34';
+
+    var svg = '<svg viewBox="0 0 300 110" role="img" aria-label="'+d.label+'训练分布定位">';
+    /* 5–95 百分位主区间带 */
+    svg += '<rect x="'+sx(d.p5).toFixed(1)+'" y="'+(YB-H)+'" width="'+(sx(d.p95)-sx(d.p5)).toFixed(1)+'" height="'+H+'" fill="rgba(125,143,106,0.13)"/>';
+    /* 训练分布直方图（暖灰/米色填充） */
+    for(i = 0; i < n; i++){
+      if(!c[i]) continue;
+      var bx = sx(e[i]), bw = Math.max(1, sx(e[i+1]) - sx(e[i]) - 0.6);
+      var bh = c[i] / maxC * H;
+      svg += '<rect x="'+bx.toFixed(1)+'" y="'+(YB-bh).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" fill="'+(warn?'#dfc2a5':'#d8cbb2')+'"/>';
+    }
+    /* 基线 + 均值虚线 */
+    svg += '<line x1="'+X0+'" y1="'+YB+'" x2="'+X1+'" y2="'+YB+'" stroke="#c9bba6" stroke-width="1"/>';
+    svg += '<line x1="'+mx.toFixed(1)+'" y1="'+(YB-H-2)+'" x2="'+mx.toFixed(1)+'" y2="'+YB+'" stroke="#a8977f" stroke-width="1" stroke-dasharray="3 3"/>';
+    /* 当前取值标记线（入场时从均值滑动到实际位置） */
+    svg += '<g class="dist-mk" data-from="'+mx.toFixed(1)+'" data-to="'+vx.toFixed(1)+'" style="transform:translateX('+mx.toFixed(1)+'px)">'
+        + '<line x1="0" y1="'+(YB-H-4)+'" x2="0" y2="'+YB+'" stroke="'+col+'" stroke-width="2.5"/>'
+        + '<circle cx="0" cy="'+(YB-H-4)+'" r="3.2" fill="'+col+'"/>'
+        + '</g>';
+    /* 轴端刻度 */
+    svg += '<text x="'+X0+'" y="107" font-size="8.5" fill="#a8977f">'+fmtVal(e0)+'</text>';
+    svg += '<text x="'+X1+'" y="107" font-size="8.5" fill="#a8977f" text-anchor="end">'+fmtVal(eN)+'</text>';
+    svg += '</svg>';
+
+    var capText;
+    if(v < d.p5) capText = '低于 5 分位 · 取值 '+fmtVal(v);
+    else if(v > d.p95) capText = '高于 95 分位 · 取值 '+fmtVal(v);
+    else if(pct < 1) capText = '位于训练分布的 <b>不足 1 分位</b>（分布下缘） · 取值 '+fmtVal(v);
+    else if(pct > 99) capText = '位于训练分布的 <b>99 分位以上</b>（分布上缘） · 取值 '+fmtVal(v);
+    else capText = '位于训练分布的 <b>'+Math.round(pct)+' 分位</b> · 取值 '+fmtVal(v);
+    var noteText = outRange
+      ? '超出训练分布主要范围，预测置信度降低'
+      : '当前组成为域外输入（外推），定位仅供参考，预测置信度降低';
+
+    var cell = document.createElement('div');
+    cell.className = 'dist-cell' + (warn ? ' warn' : '');
+    cell.innerHTML =
+      '<div class="dist-title">'+d.label+'<span class="en">'+f+'</span></div>'+svg+
+      '<div class="dist-cap">'+capText+'</div>'+
+      (warn ? '<div class="dist-note">'+noteText+'</div>' : '');
+    grid.appendChild(cell);
+  });
+
+  /* 标记线动画：从分布均值滑动到实际位置（600ms ease-out，reduced-motion 直接到位） */
+  grid.querySelectorAll('.dist-mk').forEach(function(g){
+    var from = g.getAttribute('data-from'), to = g.getAttribute('data-to');
+    if(REDUCED){ g.style.transition = 'none'; g.style.transform = 'translateX('+to+'px)'; return; }
+    g.style.transition = 'none';
+    g.style.transform = 'translateX('+from+'px)';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        g.style.transition = '';
+        g.style.transform = 'translateX('+to+'px)';
+      });
+    });
+  });
+}
+
+$('predBtn').addEventListener('click', runPredict);
+$('compInput').addEventListener('keydown', function(e){ if(e.key==='Enter' && !$('predBtn').disabled) runPredict(); });
+
+/* ---------- ② 候选表 ---------- */
+var candRows = [], sortKey = 'rank', sortAsc = true;
+function initCandidateTable(rows, pnear){
+  candRows = rows;
+  var pnMap = {};
+  (pnear || []).forEach(function(p){
+    pnMap[p.comp + '|' + p.structure + '|' + String(p.facet)] = p.p_near;
+  });
+  candRows.forEach(function(r){
+    var v = pnMap[r.comp + '|' + r.structure + '|' + String(r.facet)];
+    r.p_near = (v === undefined) ? null : v;
+  });
+  renderCandTable();
+  document.querySelectorAll('#candTable th').forEach(function(th){
+    th.addEventListener('click', function(){
+      var k = th.getAttribute('data-k');
+      if(sortKey === k) sortAsc = !sortAsc; else { sortKey = k; sortAsc = (k !== 'p_near'); }
+      renderCandTable();
+    });
+  });
+  $('candSearch').addEventListener('input', renderCandTable);
+}
+function renderCandTable(){
+  var q = $('candSearch').value.trim().toLowerCase();
+  var rows = candRows.filter(function(r){ return !q || r.comp.toLowerCase().indexOf(q) >= 0; });
+  rows = rows.slice().sort(function(a,b){
+    var va = a[sortKey], vb = b[sortKey];
+    if(sortKey === 'p_near'){ va = (va == null) ? -1 : va; vb = (vb == null) ? -1 : vb; }
+    if(typeof va === 'string'){ va = va || '\uffff'; vb = vb || '\uffff'; }
+    var c = (va < vb) ? -1 : (va > vb ? 1 : 0);
+    return sortAsc ? c : -c;
+  });
+  var tb = $('candBody'); tb.innerHTML = '';
+  rows.forEach(function(r){
+    var flags = (r.red_flags || '').split(';').filter(Boolean)
+      .map(function(f){ return '<span class="flag">'+f+'</span>'; }).join('') || '<span style="color:#b3a48d">—</span>';
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+r.rank+'</td><td class="comp">'+r.comp+'</td><td>'+r.structure+'</td><td>('+r.facet+')</td>'+
+      '<td>'+fmt(r.pred_dG,4)+'</td><td>'+fmt(r.true_dG,4)+'</td>'+
+      '<td>'+(r.p_near == null ? '<span style="color:#b3a48d">—</span>' : r.p_near.toFixed(3))+'</td><td>'+flags+'</td>';
+    tb.appendChild(tr);
+  });
+  $('candCnt').textContent = '显示 '+rows.length+' / '+candRows.length+' 条 · 点击表头排序';
+  document.querySelectorAll('#candTable th .arr').forEach(function(s){ s.remove(); });
+  var th = document.querySelector('#candTable th[data-k="'+sortKey+'"]');
+  if(th){ var sp = document.createElement('span'); sp.className='arr'; sp.textContent = sortAsc?'▲':'▼'; th.appendChild(sp); }
+}
+
+/* ---------- ③ 火山图与直方图 ---------- */
+var PALETTE = { pure:'#b05c34', alloy:'#c9a35f', ind:'#7d8f6a', outd:'#c0705a', hl:'#8c3a1d' };
+var colorMode = 'n';
+
+function nElementsOf(comp){ var m = comp.match(/[A-Z][a-z]?/g); return m ? m.length : 0; }
+
+function volcanoOption(){
+  var groups = {};
+  allPred.forEach(function(r){
+    var key;
+    if(colorMode === 'n') key = (nElementsOf(r.comp) === 1) ? '纯金属' : '合金';
+    else key = r.in_domain ? '域内' : '外推';
+    if(!groups[key]) groups[key] = [];
+    groups[key].push([ +r.dG_pred.toFixed(5), -Math.abs(r.dG_pred), r.comp, r.structure, r.facet ]);
+  });
+  var colors = colorMode === 'n' ? [PALETTE.pure, PALETTE.alloy] : [PALETTE.ind, PALETTE.outd];
+  var series = Object.keys(groups).map(function(k, i){
+    return {
+      name: k, type: 'scatter', data: groups[k],
+      symbolSize: colorMode==='n' && k==='纯金属' ? 8 : 5,
+      itemStyle: { color: colors[i % colors.length], opacity: 0.55 },
+      emphasis: { itemStyle: { opacity: 0.95 } },
+      large: true, largeThreshold: 2000
+    };
+  });
+  if(lastResult){
+    series.push({
+      name: '当前选中', type: 'effectScatter',
+      data: [[ +lastResult.dG_H.toFixed(5), -Math.abs(lastResult.dG_H), lastResult.comp ]],
+      symbolSize: 15, symbol: 'diamond',
+      rippleEffect: { brushType: 'stroke', scale: 3.2, period: 3 },
+      itemStyle: { color: PALETTE.hl, borderColor:'#fff', borderWidth: 1.5 },
+      label: { show: true, formatter: lastResult.comp, position: 'top', color: PALETTE.hl, fontWeight: 'bold' },
+      z: 10
+    });
+  }
+  return {
+    animation: false,
+    grid: { left: 70, right: 30, top: 56, bottom: 55 },
+    legend: { top: 4, textStyle: { color: '#7a6a58' } },
+    tooltip: {
+      trigger: 'item', backgroundColor:'#fffdf8', borderColor:'#e7dccb', textStyle:{color:'#3b2f26'},
+      formatter: function(p){
+        var d = p.data;
+        return '<b>'+d[2]+'</b>'+(d[3]?' · '+d[3]+' ('+d[4]+')':'')+
+          '<br>ΔG_H*（导出量）= '+fmt(d[0],4)+' eV<br>−|ΔG_H*| = '+d[1].toFixed(4)+' eV';
+      }
+    },
+    xAxis: {
+      name: 'ΔG_H*（预测，导出量，eV）', nameLocation: 'middle', nameGap: 32,
+      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
+      axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
+    },
+    yAxis: {
+      name: '−|ΔG_H*|（导出量，Sabatier 活性代理，eV）', nameLocation:'middle', nameGap: 48,
+      max: 0.05,
+      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
+      axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
+    },
+    series: series
+  };
+}
+function initVolcano(){
+  volcanoChart = echarts.init($('volcanoChart'));
+  volcanoChart.setOption(volcanoOption());
+  document.querySelectorAll('.chart-toggle button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.chart-toggle button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      colorMode = b.getAttribute('data-color');
+      volcanoChart.setOption(volcanoOption(), { replaceMerge: ['series'] });
+    });
+  });
+}
+function highlightOnVolcano(r){
+  if(!volcanoChart) return;
+  var opt = volcanoOption();
+  if(!REDUCED){
+    /* 联动定位：短暂开启动画，让选中点平滑移动到新位置 */
+    opt.animation = true;
+    opt.animationDuration = 650;
+    opt.animationEasing = 'cubicOut';
+    opt.animationDurationUpdate = 650;
+    opt.animationEasingUpdate = 'cubicOut';
+  }
+  volcanoChart.setOption(opt, { replaceMerge: ['series'] });
+}
+
+function initHist(rows){
+  histChart = echarts.init($('histChart'));
+  var vals = rows.map(function(r){ return r.dG_pred; });
+  var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+  var nb = 46, bw = (mx - mn) / nb, bins = new Array(nb).fill(0);
+  vals.forEach(function(v){
+    var i = Math.min(nb-1, Math.floor((v-mn)/bw)); bins[i]++;
+  });
+  var data = bins.map(function(c,i){ return [+(mn + (i+0.5)*bw).toFixed(4), c]; });
+  histChart.setOption({
+    animation: false,
+    grid: { left: 60, right: 30, top: 34, bottom: 50 },
+    tooltip: { trigger:'axis', backgroundColor:'#fffdf8', borderColor:'#e7dccb', textStyle:{color:'#3b2f26'},
+      formatter: function(ps){ var p=ps[0]; return 'ΔG_H*（导出量）≈ '+fmt(p.data[0],3)+' eV<br>位点数：'+p.data[1]; } },
+    xAxis: { type:'value', name:'ΔG_H*（预测，导出量，eV）', nameLocation:'middle', nameGap:30,
+      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{show:false}, axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'} },
+    yAxis: { type:'value', name:'位点数', axisLine:{lineStyle:{color:'#c9bba6'}},
+      splitLine:{lineStyle:{color:'#f0e8dc'}}, axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'} },
+    series: [{
+      type:'bar', data:data, barCategoryGap:'12%',
+      itemStyle:{ color:'#d8a07e', borderRadius:[3,3,0,0] },
+      markArea: {
+        silent: true,
+        itemStyle:{ color:'rgba(125,143,106,0.16)' },
+        label:{ color:'#5a7150', fontSize:12 },
+        data: [[ { xAxis:-0.1, name:'|ΔG_H*| ≤ 0.1 eV' }, { xAxis:0.1 } ]]
+      }
+    }]
+  });
+}
+
+/* ---------- ④ SHAP（进入视口时动画加载） ---------- */
+function initShap(top15, animate){
+  shapChart = echarts.init($('shapChart'));
+  var feats = top15.slice().reverse();
+  shapChart.setOption({
+    animation: !!animate,
+    animationDuration: 900,
+    animationEasing: 'cubicOut',
+    animationDelay: function(idx){ return animate ? idx * 45 : 0; },
+    grid: { left: 190, right: 60, top: 20, bottom: 40 },
+    tooltip: { backgroundColor:'#fffdf8', borderColor:'#e7dccb', textStyle:{color:'#3b2f26'},
+      formatter: function(p){ return (FEATURE_LABELS[p.name]||p.name)+' ('+p.name+')<br>mean |SHAP| = '+p.value.toFixed(4)+' eV'; } },
+    xAxis: { type:'value', name:'mean |SHAP| (eV)', nameLocation:'middle', nameGap:28,
+      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
+      axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'} },
+    yAxis: { type:'category',
+      data: feats.map(function(f){ return f.feature; }),
+      axisLabel:{ color:'#3b2f26',
+        formatter: function(v){ return FEATURE_LABELS[v] || v; } },
+      axisLine:{lineStyle:{color:'#c9bba6'}} },
+    series: [{
+      type:'bar', data: feats.map(function(f){ return +f.mean_abs_shap.toFixed(4); }),
+      barWidth: '58%',
+      itemStyle:{ color:'#c2924a', borderRadius:[0,4,4,0] }
+    }]
+  });
+}
+
+function armShapReveal(){
+  var el = $('shapChart');
+  if(!shapData || !el) return;
+  if(REDUCED || !('IntersectionObserver' in window)){ initShap(shapData, false); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){ initShap(shapData, true); io.disconnect(); }
+    });
+  }, { threshold: .2 });
+  io.observe(el);
+}
+
+/* ---------- 滚动入场：板块 fade-up（一次） + 五口径表行 stagger ---------- */
+(function scrollReveals(){
+  var secs = document.querySelectorAll('main section');
+  var perf = document.querySelector('table.perf');
+  if(REDUCED || !('IntersectionObserver' in window)){
+    secs.forEach(function(s){ s.classList.add('fx-reveal','fx-in'); });
+    if(perf) perf.classList.add('fx-rows');
+    return;
+  }
+  secs.forEach(function(s){ s.classList.add('fx-reveal'); });
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('fx-in'); io.unobserve(en.target); }
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -6% 0px' });
+  secs.forEach(function(s){ io.observe(s); });
+  if(perf){
+    var io2 = new IntersectionObserver(function(es){
+      es.forEach(function(en){
+        if(en.isIntersecting){ perf.classList.add('fx-rows'); io2.disconnect(); }
+      });
+    }, { threshold: .3 });
+    io2.observe(perf);
+  }
+})();
+
+/* ---------- resize ---------- */
+window.addEventListener('resize', function(){
+  [volcanoChart, histChart, shapChart].forEach(function(c){ if(c) c.resize(); });
+});
+})();
+</script>
+</body>
+</html>

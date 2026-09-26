@@ -1,0 +1,96 @@
+[预算] 今日已用请求 400/500
+[merge] +all_h: 原始 26477 行 → 并集 0→20363 （新增 20363）
+[merge] +all_h_p2: 原始 26477 行 → 并集 20363→22854 （新增 2491）
+[merge] +all_h_p3: 原始 26477 行 → 并集 22854→23990 （新增 1136）
+[merge] 合并后总量 23990 行（totalCount 应为 26,477；覆盖率 90.6%）
+
+===== 任务A：MamunHighT2019 官方 H 子集与镜像交叉核对 =====
+[A] data_processed/cathub_mamun.csv ← 8663 行（products~H* 且 reactants~H2）
+[A] 方程分布 Top10:
+Equation
+0.5H2(g) + * -> H*    6894
+H2(g) + 2* -> 2H*     1769
+[A] 其中稀释 H*（0.5H2(g) + * -> H*）6894 行，唯一组成 1821 个
+[A] 镜像 H* 构型 7048 条，唯一组成 1836 个
+[A] 组成匹配率：1821/1836 （99.2%）；仅镜像 15、仅官方 0
+[A] 仅镜像组成示例: ['AgFe3', 'AgTc', 'CdFe3', 'CrV', 'CuFe3', 'CuHg', 'Fe3Pb', 'Fe3Zn', 'FeNb', 'FeRh3']
+[A] 能量逐条匹配（容差 0.001 eV）：6893/7005 （98.40%）
+[A] 匹配能量偏差分布：max=5.22e-04 eV, mean=1.44e-07 eV, p50=0.00e+00, p90=0.00e+00, p99=0.00e+00
+[A] 去重后表面级核对（v1 最低能 vs 官方最低能）：1821/1836 表面，|Δ| max=1.07e+00 eV, mean=2.87e-03 eV, 98.96% 在容差内
+
+===== 任务B：官方 facet/sites vs v1/v2 推断标签 =====
+[B] v1 1836 表面 / v2 1836 表面，组成集合一致：True
+[B] hstar_facet_check.csv ← 1836 表面：facet 一致 1821 （99.2%），不一致 0，官方缺 facet 15
+[B] 官方 facet 覆盖率 99.2%；官方 H 吸附位点（sites）覆盖率 99.2%
+[B] 官方 facet 分布: {'111': 1216, '101': 605}
+[B] H 位点类型分布: {'top|B': 956, 'hollow|A_A_A|HCP': 860, 'hollow|A_A_A|FCC': 806, 'hollow|A_A_B|HCP': 668, 'hollow|A_A_B|FCC': 643, 'bridge|A_A|B': 573, 'top|A': 524, 'bridge|B_B|A': 368, 'bridge|A_A|A': 290, 'bridge|A_B|A': 271}
+
+===== 任务C：非 Mamun H 吸附增量盘点 =====
+[C] 库内 publication 总数：147（已取 147）
+[C] 全库 H 相关子集 23990 行；非 Mamun 15327 行，唯一组成 571 个
+[C] 方程分布 Top10:
+Equation
+0.5H2(g) + * -> H*        4370
+4.5H2(g) + * -> 9.0H*     1387
+4.0H2(g) + * -> 8.0H*     1231
+5.0H2(g) + * -> 10.0H*    1126
+3.5H2(g) + * -> 7.0H*     1078
+3.0H2(g) + * -> 6.0H*      926
+5.5H2(g) + * -> 11.0H*     868
+2.5H2(g) + * -> 5.0H*      747
+2.0H2(g) + * -> 4.0H*      560
+6.0H2(g) + * -> 12.0H*     422
+[C] data_processed/cathub_hstar_extra.csv ← 15327 行
+[C] 来源 pub 分布（全部）:
+    ZhangOff-equilibrium2025           9205 行     3 组成 E∈[ -5.736,  3.126]  (2025) Off-Equilibrium Reactivity of Boron-Enriched Metal Diboride 
+    YohannesCombined2023               2590 行    48 组成 E∈[-11.628, 22.061]  (2023) Combined High throughput DFT and ML Screening of Transition 
+    BoesAdsorption2018                 1589 行     7 组成 E∈[ -2.234, 22.339]  (2018) Adsorption energies on fcc 111 transition metals
+    ZhangDopant-dependent2025           538 行    51 组成 E∈[ -0.745,  1.953]  (2025) Dopant-dependent boron arrangement and chemistry of metal bo
+    AlonsoStrain2023                    347 行    46 组成 E∈[ -1.239,  1.230]  (2024) Application of machine learning to discover new intermetalli
+    DickensElectronic2018               213 行   111 组成 E∈[ -3.357,  1.554]  (2018) An Electronic Structure Descriptor for Oxygen Reactivity at 
+    ZhangUnlocking2025                  168 行   168 组成 E∈[ -1.980, -0.275]  (2025) Unlocking Switchable Reactivity of MBene via Asymmetric Surf
+    PasumarthiFacetDependence2023       132 行     1 组成 E∈[ -0.024,  0.745]  (2025) Facet-Dependent Catalytic Selectivity for Electrochemical Re
+    TangModeling2020                     94 行    73 组成 E∈[ -0.927,  1.697]  (2020) Modeling Hydrogen Evolution Reaction Kinetics through Explic
+    MontoyaThe2015                       47 行    12 组成 E∈[ -0.614,  0.601]  (2015) The Challenge of Electrochemical Ammonia Synthesis: A New Pe
+    KaiData-driven2022                   45 行     4 组成 E∈[ -1.645, -0.795]  (2022) Data‐driven and constrained optimization of semi‐local excha
+    LandersUnderstanding2020             40 行    15 组成 E∈[ -0.421,  0.596]  (2021) Dynamics and Hysteresis of Hydrogen Intercalation and Deinte
+    WangAchieving2021                    31 行    15 组成 E∈[ -1.608,  0.828]  (2021) Achieving industrial ammonia synthesis rates at near-ambient
+    FantaQMCcopperCO2024                 28 行     1 组成 E∈[ -1.075,  1.939]  (2025) Resolution of Selectivity Steps of CO Reduction Reaction on 
+    DheerRefinement2026                  28 行     3 组成 E∈[ -1.525,  0.719]  (2026) Refinement of the Electrochemical Description of the Nitroge
+    JiangModelling2021                   25 行    23 组成 E∈[ -0.660,  1.653]  (2021) Modeling Potential-Dependent Electrochemical Activation Barr
+    HansenFirst2018                      25 行    17 组成 E∈[ -2.270,  1.838]  (2018) First Principles Micro-kinetic Model of Catalytic Non-oxidat
+    TangFrom2020                         23 行    12 组成 E∈[ -1.053,  0.823]  (2020) From Electricity to Fuels: Descriptors for C1 Selectivity in
+    DheerNitrogenase2025                 20 行     5 组成 E∈[ -1.055,  0.660]  (2025) Nitrogenase New Perspective on the Limitations of Nitrogen R
+    LiuCatalytic2022                     18 行     3 组成 E∈[-13.811,  6.635]  (2022) Catalytic Performance and Near-Surface X-ray Characterizatio
+    PengRole2020                         16 行     8 组成 E∈[ -0.394,  0.509]  (2020) The Role of Atomic Carbon in Directing Electrochemical CO(2)
+    Gauthierrole2021                     12 行     6 组成 E∈[ -0.703,  1.749]  (2021) The role of roughening in enhancing selectivity to C2+ produ
+    ClarkInfluence2018                   11 行     1 组成 E∈[  0.381,  0.884]  (2019) Influence of Atomic Surface Structure on the Activity of Ag 
+    TettehCompressively2022              10 行     1 组成 E∈[ -0.314, -0.258]  (2022) Strained Pt(221) Facet in a PtCo@Pt-Rich Catalyst Boosts Oxy
+    TangActive2025                       10 行    10 组成 E∈[ -0.280,  0.921]  (2025) Active Sites on Titanium and Hydrogen-Covered Transition Met
+    WangUniversal2011                     8 行     5 组成 E∈[ -1.000,  0.554]  (2011) Universal br{\o}nsted-evans-polanyi relations for c--c, c--o
+    E.Molecular2026                       6 行     2 组成 E∈[  0.090,  0.655]  (2026) Molecular Approaches to the Mechanism of CO2 Reduction to Me
+    SchumannSelectivity2018               6 行     6 组成 E∈[ -0.425,  0.443]  (2018) Selectivity of Synthesis Gas Conversion to C2+ Oxygenates on
+    JungSpin2025                          6 行     3 组成 E∈[ -0.671,  1.004]  (2025) Spin State Modulation in M–N–C Single-Atom Catalysts for Oxy
+    KimStabilizing2026                    5 行     3 组成 E∈[ -1.698, -1.495]  (2026) Stabilizing lattice oxygen in RuO2 with high-valent 5d Re do
+    JungRuO2-doping2026                   5 行     3 组成 E∈[ -1.698, -1.495]  (2026) RuO2-doping stabilization OER dataset
+    SongStrongly2026                      5 行     5 组成 E∈[ -0.943,  1.573]  (2026) Strongly supported platinum cluster catalysts with atom coun
+    WeiInsights2022                       4 行     2 组成 E∈[-15.223, -5.101]  (2023) Insights into Active Sites and Mechanisms of Benzyl Alcohol 
+    KoshyInvestigation2022                2 行     2 组成 E∈[  1.293,  1.439]  (2022) Investigation of the Structure of Atomically Dispersed NiN<s
+    YangIntrinsic2016                     2 行     1 组成 E∈[ -0.361, -0.313]  (2016) Intrinsic Selectivity and Structure Sensitivity of Rhodium C
+    DStructure2024                        2 行     1 组成 E∈[ -0.637, -0.586]  (2024) Structure sensitivity of the electrochemical hydrogenation o
+    ChenUnderstanding2018                 2 行     1 组成 E∈[ -1.408, -1.071]  (2018) Understanding the apparent fractional charge of protons in t
+    LogadottirAmmonia2003                 2 行     1 组成 E∈[ -1.100, -1.040]  (2003) Ammonia synthesis over a Ru (0001) surface studied by densit
+    CarlsonLiquidcrystal2024              1 行     1 组成 E∈[ -1.733, -1.733]  (2024) Liquidcrystal interphase in electrolytes with soft templatin
+    BukasORR2017                          1 行     1 组成 E∈[ -1.354, -1.354]  (2018) Combining Experiment and Theory to Unravel the Mechanism of 
+    HossainTitanium2025                   1 行     1 组成 E∈[ -0.907, -0.907]  (2025) Titanium Nitrogen-Doped Carbon Flowers Catalyze Electrochemi
+    PengTrends2022                        1 行     1 组成 E∈[  0.112,  0.112]  (2022) Trends in oxygenate/hydrocarbon selectivity for electrochemi
+    MedfordThermochemistry2014            1 行     1 组成 E∈[ -0.710, -0.710]  (2014) Thermochemistry and micro-kinetic analysis of methanol synth
+    Unpublished                           1 行     0 组成 E∈[ -0.130, -0.130]  (2015) Rational design of MoS2 catalysts: tuning the structure and 
+    SharadaAdsorption2019                 1 行     1 组成 E∈[ -1.288, -1.288]  (2019) Adsorption on transition metal surfaces: Transferability and
+[C] data_processed/cathub_hstar_extra_by_pub.csv ← 45 个来源
+[C] 能量范围：[-15.223, 22.339] eV，mean=-1.687，std=2.694；|E|>3 eV 离群 5750 行
+[C] 泛函分布: {'PBE_D3': 9911, 'PBE': 2962, 'RPBE': 1633, 'BEEF-vdW': 311, 'BEEF_gbrv_600eV': 141, 'RPBE_400eV': 72, 'RPBE-D3': 25, 'RPBE+U-2': 16, 'BEEF-vdW_-1.20VSHE': 14, 'BEEF-vdW_-0.57VSHE': 14, 'BEEF-vdW_-0.73VSHE': 14, 'BEEF-vdW_-0.26VSHE': 13, 'BEEF-vdW_-0.42VSHE': 13, 'PBE+U': 13, 'BEEF-vdW_-0.89VSHE': 13, 'RPBE_-0.413VSHE': 12, 'PBE+U+VASPsol': 10, 'RPBE+U-3.5': 10, 'BEEF-vdW_-1.04VSHE': 9, 'FNDMC': 8, 'SCAN': 6, 'RPBE+U-4.3': 6, 'PBE+U+D3+VASPsol': 6, 'SCAN-rVV10': 5, 'PBE-D3': 5, 'MCML': 5, 'VCML-rVV10': 5, 'beef-vdW': 5, 'MS2': 5, 'MCML-rVV10': 5, 'r2SCAN': 5, 'PBE-vdW': 4, 'BEEF-vdW_-1.01VSHE': 3, 'BEEF-vdW_-0.51VSHE': 3, 'BEEF-vdW_-0.70VSHE': 3, 'BEEF-vdW_0.11VSHE': 3, 'BEEF-vdW_-0.20VSHE': 3, 'BEEF-vdW_-0.85VSHE': 3, 'BEEF-vdW_-0.38VSHE': 3, 'BEEF-vdW_-0.36VSHE': 3, 'BEEF-vdW_-0.04VSHE': 3, 'BEEF-vdW_-0.07VSHE': 3, 'BEEF-vdW_-0.23VSHE': 3, 'BEEF-vdW_0.27VSHE': 3, 'BEEF-vdW_-0.67VSHE': 3, 'BEEF-vdW_-0.54VSHE': 3, 'PBE+D3': 2, 'FNDMC-RPBE+U-2': 2, 'BEEF': 1, 'FNDMC-RPBE+U-3.5': 1, 'FNDMC-RPBE+U-4.3': 1, 'PBEsol_800eV': 1, 'B3LYP': 1}
+[C] DFT 代码分布: {'VASP': 12548, 'Quantum ESPRESSO 5.1': 1895, 'Quantum Espresso': 378, 'QE-5.1': 315, 'VASP-5.4.4': 73, 'VASP_5.4.4': 49, 'QE-7.2': 20, 'VASP-6.4.2': 16, 'DACAPO': 10, 'QMCPACK-3.17.9': 9, 'VASP-6.3.2': 6, 'QMCPACK-4.2.9': 3, 'VASP 5.4.1': 2, 'VASP.5.4.4': 1, 'GPAW': 1, 'ORCA-5.0.0': 1}
+[C] 晶面分布 Top10: {'B03Hn': 6147, 'B01Hn': 2197, '111': 2016, '100': 1359, '110': 1321, 'B00Hn': 861, '001': 802, '101': 71, '211': 59, '511': 44}
+
+[完成] 总耗时 0.1 min，今日累计请求 401/500

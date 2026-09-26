@@ -1,0 +1,120 @@
+{
+  "taskA": {
+    "pool_seed": 123,
+    "n_pool": 200,
+    "n_train0": 1636,
+    "curve": [
+      {
+        "k": 0,
+        "n_remaining": 200,
+        "al_mae": 0.13934,
+        "alw_mae": 0.13934,
+        "rand_mae_mean": 0.13934,
+        "rand_mae_std": 0.0,
+        "rand_mae_min": 0.13934,
+        "rand_mae_max": 0.13934,
+        "diff_rand_minus_al": 0.0,
+        "diff_rand_minus_alw": 0.0,
+        "significant": "",
+        "significant_width": ""
+      },
+      {
+        "k": 5,
+        "n_remaining": 195,
+        "al_mae": 0.14069,
+        "alw_mae": 0.1284,
+        "rand_mae_mean": 0.13994,
+        "rand_mae_std": 0.00241,
+        "rand_mae_min": 0.13527,
+        "rand_mae_max": 0.14294,
+        "diff_rand_minus_al": -0.00075,
+        "diff_rand_minus_alw": 0.01154,
+        "significant": "no",
+        "significant_width": "YES"
+      },
+      {
+        "k": 10,
+        "n_remaining": 190,
+        "al_mae": 0.14002,
+        "alw_mae": 0.12181,
+        "rand_mae_mean": 0.13956,
+        "rand_mae_std": 0.00465,
+        "rand_mae_min": 0.12813,
+        "rand_mae_max": 0.14503,
+        "diff_rand_minus_al": -0.00046,
+        "diff_rand_minus_alw": 0.01775,
+        "significant": "no",
+        "significant_width": "YES"
+      },
+      {
+        "k": 15,
+        "n_remaining": 185,
+        "al_mae": 0.13957,
+        "alw_mae": 0.11708,
+        "rand_mae_mean": 0.1407,
+        "rand_mae_std": 0.00638,
+        "rand_mae_min": 0.12921,
+        "rand_mae_max": 0.14831,
+        "diff_rand_minus_al": 0.00113,
+        "diff_rand_minus_alw": 0.02362,
+        "significant": "no",
+        "significant_width": "YES"
+      },
+      {
+        "k": 20,
+        "n_remaining": 180,
+        "al_mae": 0.13595,
+        "alw_mae": 0.10807,
+        "rand_mae_mean": 0.1407,
+        "rand_mae_std": 0.00693,
+        "rand_mae_min": 0.12924,
+        "rand_mae_max": 0.15149,
+        "diff_rand_minus_al": 0.00475,
+        "diff_rand_minus_alw": 0.03263,
+        "significant": "no",
+        "significant_width": "YES"
+      }
+    ],
+    "verdict_k10": "no",
+    "verdict_k20": "no"
+  },
+  "taskB": {
+    "n_beef_subset": 115,
+    "filter": "dftFunctional.str.lower() == 'beef-vdw'（剔除 4 行 VSHE 电位偏移标注）",
+    "metrics": [
+      {
+        "stage": "before",
+        "k": 0,
+        "n_eval": 115,
+        "al_mae": 0.14191980487871395,
+        "al_bias": 0.00022320473479388374,
+        "aldedup_mae": "",
+        "aldedup_bias": "",
+        "rand_mae_mean": "",
+        "rand_mae_std": ""
+      },
+      {
+        "stage": "after_top10",
+        "k": 10,
+        "n_eval": 105,
+        "al_mae": 0.13698180754311418,
+        "al_bias": -0.025384030446006893,
+        "aldedup_mae": 0.13538946850428982,
+        "aldedup_bias": -0.01225818681387405,
+        "rand_mae_mean": 0.1419360131207025,
+        "rand_mae_std": 0.0056558581902209065
+      },
+      {
+        "stage": "after_top20",
+        "k": 20,
+        "n_eval": 95,
+        "al_mae": 0.1441942691405012,
+        "al_bias": -0.03894654390832668,
+        "aldedup_mae": 0.11632063082851968,
+        "aldedup_bias": -0.012547389675881277,
+        "rand_mae_mean": 0.13861974206631328,
+        "rand_mae_std": 0.00990896677080771
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "n_lockbox_surfaces": 276,
+  "n_lockbox_surfaces_with_site_pred": 272,
+  "v3_lockbox_mae": 0.11021264793243288,
+  "site_min_lockbox_mae": 0.10791633138238244,
+  "delta": 0.0022963165500504423,
+  "note": "F0 位点 lockbox 唯一一次评估（F5 占优后触发）"
+}

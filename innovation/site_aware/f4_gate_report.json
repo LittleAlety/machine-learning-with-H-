@@ -1,0 +1,13 @@
+{
+  "feature": "minsite_onehot_dev",
+  "k_dims": 27,
+  "mae_base_10seeds": 0.11668419418749945,
+  "mae_gold_10seeds": 0.09627518519339862,
+  "delta_A": 0.020409008994100825,
+  "delta_A_std": 0.0006117015442697551,
+  "seeds_win": "10/10",
+  "delta_B_inferred": -0.000730333170518363,
+  "retention": -0.03578484240608959,
+  "verdict": "LEAK",
+  "note": "开发集 1560 表面（lockbox 冻结）；特征=min-energy 位点的 site_full one-hot（28 类，物理身份）；预期 PASS，判 LEAK 则记录并分析"
+}

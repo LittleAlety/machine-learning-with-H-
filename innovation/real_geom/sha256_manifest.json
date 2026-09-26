@@ -1,0 +1,11 @@
+{
+  "s1_parse_features.py": "ffc6458058d77f87693b99f35e4b56bfb58c86722c9cbdb85b10f4c946324b3d",
+  "s2_eval.py": "7568577bef5661a57671d6e4593dd264431a9009ca7f1cb4aaa832ae173655f3",
+  "real_geom_site_features.csv": "8f7aba937adee3ae4b7d6a9bcdff88e370c628f79e08bb0ba44ebde7b22c5e46",
+  "parse_failures.csv": "83e894d5cf36468f81decd9e134102c7f8c0046c4010a79e45318645908b1704",
+  "s1_parse_report.json": "33e57315331735516457d1f7f73f729f03cc0b0f34d8601dc6d6dbe66b91b37f",
+  "real_geom_eval.json": "8c25064255e8a58c047841114f6cbc2832c257e6daa4f6bfadc57473f43de9f0",
+  "log_eval.txt": "241cbc6edf710b8d49e0fb51dd0364e1585cf15f0839dfaee5c89975aae6ef97",
+  "README.md": "8191119e87248fb3069c7c5f0d584269fa637d91291aa22534cc0fa92b382262",
+  "summary.json": "731421188adc934beb8e7085ec7f1dcc77a6d25d3d9fc8b2d1776b7f2c815957"
+}

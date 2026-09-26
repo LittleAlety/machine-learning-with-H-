@@ -1,0 +1,14 @@
+{
+  "checkpoint": "H1_slab_build",
+  "n_total": 1836,
+  "n_ok": 1836,
+  "n_fail": 0,
+  "build_rate": 1.0,
+  "pass_line": 1.0,
+  "passed": true,
+  "n_atoms_min": 32,
+  "n_atoms_max": 128,
+  "n_atoms_mean": 126.22222222222223,
+  "failure_reason_dist": {},
+  "failures": []
+}

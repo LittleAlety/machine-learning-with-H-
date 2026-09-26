@@ -1,0 +1,207 @@
+{
+  "per_adsorbate_mae": {
+    "H": {
+      "n": 1836,
+      "tier": "large",
+      "mae_mean": 0.1206,
+      "mae_std": 0.0002,
+      "warning": NaN
+    },
+    "S": {
+      "n": 1806,
+      "tier": "large",
+      "mae_mean": 0.1635,
+      "mae_std": 0.0004,
+      "warning": NaN
+    },
+    "2H": {
+      "n": 1802,
+      "tier": "large",
+      "mae_mean": 0.2363,
+      "mae_std": 0.001,
+      "warning": NaN
+    },
+    "N": {
+      "n": 1796,
+      "tier": "large",
+      "mae_mean": 0.2778,
+      "mae_std": 0.0014,
+      "warning": NaN
+    },
+    "O": {
+      "n": 1795,
+      "tier": "large",
+      "mae_mean": 0.2231,
+      "mae_std": 0.0012,
+      "warning": NaN
+    },
+    "C": {
+      "n": 1776,
+      "tier": "large",
+      "mae_mean": 0.3065,
+      "mae_std": 0.0007,
+      "warning": NaN
+    },
+    "2N": {
+      "n": 1761,
+      "tier": "large",
+      "mae_mean": 0.5487,
+      "mae_std": 0.0031,
+      "warning": NaN
+    },
+    "2O": {
+      "n": 1680,
+      "tier": "large",
+      "mae_mean": 0.4406,
+      "mae_std": 0.002,
+      "warning": NaN
+    },
+    "NH": {
+      "n": 352,
+      "tier": "small",
+      "mae_mean": 0.2056,
+      "mae_std": 0.0044,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "CH": {
+      "n": 347,
+      "tier": "small",
+      "mae_mean": 0.2223,
+      "mae_std": 0.0016,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "SH": {
+      "n": 342,
+      "tier": "small",
+      "mae_mean": 0.2235,
+      "mae_std": 0.0035,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "H2O": {
+      "n": 326,
+      "tier": "small",
+      "mae_mean": 0.0765,
+      "mae_std": 0.0004,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "CH2": {
+      "n": 319,
+      "tier": "small",
+      "mae_mean": 0.2802,
+      "mae_std": 0.0017,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "CH3": {
+      "n": 318,
+      "tier": "small",
+      "mae_mean": 0.1559,
+      "mae_std": 0.0007,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    },
+    "OH": {
+      "n": 243,
+      "tier": "small",
+      "mae_mean": 0.2102,
+      "mae_std": 0.0021,
+      "warning": "SMALL-SAMPLE WARNING (n<500)"
+    }
+  },
+  "transfer_verdict": "跨吸附种迁移红利在数据共享不在表示共享：联合硬共享 MLP 未能在小档吸附种上显著优于单任务 GBDT（公平契约未满足），迁移红利主要来自描述符/数据口径统一而非表示共享。",
+  "transfer_details": {
+    "contract": "improvement>0.005 eV AND 10/10 same-direction seeds",
+    "per_adsorbate": {
+      "2H": {
+        "gbdt_mae": 0.2372,
+        "nn_mae": 0.3326
+      },
+      "2N": {
+        "gbdt_mae": 0.5552,
+        "nn_mae": 0.6833
+      },
+      "2O": {
+        "gbdt_mae": 0.4364,
+        "nn_mae": 0.5336
+      },
+      "C": {
+        "gbdt_mae": 0.2997,
+        "nn_mae": 0.3877
+      },
+      "CH": {
+        "gbdt_mae": 0.2197,
+        "nn_mae": 0.2775
+      },
+      "CH2": {
+        "gbdt_mae": 0.2506,
+        "nn_mae": 0.315
+      },
+      "CH3": {
+        "gbdt_mae": 0.1626,
+        "nn_mae": 0.2066
+      },
+      "H": {
+        "gbdt_mae": 0.1212,
+        "nn_mae": 0.1744
+      },
+      "H2O": {
+        "gbdt_mae": 0.0766,
+        "nn_mae": 0.1382
+      },
+      "N": {
+        "gbdt_mae": 0.2754,
+        "nn_mae": 0.3481
+      },
+      "NH": {
+        "gbdt_mae": 0.2025,
+        "nn_mae": 0.2451
+      },
+      "O": {
+        "gbdt_mae": 0.2255,
+        "nn_mae": 0.2835
+      },
+      "OH": {
+        "gbdt_mae": 0.2059,
+        "nn_mae": 0.2165
+      },
+      "S": {
+        "gbdt_mae": 0.1673,
+        "nn_mae": 0.223
+      },
+      "SH": {
+        "gbdt_mae": 0.2287,
+        "nn_mae": 0.2826
+      }
+    },
+    "small_tier_mean_delta_nn_minus_gbdt": -0.0478,
+    "large_tier_mean_delta_nn_minus_gbdt": -0.081,
+    "nn_wins_adsorbates": 0,
+    "note": "NN 在 15/15 吸附种上 10/10 种子一致劣于单任务 GBDT"
+  },
+  "key_numbers": {
+    "n_rows": 16499,
+    "n_adsorbates": 15,
+    "n_features": 45,
+    "large_tier_mae_range": [
+      0.1206472930794511,
+      0.5487102023684344
+    ],
+    "dual_pool": 1836,
+    "dual_optimal_found": 0,
+    "dual_her_window_count": 247,
+    "dual_orr_window_count": 250,
+    "dual_note": "HER窗口与ORR窗口各约250个组成，但无交集（H/OH 结合强度此消彼长）"
+  },
+  "files": [
+    "clean_report.md",
+    "per_adsorbate_models.py",
+    "per_adsorbate_mae.csv",
+    "per_adsorbate_parity.png",
+    "transfer_experiment.py",
+    "transfer_raw.csv",
+    "transfer_verdict.json",
+    "dual_volcano.py",
+    "dual_volcano.png",
+    "dual_candidates.csv",
+    "multi_adsorbate_summary.json",
+    "README.md"
+  ]
+}

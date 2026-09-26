@@ -1,0 +1,62 @@
+{
+  "p1": {
+    "saturation_verdict": "capacity saturated",
+    "gbdt_highcap_oof_span": 0.002324334910310727,
+    "gbdt_best": {
+      "max_depth": 7.0,
+      "n_estimators": 2000.0,
+      "oof_mae": 0.11693862819355731
+    },
+    "mlp_best_oof_by_width": {
+      "16": 0.1168900457580699,
+      "64": 0.11435140577659765,
+      "256": 0.11378037114003973
+    },
+    "mlp_a4_deepdive_triggered": false
+  },
+  "p2": {
+    "slope_tail_eV_per_doubling": 0.00993899278925871,
+    "verdict": "data-volume saturated",
+    "mean_oof_by_fraction": {
+      "0.25": 0.13740593206737103,
+      "0.5": 0.12555046166096853,
+      "0.75": 0.12139156769233754,
+      "1.0": 0.11726651297973315
+    }
+  },
+  "p3": {
+    "floor_a": 0.03657244003716187,
+    "floor_b": 0.11629380367648003,
+    "oof_mae_10seed_mean": 0.11726651297973315,
+    "ceiling": 0.08069407294257128,
+    "ceiling_path_b": 0.0009727093032531192,
+    "verdict": "headroom remains"
+  },
+  "p4": {
+    "deltas": {
+      "site_onehot": {
+        "delta_A": 0.0008620342577100162,
+        "retention": -5.396718422621655,
+        "verdict": "NO_GAIN"
+      },
+      "config_mean": {
+        "delta_A": 0.03906382755502459,
+        "retention": -0.06828147979195438,
+        "verdict": "LEAK"
+      },
+      "config_count": {
+        "delta_A": 0.009646935009804302,
+        "retention": -0.15125063302768682,
+        "verdict": "LEAK"
+      }
+    },
+    "capacity_side_gain": 0.002659674254138697,
+    "info_side_max_deltaA": 0.03906382755502459,
+    "verdicts": {
+      "site_onehot": "NO_GAIN",
+      "config_mean": "LEAK",
+      "config_count": "LEAK"
+    }
+  },
+  "discipline": "probes are diagnostic only; NOT used to select delivery config"
+}

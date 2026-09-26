@@ -1,0 +1,17 @@
+{
+  "gbdt_highcap_oof_span": 0.002324334910310727,
+  "gbdt_highcap_min": 0.11693862819355731,
+  "gbdt_highcap_max": 0.11926296310386804,
+  "gbdt_best": {
+    "max_depth": 7.0,
+    "n_estimators": 2000.0,
+    "oof_mae": 0.11693862819355731
+  },
+  "saturation_verdict": "capacity saturated",
+  "mlp_best_oof_by_width": {
+    "16": 0.1168900457580699,
+    "64": 0.11435140577659765,
+    "256": 0.11378037114003973
+  },
+  "mlp_a4_deepdive_triggered": false
+}

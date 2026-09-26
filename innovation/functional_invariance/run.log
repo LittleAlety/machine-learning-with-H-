@@ -1,0 +1,47 @@
+[口径自检] 主域 84 特征重算失配数 = 0（须为 0）
+[域] Mamun_BEEFvdW: n=1836, 唯一组成=1836, E_ads ∈ [-2.31, 2.74] eV
+[域] EqV2_RPBE: n=491, 唯一组成=115, E_ads ∈ [-3.05, 7.31] eV
+[域] CatHub_PBE: n=203, 唯一组成=46, E_ads ∈ [-1.24, 0.83] eV
+[i1] 三域共同组成数 = 3
+                      pair  n_overlap_comps
+ Mamun_BEEFvdW ∩ EqV2_RPBE               68
+Mamun_BEEFvdW ∩ CatHub_PBE               34
+    EqV2_RPBE ∩ CatHub_PBE                3
+[i2] 最稳定 Top5: ['melting_point_range', 'melting_point_mode', 'melting_point_min', 'melting_point_wstd', 'melting_point_max']
+[i2] 最不稳 Bottom5: ['n_elements', 'structure_A1', 'structure_L10', 'structure_L12', 'facet_101']
+[i3] naive_pooled       seed=    0  EqV2 MAE=0.1330  ρ=0.463
+[i3] domain_indicator   seed=    0  EqV2 MAE=0.1234  ρ=0.485
+[i3] IRM_lite           seed=    0  EqV2 MAE=0.2244  ρ=0.130
+[i3] naive_pooled       seed=    1  EqV2 MAE=0.1370  ρ=0.463
+[i3] domain_indicator   seed=    1  EqV2 MAE=0.1278  ρ=0.485
+[i3] IRM_lite           seed=    1  EqV2 MAE=0.2299  ρ=0.086
+[i3] naive_pooled       seed=    2  EqV2 MAE=0.1281  ρ=0.470
+[i3] domain_indicator   seed=    2  EqV2 MAE=0.1295  ρ=0.481
+[i3] IRM_lite           seed=    2  EqV2 MAE=0.2265  ρ=0.102
+[i3] naive_pooled       seed=    7  EqV2 MAE=0.1309  ρ=0.495
+[i3] domain_indicator   seed=    7  EqV2 MAE=0.1211  ρ=0.520
+[i3] IRM_lite           seed=    7  EqV2 MAE=0.2276  ρ=0.089
+[i3] naive_pooled       seed=   13  EqV2 MAE=0.1299  ρ=0.477
+[i3] domain_indicator   seed=   13  EqV2 MAE=0.1185  ρ=0.515
+[i3] IRM_lite           seed=   13  EqV2 MAE=0.2375  ρ=0.067
+[i3] naive_pooled       seed=   42  EqV2 MAE=0.1343  ρ=0.435
+[i3] domain_indicator   seed=   42  EqV2 MAE=0.1265  ρ=0.459
+[i3] IRM_lite           seed=   42  EqV2 MAE=0.2292  ρ=0.091
+[i3] naive_pooled       seed=   99  EqV2 MAE=0.1282  ρ=0.494
+[i3] domain_indicator   seed=   99  EqV2 MAE=0.1152  ρ=0.536
+[i3] IRM_lite           seed=   99  EqV2 MAE=0.2322  ρ=0.093
+[i3] naive_pooled       seed=  123  EqV2 MAE=0.1237  ρ=0.468
+[i3] domain_indicator   seed=  123  EqV2 MAE=0.1155  ρ=0.503
+[i3] IRM_lite           seed=  123  EqV2 MAE=0.2269  ρ=0.106
+[i3] naive_pooled       seed= 2024  EqV2 MAE=0.1306  ρ=0.370
+[i3] domain_indicator   seed= 2024  EqV2 MAE=0.1220  ρ=0.407
+[i3] IRM_lite           seed= 2024  EqV2 MAE=0.2272  ρ=0.115
+[i3] naive_pooled       seed=31337  EqV2 MAE=0.1331  ρ=0.422
+[i3] domain_indicator   seed=31337  EqV2 MAE=0.1262  ρ=0.453
+[i3] IRM_lite           seed=31337  EqV2 MAE=0.2374  ρ=0.095
+             arm  EqV2_MAE_mean  EqV2_MAE_sd  gain_mean  gain_min_10seeds  contract_10of10_gain_ge_0.005  rho_mean
+    naive_pooled       0.130886     0.003740   0.216114          0.210041                           True  0.455780
+domain_indicator       0.122572     0.005037   0.224428          0.217467                           True  0.484506
+        IRM_lite       0.229868     0.004519   0.117132          0.109473                           True  0.097488
+[i3] 结局判定 = A（best arm=domain_indicator）
+[写出] innovation/functional_invariance/ 全部产物完成

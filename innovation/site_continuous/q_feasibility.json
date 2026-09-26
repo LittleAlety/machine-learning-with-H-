@@ -1,0 +1,44 @@
+{
+  "workstream": "Q_optional (site_continuous)",
+  "phase": 4,
+  "verdict": "SHELVED",
+  "reason": "prereq_failed",
+  "prereq_as_registered": "EqV2 491 表面自带结构文件可用",
+  "finding": {
+    "data_files_checked": [
+      "data_raw/eqv2_361.csv (361 rows)",
+      "data_raw/eqv2_500.csv (500 rows)"
+    ],
+    "note": "任务描述的 data_processed/eqv2_*.csv 不存在，实际位于 data_raw/",
+    "eqv2_361_columns": ["key", "Ametal", "Bmetal", "AandB", "symbol", "Crystal System", "Surface", "experimentally_observed", "Full_optimized_DFT_H_ads_energy", "surface_energy", "Cost"],
+    "eqv2_500_columns": ["key", "Bulk_id", "symbol", "Surface", "in_domain", "Bulk_concentration", "surface_concentration", "Crystal System", "Point Group", "EqV2_predicted_H_ads_E", "single_point_DFT_H_ads_E"],
+    "structure_info_present": false,
+    "missing": ["原子坐标", "晶胞参数", "cif/traj 路径", "吸附位点身份/配位描述"],
+    "summary": "两表均为 组成(元素/浓度) + 晶系/点群 + 晶面 + 能量 的标量表，无任何几何/结构字段。"
+  },
+  "structure_file_search": {
+    "command": "find . -iname '*eqv2*' 及 cif/xyz/traj/extxyz 全库搜索",
+    "result": "项目内唯一 cif 集合为 innovation/chgnet_features/slabs/ 下 1836 个自建原型 slab (命名 A3B_Prototype_111.cif 等)，来自 H1 slab_build (CHGNet 特征线)，并非 EqV2 491 表面的弛豫结构。",
+    "overlap_test": "eqv2_500 的 (symbol, Surface) 与 slab 文件名松匹配仅 20/500，且匹配到的为自建原型结构，与 EqV2 实际表面(按 Bulk_id=mp-* 弛豫)不构成同一结构，不可用于 GCN 几何描述符。",
+    "conclusion": "EqV2 491 表面自带结构文件不在数据包内。"
+  },
+  "decision": "Q 搁置至结构数据到位；不执行训练，避免用不匹配原型结构制造伪几何特征。",
+  "control_baseline": {
+    "discrete_onehot_redemption_rate": 0.147,
+    "note": "Q 重启后对照目标：连续几何描述符位点级模型的红利兑现率需显著超过 14.7%"
+  },
+  "restart_minimum_data_requirements": [
+    "EqV2 491 表面每个 key (mp-*_H_*_*) 对应的弛豫后 slab 结构文件 (cif/traj/extxyz)，或可从 key 的 Bulk_id + Surface + 位点索引唯一定位的结构库",
+    "每个结构的表面位点标注：吸附位点身份 (H 吸附原子索引或位点坐标) 与 A/B 元素身份",
+    "晶胞与周期性信息 (随结构文件自带)",
+    "（可选但推荐）表面能/未弛豫结构，用于弛豫几何变化量特征",
+    "格式建议：ASE-readable，至少含 positions, cell, pbc, chemical_symbols"
+  ],
+  "restart_protocol_as_registered": [
+    "从几何纯计算 A/B 配位数 (cutoff-based) 与 GCN 类连续局域描述符，无 QM 成本",
+    "训练位点级/表面级模型，对照离散 one-hot 基线兑现率 14.7%",
+    "10 种子同协议，显著性检验",
+    "产出写入 innovation/site_continuous/"
+  ],
+  "date": "phase4 feasibility probe"
+}

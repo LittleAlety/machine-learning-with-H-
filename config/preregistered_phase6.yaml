@@ -1,0 +1,24 @@
+# Phase 6 预注册（集群版 v6.0）— 冻结时间戳: 2026-09-19
+redlines_16_18:
+  16: "新数据点全程时间戳+哈希链（计算前清单、原始输出、回灌记录三段对应）"
+  17: "任何批次不得在锚定闸门通过前开跑"
+  18: "lockbox 对 v6 仅评一次，裁决数字入档后冻结"
+iron_rules: ["协议一致性：BEEF-vdW/QE，禁 VASP 工具链混入", "锚定闸门先行：5-10 已知体系 |ΔE|≤0.1 eV", "首任务校准：3 探针实测核时后一次性修订预算"]
+stage_S2_static:
+  features: "18 个连续特征拆静态组（CN/GCN/近邻加权——原型几何确定性生成）与弛豫依赖组（层距/位移）分别过闸门+公平契约"
+  adopt: "静态组 PASS 且 Δ>0.005 + 10/10 → v5.1 定向采纳"
+stage_S3_second_dim:
+  method: "v3 SHAP 交互值排名 + 残差蒸馏（v3 残差 ~ 候选第二维度特征族）"
+  rule: "命名候选须双人复核口径；机制结论需交互+蒸馏两臂互证"
+batches_preregistered:
+  A_AL_top: 10        # 采集函数顶部，红旗过滤
+  B_scaling_tier2: 10 # 标度线最近邻无红旗第二梯队
+  C_relax_audit: 30   # CHGNet 重构最剧烈分层抽样
+  rule: "清单计算前公开（时间戳+SHA256），红旗不进首轮"
+stage1_3_note: "DFT 生产（QE/BEEF-vdW、收敛测试、锚定闸门、v6 评估）需外部集群，本会话交付执行包与清单"
+stage_S4_real_geom:  # S1 分支 α 触发：真实 DFT 弛豫几何上的连续局域特征（追加注册，时间戳 2026-09-19）
+  source: "data_raw/MamunHighT2019_adsorption.json.gz 的 _structures 块（42,667 弛豫结构，ref MD5 索引，构型覆盖 100%）"
+  features: "与 Phase5 路线2 同一预注册 18 特征清单（CN/GCN/近邻EN/d电子/层距/位移），禁新增"
+  aggregation: "位点级：H 吸附位点局域特征 + 表面级聚合（min/均值/最稳定位点）两口径"
+  contract: "闸门 + 公平契约（>0.005, 10/10, 嵌套CV）+ 3d 子层 Δ；位点级对照 F3=0.1156/兑现率 14.7%；oracle 缺口 ~0.033 eV 为目标"
+  honesty: "特征来自标签同源弛豫几何——无 CHGNet 伪影问题；仍须闸门防几何-标签耦合泄漏"
