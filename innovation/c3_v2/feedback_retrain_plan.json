@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-09-26T08:53:36+00:00",
+  "ingestion": {
+    "expected_input": "stage2_status.csv extended on cluster with total_energy_eV / fmax_eV_A / converged",
+    "required_columns": [
+      "adsorbate",
+      "comp",
+      "converged",
+      "facet",
+      "fmax_eV_A",
+      "structure",
+      "total_energy_eV"
+    ],
+    "converged_only_train": true,
+    "failed_jobs_retained": true
+  },
+  "rerun_sequence": [
+    "scripts/21_active_learning.py   (re-rank pool on merged table)",
+    "scripts/24_al_validation.py     (learning curve + extval acquisition)",
+    "scripts/27_seed_robustness.py   (10-seed paired test)"
+  ],
+  "fair_contract": {
+    "delta_threshold_eV": 0.005,
+    "seeds_required": 10,
+    "nested_folds_required": 5,
+    "paired_p_max": 0.05
+  },
+  "v5_geometry_rule": "v5 geometry features may only be promoted after their descriptors are rebuilt from truly DFT-relaxed structures and pass the same contract; currently V5_GEOMETRY_CANDIDATE_CONDITIONAL (surface Δ=+0.0249 eV, site OOF 0.104 eV vs <=0.090 target).",
+  "status": "BLOCKED_UNTIL_STAGE2_DATA"
+}

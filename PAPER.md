@@ -26,6 +26,7 @@ Our contributions are:
 2. **Two independent external validations** — a cross-database zero-retrain test on EqV2-HER and a homogeneous-metal test against the official Catalysis-Hub GraphQL library — plus a 99.2%/98.4% record-level cross-check of the training data itself.
 3. **A preregistered active-learning DFT loop (C-3 v2)** with a frozen batch list, hash chain, amendments, anchor gate, core-hour probe, and sentinel stop rule that can falsify a learned-interatomic-potential (CHGNet) relaxation artifact.
 4. **An interactive, browser-based predictor** and a fully open code release.
+5. **A systematic, fair-contract descriptor-saturation ablation** across three independent families — tabulated elemental stats (Mendeleev), DFT bulk elastic constants (Materials Project), and DFT bulk reference energies (OMat24) — establishing that static composition is saturated and that further gains require relaxed surface geometry.
 
 ## 2. Data
 
@@ -106,6 +107,18 @@ Zero-retrain prediction on the 355-surface Catalysis-Hub homogeneous-HER set yie
 
 The model carries a small functional-offset bias (Mamun is BEEF-vdW; external PBE/RPBE references differ), and on the functional-matched stratum that bias collapses to 0.001 eV — i.e. the surrogate generalizes, and the residual error is largely the known functional reference offset, not a structural failure.
 
+### 4.5 Composition-only descriptors are saturated
+
+A natural question is whether adding more descriptors — the literature proposes many elemental and bulk properties — can close the remaining error without new calculations. We therefore screened three independent families of additional descriptors under an identical fair contract (GroupKFold on canonical composition, fixed tuned hyperparameters, three seeds; the within-screen baseline MAE is 0.1166 eV):
+
+| Family (source) | Best single descriptor Δ (eV) | All-joint Δ (eV) |
+|---|---:|---:|
+| Elemental stats — electron affinity, atomic weight, density, atomic volume, polarizability, thermal conductivity, specific heat, Ghosh EN (Mendeleev) | −0.0004 (density / atomic volume) | +0.0014 |
+| DFT bulk elastic constants — bulk modulus K_VRH, shear modulus G_VRH, anisotropy (Materials Project) | +0.0002 | +0.0002 |
+| DFT elemental bulk reference energy per atom (OMat24 references, PBE) | +0.0002 | — |
+
+Every single delta lies within ±0.0016 eV — an order of magnitude below the fold-to-fold variability (≈0.01 eV) — and pooling descriptors never helps (the all-joint models are neutral-to-worse). We therefore do **not** promote any of these to the production model. The result is informative rather than null: the composition-weighted elemental representation already saturates the information available from *unrelaxed* composition, and bulk-derived properties (moduli, bulk energies) are merely proxies for the same compositional signal. The missing information is specifically the **surface geometry and local electronic structure that only a relaxation returns** — consistent with the v5 geometry model, which gains a substantial +0.025 eV (OOF) once relaxed geometric features are available (Section 5.4). This directly motivates the DFT campaign below and explains why further descriptor engineering on static composition cannot substitute for it.
+
 ## 5. The preregistered active-learning DFT loop (C-3 v2)
 
 A surrogate model is only as trustworthy as the experiments used to correct it. Because the training structures were inferred from stoichiometry rather than relaxed, and because a learned potential (CHGNet) flagged large surface reconstructions, we designed a **preregistered, gated DFT campaign** (plan `C3v2_集群执行计划_Stage1-3`) with three frozen batches and a hash chain, so that no exploratory choice can be made after seeing results.
@@ -167,3 +180,4 @@ A deliberately conservative, leakage-audited tree-model pipeline predicts H\* ad
 6. Lundberg & Lee, SHAP, *NeurIPS* (2017).
 7. Batatia et al., MACE Foundation Model (MACE-MPA-0).
 8. Deng et al., CHGNet, *Nat. Mach. Intell.* (2023).
+9. Barroso-Luque et al., Open Materials 2024 (OMat24) Inorganic Materials Dataset and Models, arXiv:2410.12771 (2024).

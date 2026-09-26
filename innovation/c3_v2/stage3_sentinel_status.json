@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-09-26T08:52:56+00:00",
+  "threshold_A": 0.5,
+  "n_sentinels": 8,
+  "n_measured": 0,
+  "n_over_threshold": 0,
+  "decision": "PENDING",
+  "verdict": "No DFT-measured displacements yet. Fill dft_measured_disp_A in stage3_sentinel_sheet.csv after relaxing each sentinel; re-run to decide.",
+  "sentinels": [
+    {
+      "comp": "Cr3Pb",
+      "structure": "L12",
+      "facet": 111,
+      "chgnet_surf_disp_A": 3.125,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "LaPb",
+      "structure": "L10",
+      "facet": 101,
+      "chgnet_surf_disp_A": 6.71,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "CrTl",
+      "structure": "L10",
+      "facet": 101,
+      "chgnet_surf_disp_A": 4.887,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "Co",
+      "structure": "A1",
+      "facet": 111,
+      "chgnet_surf_disp_A": 3.503,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "CuFe3",
+      "structure": "L12",
+      "facet": 111,
+      "chgnet_surf_disp_A": 3.011,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "Fe3Mo",
+      "structure": "L12",
+      "facet": 111,
+      "chgnet_surf_disp_A": 3.156,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "FeTi",
+      "structure": "L10",
+      "facet": 101,
+      "chgnet_surf_disp_A": 5.082,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    },
+    {
+      "comp": "Ag3Sc",
+      "structure": "L12",
+      "facet": 111,
+      "chgnet_surf_disp_A": 3.21,
+      "dft_measured_disp_A": null,
+      "over_threshold": null
+    }
+  ]
+}

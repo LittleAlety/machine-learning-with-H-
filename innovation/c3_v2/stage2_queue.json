@@ -1,0 +1,701 @@
+{
+  "generated_at": "2026-09-26T08:52:56+00:00",
+  "n_tasks": 30,
+  "by_batch": {
+    "A": 10,
+    "B_H": 10,
+    "B_OH": 10
+  },
+  "tasks": [
+    {
+      "task_id": "S2-A-01-H",
+      "batch": "A",
+      "rank_in_batch": 1,
+      "comp": "HgRu",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.5721, pred_dG=0.0"
+    },
+    {
+      "task_id": "S2-A-02-H",
+      "batch": "A",
+      "rank_in_batch": 2,
+      "comp": "Co3Ga",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.5478, pred_dG=0.0181"
+    },
+    {
+      "task_id": "S2-A-03-H",
+      "batch": "A",
+      "rank_in_batch": 3,
+      "comp": "CoPt3",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.489, pred_dG=-0.0064"
+    },
+    {
+      "task_id": "S2-A-04-H",
+      "batch": "A",
+      "rank_in_batch": 4,
+      "comp": "AuRu",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.4316, pred_dG=0.0333"
+    },
+    {
+      "task_id": "S2-A-05-H",
+      "batch": "A",
+      "rank_in_batch": 5,
+      "comp": "HgTc",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.4163, pred_dG=0.0764"
+    },
+    {
+      "task_id": "S2-A-06-H",
+      "batch": "A",
+      "rank_in_batch": 6,
+      "comp": "AuOs",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.3759, pred_dG=-0.0582"
+    },
+    {
+      "task_id": "S2-A-07-H",
+      "batch": "A",
+      "rank_in_batch": 7,
+      "comp": "CrHg",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.3435, pred_dG=0.1404"
+    },
+    {
+      "task_id": "S2-A-08-H",
+      "batch": "A",
+      "rank_in_batch": 8,
+      "comp": "CrIn",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.3332, pred_dG=-0.1146"
+    },
+    {
+      "task_id": "S2-A-09-H",
+      "batch": "A",
+      "rank_in_batch": 9,
+      "comp": "HgNi3",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.3242, pred_dG=-0.0771"
+    },
+    {
+      "task_id": "S2-A-10-H",
+      "batch": "A",
+      "rank_in_batch": 10,
+      "comp": "CdCr",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "AL acquisition top, score=0.2729, pred_dG=-0.1448"
+    },
+    {
+      "task_id": "S2-B-01-H",
+      "batch": "B",
+      "rank_in_batch": 1,
+      "comp": "Cr3Hf",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.3205, dG_OH=0.9739"
+    },
+    {
+      "task_id": "S2-B-01-OH",
+      "batch": "B",
+      "rank_in_batch": 1,
+      "comp": "Cr3Hf",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-02-H",
+      "batch": "B",
+      "rank_in_batch": 2,
+      "comp": "CrNb3",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.2927, dG_OH=1.155"
+    },
+    {
+      "task_id": "S2-B-02-OH",
+      "batch": "B",
+      "rank_in_batch": 2,
+      "comp": "CrNb3",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": true,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-03-H",
+      "batch": "B",
+      "rank_in_batch": 3,
+      "comp": "Al3Ta",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.1886, dG_OH=1.2015"
+    },
+    {
+      "task_id": "S2-B-03-OH",
+      "batch": "B",
+      "rank_in_batch": 3,
+      "comp": "Al3Ta",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-04-H",
+      "batch": "B",
+      "rank_in_batch": 4,
+      "comp": "InZr",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=-0.3462, dG_OH=1.22"
+    },
+    {
+      "task_id": "S2-B-04-OH",
+      "batch": "B",
+      "rank_in_batch": 4,
+      "comp": "InZr",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-05-H",
+      "batch": "B",
+      "rank_in_batch": 5,
+      "comp": "AlTa",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=-0.4039, dG_OH=1.2352"
+    },
+    {
+      "task_id": "S2-B-05-OH",
+      "batch": "B",
+      "rank_in_batch": 5,
+      "comp": "AlTa",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-06-H",
+      "batch": "B",
+      "rank_in_batch": 6,
+      "comp": "Al3Zr",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.0596, dG_OH=1.2506"
+    },
+    {
+      "task_id": "S2-B-06-OH",
+      "batch": "B",
+      "rank_in_batch": 6,
+      "comp": "Al3Zr",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-07-H",
+      "batch": "B",
+      "rank_in_batch": 7,
+      "comp": "Al3Hf",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.0591, dG_OH=1.2506"
+    },
+    {
+      "task_id": "S2-B-07-OH",
+      "batch": "B",
+      "rank_in_batch": 7,
+      "comp": "Al3Hf",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-08-H",
+      "batch": "B",
+      "rank_in_batch": 8,
+      "comp": "AlNb",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=-0.3504, dG_OH=1.2816"
+    },
+    {
+      "task_id": "S2-B-08-OH",
+      "batch": "B",
+      "rank_in_batch": 8,
+      "comp": "AlNb",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-09-H",
+      "batch": "B",
+      "rank_in_batch": 9,
+      "comp": "Al3Nb",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=0.2546, dG_OH=1.2949"
+    },
+    {
+      "task_id": "S2-B-09-OH",
+      "batch": "B",
+      "rank_in_batch": 9,
+      "comp": "Al3Nb",
+      "structure": "L12",
+      "facet": 111,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    },
+    {
+      "task_id": "S2-B-10-H",
+      "batch": "B",
+      "rank_in_batch": 10,
+      "comp": "HfPb",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "H",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "h_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "scaling tier-2, dG_H=-0.2561, dG_OH=1.3019"
+    },
+    {
+      "task_id": "S2-B-10-OH",
+      "batch": "B",
+      "rank_in_batch": 10,
+      "comp": "HfPb",
+      "structure": "L10",
+      "facet": 101,
+      "adsorbate": "OH",
+      "magnetic_dual_init": false,
+      "workflow": [
+        "bulk_relax",
+        "clean_slab_relax",
+        "oh_adsorb_relax"
+      ],
+      "convergence": {
+        "ecutwfc": 60,
+        "fmax": 0.01,
+        "occupations": "smearing",
+        "degauss": 0.02,
+        "functional": "BEEF-vdW"
+      },
+      "note": "OH extrapolation point (oh_in_training=False): escape-angle stress test"
+    }
+  ]
+}

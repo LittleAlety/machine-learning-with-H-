@@ -676,6 +676,21 @@
       <div class="kv"><div class="n">预算中点（探针前）</div><div class="v">199,875 核时</div></div>
     </div>
   </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="sec-head" style="margin-bottom:10px">
+      <div class="no">FEATURE ABLATION</div>
+      <h2 style="font-size:18px;margin-top:2px">静态成分描述符已经饱和</h2>
+    </div>
+    <p style="font-size:14px;color:var(--ink-soft)">文献提出大量元素/体相描述符。我们在同一公平契约下（按规范化成分 GroupKFold、固定调参、3 种子；筛选基线 MAE 0.1166 eV）筛选了三个独立家族，<b>没有任何一个能带来可靠增益</b>，故均不并入生产模型。</p>
+    <div class="loop-kv">
+      <div class="kv"><div class="n">Mendeleev 8 元素属性（最佳：密度/原子体积）</div><div class="v">Δ −0.0004 eV</div></div>
+      <div class="kv"><div class="n">Materials Project 弹性模量 K/G/各向异性</div><div class="v">Δ +0.0002~+0.0008</div></div>
+      <div class="kv"><div class="n">OMat24 元素体相参考能量/原子</div><div class="v">Δ +0.0002 eV</div></div>
+      <div class="kv"><div class="n">对照：加入弛豫几何（v5）</div><div class="v">Δ +0.0249 eV</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:8px">所有静态描述符 Δ 均在 ±0.0016 eV 内（远小于折间波动 ~0.01 eV），合并加入反而中性或变差。缺失的信息是只有弛豫才能返回的<b>表面几何与局域电子结构</b>——这正是需要 DFT 回灌、而非继续堆静态特征的原因。</p>
+  </div>
 </section>
 
 </main>

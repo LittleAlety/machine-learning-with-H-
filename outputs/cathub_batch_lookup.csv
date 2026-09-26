@@ -1,0 +1,64 @@
+﻿group,comp,equation,energy_eV,facet,sites,pubId,dftCode,dftFunctional,totalCount
+A,Co3Ga,H2O(g) -> hfH2(g) + OH*,0.55615,111,null,In Preparation,DACAPO,RPBE,3
+A,Co3Ga,CHO* -> hfH2(g) + CO*,-0.94475,111,null,In Preparation,DACAPO,RPBE,3
+A,Co3Ga,CO(g) + * -> CO*,-1.616524751,111,null,In Preparation,DACAPO,RPBE,3
+A,CoPt3,hfO2(g) + * -> O*,-1.3604,211,null,StudtCO2012,DACAPO,RPBE,4
+A,CoPt3,C* -> Cgraphene + *,-0.93513,211,null,StudtCO2012,DACAPO,RPBE,4
+A,CoPt3,C* -> Cgraphene + *,-1.16421,211,null,StudtCO2012,DACAPO,RPBE,4
+A,CoPt3,hfO2(g) + * -> O*,-1.99524,211,null,StudtCO2012,DACAPO,RPBE,4
+B,Al3Ta,CO(g) + * -> CO*,-1.436524751,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Ta,H2O(g) -> hfH2(g) + OH*,-0.51385,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Ta,CHO* -> hfH2(g) + CO*,-0.41475,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Zr,CHO* -> hfH2(g) + CO*,-0.15475,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Zr,CO(g) + * -> CO*,-1.216524751,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Zr,H2O(g) -> hfH2(g) + OH*,-0.63385,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Hf,CO(g) + * -> CO*,-1.306524751,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Hf,CHO* -> hfH2(g) + CO*,-0.06475,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Hf,H2O(g) -> hfH2(g) + OH*,-0.66385,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Nb,H2O(g) -> hfH2(g) + OH*,-0.49385,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Nb,CO(g) + * -> CO*,-1.266524751,111,null,In Preparation,DACAPO,RPBE,3
+B,Al3Nb,CHO* -> hfH2(g) + CO*,-0.42475,111,null,In Preparation,DACAPO,RPBE,3
+S,Co,NH* -> H* + N*,0.32,0001step,null,MedfordAssessing2014,Quantum ESPRESSO 5.1,BEEF,37
+S,Co,NH2* -> NH* + H*,0.37,0001step,null,MedfordAssessing2014,Quantum ESPRESSO 5.1,BEEF,37
+S,Co,NH3(g) -> NH2* + H*,-1.14,0001step,null,MedfordAssessing2014,Quantum ESPRESSO 5.1,BEEF,37
+S,Co,NO(g) -> N* + O*,-3.015,110,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,H** -> H** + **,0.07,1,null,FerrinHydrogen2012,DACAPO,PW91,37
+S,Co,NO(g) -> N* + O*,-3.455,311,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CO* -> C* + O*,0.15,211,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,H** -> ** + H*,-0.79,1,null,FerrinHydrogen2012,DACAPO,PW91,37
+S,Co,NO(g) -> N* + O*,-3.635,532,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,-0.39,211,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO* -> N* + O*,-1.43,532,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO* -> N* + O*,-1.36,311,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO(g) + * -> NO*,-2.205,532,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO(g) + * -> NO*,-1.985,111,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO(g) + * -> NO*,-2.095,311,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,-0.26,0001step,null,MedfordAssessing2014,Quantum ESPRESSO 5.1,BEEF,37
+S,Co,NO(g) + * -> NO*,-2.155,211,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,-0.45,532,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,-0.09,111,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,H(g) + * -> H*,-2.88,1,null,FerrinHydrogen2012,DACAPO,PW91,37
+S,Co,CH3CH3(g) + * -> CH3CH3*,0.0,1,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,NO(g) -> N* + O*,-3.165,111,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CO(g) + * -> CO*,-1.537,211,null,JiangTrends2009,DACAPO,RPBE,37
+S,Co,NH3(g) + * -> NH3*,-1.45,111,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,NO* -> N* + O*,-0.99,110,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CH3CH2CH3(g) + * -> CH3CH2CH3*,-0.00302,1,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,H2O(g) + * -> H2O*,-0.367,211,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,0.05,110,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO* -> N* + O*,-1.18,111,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,NO* -> N* + O*,-1.46,211,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CO(g) -> C* + O*,-1.387,211,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,NO(g) -> N* + O*,-3.615,211,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CCH* -> CH* + C*,-0.148,211,null,WangUniversal2011,DACAPO,RPBE,37
+S,Co,N2(g) -> N*,-0.35,311,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,CO2(g) -> CO* + O*,-1.107,211,null,JiangTrends2009,DACAPO,RPBE,37
+S,Co,NO(g) + * -> NO*,-2.025,110,null,FalsigOn2014,DACAPO,RPBE,37
+S,Co,H2O(g) + * -> H2O*,-0.054,111,null,WangUniversal2011,DACAPO,RPBE,37
+S,CuFe3,hfO2(g) + * -> O*,-3.54644,211,null,StudtCO2012,DACAPO,RPBE,4
+S,CuFe3,C* -> Cgraphene + *,-0.13621,211,null,StudtCO2012,DACAPO,RPBE,4
+S,CuFe3,C* -> Cgraphene + *,-0.79733,211,null,StudtCO2012,DACAPO,RPBE,4
+S,CuFe3,hfO2(g) + * -> O*,-3.05789,211,null,StudtCO2012,DACAPO,RPBE,4
+S,Ag3Sc,CHO* -> hfH2(g) + CO*,0.48525,111,null,In Preparation,DACAPO,RPBE,3
+S,Ag3Sc,CO(g) + * -> CO*,-0.856524751,111,null,In Preparation,DACAPO,RPBE,3
+S,Ag3Sc,H2O(g) -> hfH2(g) + OH*,-1.66385,111,null,In Preparation,DACAPO,RPBE,3
