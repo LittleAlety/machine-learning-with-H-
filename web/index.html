@@ -567,9 +567,10 @@
   </div>
   <div class="card">
     <div class="chart-toggle">
-      <span>着色方式：</span>
-      <button data-color="n" class="on">按元素数（纯金属 / 合金）</button>
-      <button data-color="d">按定义域（域内 / 外推）</button>
+      <span>视图：</span>
+      <button data-color="n" class="on">按元素数</button>
+      <button data-color="d">按定义域</button>
+      <button data-color="h">密度着色</button>
     </div>
     <div id="volcanoChart" class="chart tall"></div>
     <div class="chart-note">数据来源：predictions_all.json（训练集 OOF 预测）。x 轴标签「ΔG_H*（导出量）= E_ads + 0.24 eV」，y 轴「−|ΔG_H*|（导出量，活性代理）」。</div>
@@ -1193,6 +1194,17 @@ var colorMode = 'n';
 
 function nElementsOf(comp){ var m = comp.match(/[A-Z][a-z]?/g); return m ? m.length : 0; }
 
+/* 1D 密度（沿 ΔG 轴）：用于密度着色，凸显火山顶附近的点聚集程度 */
+function densityAlongX(rows){
+  var xs = rows.map(function(r){return r[0];});
+  var x0 = Math.min.apply(null,xs), x1 = Math.max.apply(null,xs);
+  var B = 90, counts = new Array(B).fill(0);
+  function binOf(x){ return Math.min(B-1, Math.max(0, Math.floor((x-x0)/(x1-x0)*B))); }
+  rows.forEach(function(r){ counts[binOf(r[0])]++; });
+  var out = rows.map(function(r){ var c = r.slice(); c.push(counts[binOf(r[0])]); return c; });
+  return { rows: out, max: Math.max.apply(null, counts) };
+}
+
 function volcanoOption(){
   var groups = {};
   allPred.forEach(function(r){
@@ -1202,16 +1214,88 @@ function volcanoOption(){
     if(!groups[key]) groups[key] = [];
     groups[key].push([ +r.dG_pred.toFixed(5), -Math.abs(r.dG_pred), r.comp, r.structure, r.facet ]);
   });
-  var colors = colorMode === 'n' ? [PALETTE.pure, PALETTE.alloy] : [PALETTE.ind, PALETTE.outd];
-  var series = Object.keys(groups).map(function(k, i){
-    return {
-      name: k, type: 'scatter', data: groups[k],
-      symbolSize: colorMode==='n' && k==='纯金属' ? 8 : 5,
-      itemStyle: { color: colors[i % colors.length], opacity: 0.55 },
-      emphasis: { itemStyle: { opacity: 0.95 } },
-      large: true, largeThreshold: 2000
-    };
-  });
+  var xall = allPred.map(function(r){return +r.dG_pred;});
+  var xmin = Math.min.apply(null,xall), xmax = Math.max.apply(null,xall);
+  var sym = Math.max(Math.abs(xmin), Math.abs(xmax));
+  var ymin = -sym;   /* y = -|x| → 对称范围 */
+
+  /* 火山轮廓（虚线倒 V） */
+  var outline = [], NN = 48;
+  for(var i=0;i<=NN;i++){ var xx = -sym + 2*sym*i/NN; outline.push([+xx.toFixed(4), -Math.abs(xx)]); }
+
+  var baseGrid = { left: 72, right: 30, top: 78, bottom: 58 };
+  var baseTooltip = {
+    trigger: 'item', backgroundColor:'#fffdf8', borderColor:'#e7dccb', textStyle:{color:'#3b2f26'},
+    formatter: function(p){
+      var d = p.data;
+      return '<b>'+d[2]+'</b>'+(d[3]?' · '+d[3]+' ('+d[4]+')':'')+
+        '<br>ΔG_H*（导出量）= '+fmt(d[0],4)+' eV<br>−|ΔG_H*| = '+d[1].toFixed(4)+' eV';
+    }
+  };
+  var xAxis = {
+    name: 'ΔG_H*（预测，导出量，eV）', nameLocation: 'middle', nameGap: 34, min: -sym, max: sym,
+    axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
+    axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
+  };
+  var yAxis = {
+    name: '−|ΔG_H*|（Sabatier 活性代理，eV）', nameLocation:'middle', nameGap: 50, min: ymin, max: 0.04,
+    axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
+    axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
+  };
+
+  /* 最优窗口 + 潜力窗口色带，火山顶竖线（挂在第一个散点系列上） */
+  var markArea = { silent:true, data:[
+    [{xAxis:-0.2, itemStyle:{color:'rgba(194,146,74,0.07)'}},{xAxis:-0.1}],
+    [{xAxis: 0.1, itemStyle:{color:'rgba(194,146,74,0.07)'}},{xAxis: 0.2}],
+    [{xAxis:-0.1, itemStyle:{color:'rgba(125,143,106,0.16)'}, name:'优秀窗口 |ΔG|≤0.1'},{xAxis: 0.1}]
+  ]};
+  var markLine = { silent:true, symbol:'none',
+    lineStyle:{color:'#b05c34', width:1.6, opacity:.55}, label:{show:false},
+    data:[{xAxis:0}] };
+  var markPoint = { symbol:'circle', symbolSize:9, itemStyle:{color:'#b05c34', borderColor:'#fff', borderWidth:2},
+    label:{show:false}, data:[{coord:[0,0]}] };
+
+  var series = [];
+  var visualMap = null;
+  var legendShow = true;
+
+  if(colorMode === 'h'){
+    /* 密度着色：单散点系列，颜色由沿轴密度驱动 */
+    var rows = allPred.map(function(r){ return [+r.dG_pred.toFixed(5), -Math.abs(r.dG_pred), r.comp, r.structure, r.facet]; });
+    var dens = densityAlongX(rows);
+    series = [{
+      name:'密度', type:'scatter', data:dens.rows, symbolSize:6,
+      itemStyle:{ color:'#b05c34', opacity:.85 },
+      emphasis:{itemStyle:{opacity:1}}, large:true, largeThreshold:1500,
+      markArea:markArea, markLine:markLine, markPoint:markPoint
+    },{
+      type:'line', data:outline, showSymbol:false, silent:true, z:1,
+      lineStyle:{color:'#b05c34', width:1.8, type:'dashed', opacity:.45}
+    }];
+    visualMap = { show:true, min:0, max:dens.max, calculable:true, orient:'horizontal',
+      left:'center', top:30, dimension:5, seriesIndex:0,
+      inRange:{color:['#f2e6d2','#e6c09a','#d39a5e','#b05c34','#74321a']},
+      text:['密集','稀疏'], textStyle:{color:'#7a6a58', fontSize:11} };
+    legendShow = false;
+  } else {
+    var colors = colorMode === 'n' ? [PALETTE.pure, PALETTE.alloy] : [PALETTE.ind, PALETTE.outd];
+    series = Object.keys(groups).map(function(k, i){
+      var s = {
+        name: k, type: 'scatter', data: groups[k],
+        symbolSize: colorMode==='n' && k==='纯金属' ? 8 : 5.5,
+        itemStyle: { color: colors[i % colors.length], opacity: 0.6 },
+        emphasis: { itemStyle: { opacity: 0.95 } },
+        large: true, largeThreshold: 2000
+      };
+      if(i===0){ s.markArea = markArea; s.markLine = markLine; s.markPoint = markPoint; }
+      return s;
+    });
+    series.push({
+      type:'line', data:outline, showSymbol:false, silent:true, z:1,
+      lineStyle:{color:'#b05c34', width:1.8, type:'dashed', opacity:.45}
+    });
+  }
+
   if(lastResult){
     series.push({
       name: '当前选中', type: 'effectScatter',
@@ -1223,29 +1307,15 @@ function volcanoOption(){
       z: 10
     });
   }
+
   return {
     animation: false,
-    grid: { left: 70, right: 30, top: 56, bottom: 55 },
-    legend: { top: 4, textStyle: { color: '#7a6a58' } },
-    tooltip: {
-      trigger: 'item', backgroundColor:'#fffdf8', borderColor:'#e7dccb', textStyle:{color:'#3b2f26'},
-      formatter: function(p){
-        var d = p.data;
-        return '<b>'+d[2]+'</b>'+(d[3]?' · '+d[3]+' ('+d[4]+')':'')+
-          '<br>ΔG_H*（导出量）= '+fmt(d[0],4)+' eV<br>−|ΔG_H*| = '+d[1].toFixed(4)+' eV';
-      }
-    },
-    xAxis: {
-      name: 'ΔG_H*（预测，导出量，eV）', nameLocation: 'middle', nameGap: 32,
-      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
-      axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
-    },
-    yAxis: {
-      name: '−|ΔG_H*|（导出量，Sabatier 活性代理，eV）', nameLocation:'middle', nameGap: 48,
-      max: 0.05,
-      axisLine:{lineStyle:{color:'#c9bba6'}}, splitLine:{lineStyle:{color:'#f0e8dc'}},
-      axisLabel:{color:'#7a6a58'}, nameTextStyle:{color:'#7a6a58'}
-    },
+    grid: baseGrid,
+    legend: { show: legendShow, top: 6, textStyle: { color: '#7a6a58' } },
+    tooltip: baseTooltip,
+    visualMap: visualMap,
+    xAxis: xAxis,
+    yAxis: yAxis,
     series: series
   };
 }
@@ -1257,7 +1327,7 @@ function initVolcano(){
       document.querySelectorAll('.chart-toggle button').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on');
       colorMode = b.getAttribute('data-color');
-      volcanoChart.setOption(volcanoOption(), { replaceMerge: ['series'] });
+      volcanoChart.setOption(volcanoOption(), true);
     });
   });
 }
@@ -1272,7 +1342,7 @@ function highlightOnVolcano(r){
     opt.animationDurationUpdate = 650;
     opt.animationEasingUpdate = 'cubicOut';
   }
-  volcanoChart.setOption(opt, { replaceMerge: ['series'] });
+  volcanoChart.setOption(opt, true);
 }
 
 function initHist(rows){
