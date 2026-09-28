@@ -17,8 +17,8 @@ const path = require('path');
 const THRESHOLD = 1e-9;
 
 function main() {
-  const inputsPath = process.argv[2];
-  const assetsDir = process.argv[3];
+  const inputsPath = path.resolve(process.argv[2]);
+  const assetsDir = path.resolve(process.argv[3]);
   const inputs = JSON.parse(fs.readFileSync(inputsPath, 'utf8'));
   const model = JSON.parse(fs.readFileSync(path.join(assetsDir, 'model.json'), 'utf8'));
   const elements = JSON.parse(fs.readFileSync(path.join(assetsDir, 'elements.json'), 'utf8'));

@@ -4,7 +4,7 @@
   "engine": "predict.js (纯 JS, float32 累加 + float32 分裂比较)",
   "reference": "Python xgboost booster.predict (float32)",
   "node": "v22.23.2",
-  "generated_at": "2026-09-27T13:41:31.955Z"
+  "generated_at": "2026-09-28T14:39:10.031Z"
  },
  "dataset": {
   "n_rows": 1836,
