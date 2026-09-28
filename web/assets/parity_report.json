@@ -1,29 +1,35 @@
 {
-  "meta": {
-    "model_version": "v3-84feat",
-    "source": "web/parity_check.html（浏览器内运行，Chromium）",
-    "engine": "predict.js（纯 JS，float32 累加 + float32 分裂比较）",
-    "reference": "Python XGBoost booster.predict（float32），parity_cases.json 20 用例",
-    "pred_threshold": 1e-09,
-    "feat_threshold": 1e-06,
-    "generated_at": "2026-09-11T08:08:35.624Z"
-  },
-  "predictions": {
-    "n": 20,
-    "max_diff": 0,
-    "worst": null,
-    "pass": true
-  },
-  "features": {
-    "n_checks": 1680,
-    "n_features": 84,
-    "max_diff": 0,
-    "worst": null,
-    "pass": true
-  },
-  "meta_checks": {
-    "n_mismatch": 0,
-    "mismatches": []
-  },
+ "meta": {
+  "threshold": 1e-9,
+  "engine": "predict.js (纯 JS, float32 累加 + float32 分裂比较)",
+  "reference": "Python xgboost booster.predict (float32)",
+  "node": "v22.23.2",
+  "generated_at": "2026-09-27T13:41:31.955Z"
+ },
+ "dataset": {
+  "n_rows": 1836,
+  "max_diff": 0,
+  "mean_diff": 0,
+  "worst": null,
   "pass": true
+ },
+ "features": {
+  "n_checks": 154224,
+  "max_diff": 4.547473508864641e-13,
+  "worst": {
+   "row": 606,
+   "comp": "SnW",
+   "feature": "melting_point_wmean",
+   "js": 2096.1150000000002,
+   "csv": 2096.115
+  }
+ },
+ "random": {
+  "n": 50,
+  "max_diff": 0,
+  "mean_diff": 0,
+  "worst": null,
+  "pass": true
+ },
+ "pass": true
 }

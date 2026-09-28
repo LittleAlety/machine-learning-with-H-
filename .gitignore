@@ -10,3 +10,14 @@ data_raw/cathub_cache/
 
 # 系统杂项
 .DS_Store
+
+# Office 临时锁文件（Word/Excel 打开时生成）
+~$*
+*.tmp
+
+# 开发期截图/证据（不进部署目录）
+web/screenshot_home.png
+
+# 本地 parity 输入可由 scripts/45 重建（体积较大，默认不入库）
+# 说明：为让 CI 直接运行 parity，本文件选择入库；如需瘦身可取消下一行注释
+# web/assets/parity_check_inputs.json

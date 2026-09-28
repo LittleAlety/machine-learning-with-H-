@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  parity:
+    name: JS/Python bit-exact parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run 1836-row + 50-random parity gate
+        working-directory: ai_surface_cat
+        run: |
+          node scripts/parity_check.js \
+            web/assets/parity_check_inputs.json web/assets
+
+  smoke:
+    name: Python smoke & syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned dependencies
+        working-directory: ai_surface_cat
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-lock.txt
+      - name: Byte-compile all scripts (syntax)
+        working-directory: ai_surface_cat
+        run: |
+          python -m compileall -q scripts innovation
+      - name: Tiny deterministic XGBoost smoke fit
+        working-directory: ai_surface_cat
+        run: |
+          python - <<'PY'
+          import numpy as np
+          from xgboost import XGBRegressor
+          rng = np.random.default_rng(0)
+          X = rng.normal(size=(64, 4)); y = X[:, 0] * 0.5 + rng.normal(scale=0.05, size=64)
+          m = XGBRegressor(n_estimators=10, n_jobs=1, random_state=42).fit(X, y)
+          assert np.isfinite(m.predict(X)).all()
+          print("xgb smoke OK")
+          PY
+      - name: Node syntax check of the browser engine
+        working-directory: ai_surface_cat
+        run: node --check web/assets/predict.js
